@@ -10,6 +10,14 @@ To use pass a path to the desired output file:
 **Note**: the script will run at the root level of the repository that it is in.
 
 
+Currently Supported Repository Types
+------------------------------------
+
+* **Git**: A version greater than 1.7.2.3 is recommended.
+
+* **Mercurial**: A version greater than 1.6 is recommended.
+
+
 Currently Extracted Data
 ------------------------
 
