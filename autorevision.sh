@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copyright (c) 2012 dak180
+# See http://opensource.org/licenses/bsd-license.php for licence terms
+
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
 # To use pass a type and a path to the desired output file:
 # ./autorevision.sh h some/path/to/autorevision.h
