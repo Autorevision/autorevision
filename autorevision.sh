@@ -5,7 +5,7 @@
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
 # To use pass a type and a path to the desired output file:
-# ./autorevision.sh h some/path/to/autorevision.h [<VARIABLE>]
+# ./autorevision.sh <output_type> <file> [<VARIABLE>]
 # If you pass a variable name it will echo it to the standard output.
 # If used with the sh output it will cashe the output for use outside a repo.
 # Note: the script will run at the root level of the repository that it is in.

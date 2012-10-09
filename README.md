@@ -5,7 +5,7 @@ A script for extracting version information useful in release/build scripting.
 
 To use pass a type and a path to the desired output file:
 
-<code>./autorevision.sh <i>output_type</i> <i>file</i> [<i>&lt;VARIABLE></i>]</code>
+<code>./autorevision.sh <i>&lt;output_type></i> <i>&lt;file></i> [<i>&lt;VARIABLE></i>]</code>
 
 If you pass a variable name it will echo it to the standard output.
 If used with the sh output it will cashe the output for use outside a repo.
