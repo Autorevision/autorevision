@@ -146,23 +146,17 @@ fi
 if [[ ! -z "${VAROUT}" ]]; then
 	if [[ "${VAROUT}" = "VCS_NUM" ]]; then
 		echo "${VCS_NUM}"
-	fi
-	if [[ "${VAROUT}" = "VCS_DATE" ]]; then
+	elif [[ "${VAROUT}" = "VCS_DATE" ]]; then
 		echo "${VCS_DATE}"
-	fi
-	if [[ "${VAROUT}" = "VCS_URI" ]]; then
+	elif [[ "${VAROUT}" = "VCS_URI" ]]; then
 		echo "${VCS_URI}"
-	fi
-	if [[ "${VAROUT}" = "VCS_TAG" ]]; then
+	elif [[ "${VAROUT}" = "VCS_TAG" ]]; then
 		echo "${VCS_TAG}"
-	fi
-	if [[ "${VAROUT}" = "VCS_FULL_HASH" ]]; then
+	elif [[ "${VAROUT}" = "VCS_FULL_HASH" ]]; then
 		echo "${VCS_FULL_HASH}"
-	fi
-	if [[ "${VAROUT}" = "VCS_SHORT_HASH" ]]; then
+	elif [[ "${VAROUT}" = "VCS_SHORT_HASH" ]]; then
 		echo "${VCS_SHORT_HASH}"
-	fi
-	if [[ "${VAROUT}" = "VCS_WC_MODIFIED" ]]; then
+	elif [[ "${VAROUT}" = "VCS_WC_MODIFIED" ]]; then
 		echo "${VCS_WC_MODIFIED}"
 	fi
 fi
