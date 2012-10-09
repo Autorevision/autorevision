@@ -1,12 +1,16 @@
 #!/bin/bash
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
-# To use pass a path to the desired output file: some/path/to/autorevision.h.
+# To use pass a type and a path to the desired output file:
+# ./autorevision.sh h some/path/to/autorevision.h
 # Note: the script will run at the root level of the repository that it is in.
 
 # Config
-TARGETFILE="${1}"
+AFILETYPE="${1}"
+TARGETFILE="${2}"
 
+
+# Functions to extract data from different repo types.
 # For git repos
 function gitRepo {
 	cd "$(git rev-parse --show-toplevel)"
@@ -77,17 +81,10 @@ function hgRepo {
 }
 
 
-if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
-	gitRepo
-elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
-	hgRepo
-else
-	echo "error: No repo detected."
-	exit 1
-fi
-
-
-cat > "${TARGETFILE}" << EOF
+# Functions to output data in different formats.
+# For header output
+function hOutput {
+	cat > "${TARGETFILE}" << EOF
 /* ${VCS_FULL_HASH} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -105,3 +102,45 @@ cat > "${TARGETFILE}" << EOF
 #endif
 
 EOF
+}
+
+# For bash output
+function shOutput {
+	cat > "${TARGETFILE}" << EOF
+# ${VCS_FULL_HASH}
+# AUTOREVISION_SH
+
+VCS_NUM="${VCS_NUM}"
+VCS_DATE="${VCS_DATE}"
+VCS_URI="${VCS_URI}"
+VCS_TAG="${VCS_TAG}"
+
+VCS_FULL_HASH="${VCS_FULL_HASH}"
+VCS_SHORT_HASH="${VCS_SHORT_HASH}"
+
+VCS_WC_MODIFIED="${WC_MODIFIED}"
+
+EOF
+}
+
+
+# Detect and collect repo data.
+if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
+	gitRepo
+elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
+	hgRepo
+else
+	echo "error: No repo detected."
+	exit 1
+fi
+
+
+# Detect requested output type and use it.
+if [ "${AFILETYPE}" = "h" ]; then
+	hOutput
+elif [ "${AFILETYPE}" = "sh" ]; then
+	shOutput
+else
+	echo "error: Not a valid output type."
+	exit 1
+fi

@@ -3,11 +3,19 @@ Autorevision
 
 A script for extracting version information useful in release/build scripting.
 
-To use pass a path to the desired output file:
+To use pass a type and a path to the desired output file:
 
-	./autorevision.sh some/path/to/autorevision.h
+	./autorevision.sh h some/path/to/autorevision.h
 
 **Note**: the script will run at the root level of the repository that it is in.
+
+
+Currently Supported Output Types
+--------------------------------
+
+`h`: A header file suitable for c/c++.
+
+`sh`: A text file suitable for including from a bash script with variables defined.
 
 
 Currently Supported Repository Types
