@@ -5,12 +5,15 @@
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
 # To use pass a type and a path to the desired output file:
-# ./autorevision.sh h some/path/to/autorevision.h
+# ./autorevision.sh h some/path/to/autorevision.h [<VARIABLE>]
+# If you pass a variable name it will echo it to the standard output.
+# If used with the sh output it will cashe the output for use outside a repo.
 # Note: the script will run at the root level of the repository that it is in.
 
 # Config
 AFILETYPE="${1}"
 TARGETFILE="${2}"
+VAROUT="${3}"
 
 
 # Functions to extract data from different repo types.
@@ -132,9 +135,36 @@ if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
 	gitRepo
 elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
+elif [[ ! -z "${VAROUT}" ]] && [[ -f "${TARGETFILE}" ]]; then
+	. ${TARGETFILE}
 else
 	echo "error: No repo detected."
 	exit 1
+fi
+
+
+if [[ ! -z "${VAROUT}" ]]; then
+	if [[ "${VAROUT}" = "VCS_NUM" ]]; then
+		echo "${VCS_NUM}"
+	fi
+	if [[ "${VAROUT}" = "VCS_DATE" ]]; then
+		echo "${VCS_DATE}"
+	fi
+	if [[ "${VAROUT}" = "VCS_URI" ]]; then
+		echo "${VCS_URI}"
+	fi
+	if [[ "${VAROUT}" = "VCS_TAG" ]]; then
+		echo "${VCS_TAG}"
+	fi
+	if [[ "${VAROUT}" = "VCS_FULL_HASH" ]]; then
+		echo "${VCS_FULL_HASH}"
+	fi
+	if [[ "${VAROUT}" = "VCS_SHORT_HASH" ]]; then
+		echo "${VCS_SHORT_HASH}"
+	fi
+	if [[ "${VAROUT}" = "VCS_WC_MODIFIED" ]]; then
+		echo "${VCS_WC_MODIFIED}"
+	fi
 fi
 
 
