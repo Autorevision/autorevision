@@ -24,6 +24,10 @@ Currently Supported Output Types
 
 `sh`: A text file suitable for including from a bash script with variables defined.
 
+'py': A Python source file setting Python variables
+
+'pl': A Perl source file setting Perl variables
+
 
 Currently Supported Repository Types
 ------------------------------------

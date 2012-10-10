@@ -129,6 +129,48 @@ VCS_WC_MODIFIED="${WC_MODIFIED}"
 EOF
 }
 
+# For Python output
+function pyOutput {
+	case $WC_MODIFIED in
+	0) WC_MODIFIED=False ;;
+	1) WC_MODIFIED=True ;;
+	esac
+	cat > "${TARGETFILE}" << EOF
+# ${VCS_FULL_HASH}
+# AUTOREVISION_SH
+
+VCS_NUM = ${VCS_NUM}
+VCS_DATE = "${VCS_DATE}"
+VCS_URI = "${VCS_URI}"
+VCS_TAG = "${VCS_TAG}"
+
+VCS_FULL_HASH = "${VCS_FULL_HASH}"
+VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
+
+VCS_WC_MODIFIED = ${WC_MODIFIED}
+
+EOF
+}
+
+# For Perl output
+function plOutput {
+	cat > "${TARGETFILE}" << EOF
+# ${VCS_FULL_HASH}
+# AUTOREVISION_SH
+
+\$VCS_NUM = ${VCS_NUM};
+\$VCS_DATE = "${VCS_DATE}";
+\$VCS_URI = "${VCS_URI}";
+\$VCS_TAG = "${VCS_TAG}";
+
+\$VCS_FULL_HASH = "${VCS_FULL_HASH}";
+\$VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
+
+\$VCS_WC_MODIFIED = ${WC_MODIFIED};
+
+EOF
+}
+
 
 # Detect and collect repo data.
 if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
@@ -167,6 +209,10 @@ if [ "${AFILETYPE}" = "h" ]; then
 	hOutput
 elif [ "${AFILETYPE}" = "sh" ]; then
 	shOutput
+elif [ "${AFILETYPE}" = "py" ]; then
+	pyOutput
+elif [ "${AFILETYPE}" = "pl" ]; then
+	plOutput
 else
 	echo "error: Not a valid output type."
 	exit 1
