@@ -60,13 +60,13 @@ function hgRepo {
 	WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
-	VCS_NUM="$(hg id -n)"
+	VCS_NUM="$(hg id -n | tr -d '+')"
 
 	# The full revision hash
 	VCS_FULL_HASH="$(hg log -r ${VCS_NUM} -l 1 --template '{node}\n')"
 
 	# The short hash
-	VCS_SHORT_HASH="$(hg id -i)"
+	VCS_SHORT_HASH="$(hg id -i | tr -d '+')"
 
 	# Current bookmark (bookmarks are roughly equivalent to git's branches) or branch if no bookmark
 	VCS_URI="$(hg id -B | cut -d ' ' -f 1)"
