@@ -7,7 +7,7 @@
 # To use pass a type and a path to the desired output file:
 # ./autorevision.sh <output_type> <file> [<VARIABLE>]
 # If you pass a variable name it will echo it to the standard output.
-# If used with the sh output it will cache the output for use outside a repo.
+# If used with the sh output it will use the file as a cache for use outside a repo.
 # Note: the script will run at the root level of the repository that it is in.
 
 # Config
@@ -136,7 +136,9 @@ if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
 elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
 elif [[ ! -z "${VAROUT}" ]] && [[ -f "${TARGETFILE}" ]] && [[ "sh" = "${AFILETYPE}" ]]; then
-	. "${TARGETFILE}"
+	# We are not in a repo and sh file output has be specified and a stdout response has been requested;
+	# try to use a previously generated output to populate our variables.
+	source "${TARGETFILE}"
 else
 	echo "error: No repo detected."
 	exit 1
