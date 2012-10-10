@@ -14,7 +14,7 @@ If used with the sh output it will cache the output for use outside a repo.
 
 For a list of the variables you can pass see the *Currently Extracted Data* section.
 
-**Note**: The script will only run properly at the root level of the repository that it is in; the path to the output file should always be relative to the root of the repo, not the location of the script.
+**Note**: The script must be run at the root level of the repository from which to extract information; the path to the output file should always be relative to the root of the repo, not the location of the script.
 
 
 Currently Supported Output Types
@@ -24,9 +24,9 @@ Currently Supported Output Types
 
 `sh`: A text file suitable for including from a bash script with variables defined.
 
-'py': A Python source file setting Python variables
+'py': A Python source file setting Python variables.
 
-'pl': A Perl source file setting Perl variables
+'pl': A Perl source file setting Perl variables.
 
 
 Currently Supported Repository Types
@@ -53,4 +53,4 @@ Currently Extracted Data
 
 `VCS_SHORT_HASH`: A shortened version `VCS_FULL_HASH` or a synonym for `VCS_FULL_HASH` if it cannot be shortened.
 
-`VCS_WC_MODIFIED`: Set to 1 if the current working directory has been modified and 0 if not.
+`VCS_WC_MODIFIED`: Set to 1 if the current working directory has been modified and 0 if not. Exception: in Pyton-style output the values are Booleans True for modified and False for unmodified.
