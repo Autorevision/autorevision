@@ -13,7 +13,7 @@ Generally you *should* assume that you are executing from the top of the repo.
 
 The first thing that any repo function should do is `cd` to the root level of the repository, if possible.
 
-As a rule of thumb, try to use commands to gather the data to populate the variables in such a way as to require the least amount of post processing by things like sed or grep.
+As a rule of thumb, try to use commands to gather the data to populate the variables in such a way as to require the least amount of post processing by things like `sed` or `grep`.
 
 
 Support For New Output Types
@@ -37,6 +37,7 @@ Other Conventions
 -----------------
 
 * You generally should *not* assume that any extras, extensions or otherwise non-default commands are available.
+* Any use of `sed` *should* use `:` as a delimiter whenever feasible.
 * All variables should be written in the form `${<variable>}`
 * All error messages should be prefixed with `error: `
 * All warning messages should be prefixed with `warning: `
