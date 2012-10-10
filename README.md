@@ -40,6 +40,8 @@ Currently Supported Repository Types
 Currently Extracted Data
 ------------------------
 
+`VCS_TYPE': The repository type - "git", "hg", or "svn".
+
 `VCS_NUM`: A count of revisions there have been between the current one and the initial one; useful for build numbers.
 
 `VCS_DATE`: The date of the current commit in true ISO-8601/RFC3339 format, including seconds.

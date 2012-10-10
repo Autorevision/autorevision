@@ -19,6 +19,8 @@ VAROUT="${2}"
 function gitRepo {
 	cd "$(git rev-parse --show-toplevel)"
 
+        VCS_TYPE="git"
+
 	# Is the working copy clean?
 	git diff --quiet HEAD &> /dev/null
 	WC_MODIFIED="${?}"
@@ -53,6 +55,8 @@ function gitRepo {
 function hgRepo {
 	cd "$(hg root)"
 
+        VCS_TYPE="hg"
+
 	# Is the working copy clean?
 	hg sum | grep -q 'commit: (clean)'
 	WC_MODIFIED="${?}"
@@ -86,6 +90,8 @@ function hgRepo {
 
 # For svn repos
 function svnRepo {
+        VCS_TYPE="svn"
+
 	# Is the working copy clean?
         test -z "$(svn diff 2>/dev/null)"
 	WC_MODIFIED=$?
@@ -121,6 +127,7 @@ function hOutput {
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
 
+#define VCS_TYPE		${VCS_TYPE}
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		${VCS_DATE}
 #define VCS_URI			${VCS_URI}
@@ -142,6 +149,7 @@ function shOutput {
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
+VCS_TYPE="${VCS_TYPE}"
 VCS_NUM="${VCS_NUM}"
 VCS_DATE="${VCS_DATE}"
 VCS_URI="${VCS_URI}"
@@ -165,6 +173,7 @@ function pyOutput {
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
+VCS_TYPE = "${VCS_TYPE}"
 VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_URI = "${VCS_URI}"
@@ -184,6 +193,7 @@ function plOutput {
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
+\$VCS_TYPE = "${VCS_TYPE}";
 \$VCS_NUM = ${VCS_NUM};
 \$VCS_DATE = "${VCS_DATE}";
 \$VCS_URI = "${VCS_URI}";
