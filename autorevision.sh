@@ -48,7 +48,7 @@ function gitRepo {
 	fi
 
 	# Date of the curent commit
-	VCS_DATE="$(git log -1 --pretty=format:%ci)"
+	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's/ /T/' | sed -e 's/ //')"
 }
 
 # For hg repos
@@ -83,7 +83,7 @@ function hgRepo {
 	fi
 
 	# Date of the curent commit
-	VCS_DATE="$(hg log -r ${VCS_NUM} -l 1 --template '{date|isodatesec}\n')"
+	VCS_DATE="$(hg log -r ${VCS_NUM} -l 1 --template '{date|isodatesec}\n'   | sed -e 's/ /T/' | sed -e 's/ //')"
 }
 
 # For svn repos
@@ -111,7 +111,7 @@ function svnRepo {
 	VCS_TAG=""
 
 	# Date of the current commit
-	VCS_DATE="$(svn info | sed -n -e 's/Last Changed Date: //p' | sed 's/ (.*)//')"
+	VCS_DATE="$(svn info | sed -n -e 's/Last Changed Date: //p' | sed 's/ (.*)//' | sed -e 's/ /T/' | sed -e 's/ //')"
 }
 
 

@@ -43,7 +43,7 @@ Currently Extracted Data
 
 `VCS_NUM`: A count of revisions there have been between the current one and the initial one; useful for build numbers.
 
-`VCS_DATE`: The date of the current commit in the ISO 8601 format, including seconds.
+`VCS_DATE`: The date of the current commit in true ISO-8601/RFC3339 format, including seconds.
 
 `VCS_URI`: Repository dependent: for Git the full refspec & for Mercurial the bookmark or the branch if there is no bookmark.
 
