@@ -122,21 +122,25 @@ function svnRepo {
 # Functions to output data in different formats.
 # For header output
 function hOutput {
+	case $WC_MODIFIED in
+	1) WC_MODIFIED='true' ;;
+	0) WC_MODIFIED='false' ;;
+	esac
 	cat << EOF
 /* ${VCS_FULL_HASH} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
 
-#define VCS_TYPE		${VCS_TYPE}
+#define VCS_TYPE		"${VCS_TYPE}"
 #define VCS_NUM			${VCS_NUM}
-#define VCS_DATE		${VCS_DATE}
-#define VCS_URI			${VCS_URI}
-#define VCS_TAG			${VCS_TAG}
+#define VCS_DATE		"${VCS_DATE}"
+#define VCS_URI			"${VCS_URI}"
+#define VCS_TAG			"${VCS_TAG}"
 
-#define VCS_FULL_HASH					${VCS_FULL_HASH}
-#define VCS_SHORT_HASH					${VCS_SHORT_HASH}
+#define VCS_FULL_HASH		"${VCS_FULL_HASH}"
+#define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
 
-#define VCS_WC_MODIFIED					${WC_MODIFIED}
+#define VCS_WC_MODIFIED		${WC_MODIFIED}
 
 #endif
 

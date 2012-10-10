@@ -54,4 +54,4 @@ Currently Extracted Data
 
 `VCS_SHORT_HASH`: A shortened version `VCS_FULL_HASH` or a synonym for `VCS_FULL_HASH` if it cannot be shortened.
 
-`VCS_WC_MODIFIED`: Set to 1 if the current working directory has been modified and 0 if not. Exception: in Pyton-style output the values are Booleans True for modified and False for unmodified.
+`VCS_WC_MODIFIED`: Set to 1 if the current working directory has been modified and 0 if not. If the output language has native Boolean literals, true will mean modified and false unmodified.
