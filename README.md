@@ -3,14 +3,13 @@ Autorevision
 
 A script for extracting version information useful in release/build scripting.
 
-To use pass a type and a path to the desired output file:
+To use pass a type. The report will be omitted to standard output.
 
 ```bash
-./autorevision.sh <output_type> <file> [<variable>]
+./autorevision.sh <output_type> [<variable>]
 ```
 
 If you pass a variable name it will echo it to the standard output.
-If used with the sh output it will cache the output for use outside a repo.
 
 For a list of the variables you can pass see the *Currently Extracted Data* section.
 

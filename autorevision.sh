@@ -4,16 +4,14 @@
 # See http://opensource.org/licenses/bsd-license.php for licence terms
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
-# To use pass a type and a path to the desired output file:
-# ./autorevision.sh <output_type> <file> [<VARIABLE>]
+# To use pass a type.
+# ./autorevision.sh <output_type> [<VARIABLE>]
 # If you pass a variable name, that variable will be echoed to the standard output.
-# If used with the sh output it will cache the output for use outside a repo.
 # Note: the script must be run at the root level of the repository from which it is to extract information.
 
 # Config
 AFILETYPE="${1}"
-TARGETFILE="${2}"
-VAROUT="${3}"
+VAROUT="${2}"
 
 
 # Functions to extract data from different repo types.
@@ -118,7 +116,7 @@ function svnRepo {
 # Functions to output data in different formats.
 # For header output
 function hOutput {
-	cat > "${TARGETFILE}" << EOF
+	cat << EOF
 /* ${VCS_FULL_HASH} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -140,7 +138,7 @@ EOF
 
 # For bash output
 function shOutput {
-	cat > "${TARGETFILE}" << EOF
+	cat << EOF
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
@@ -163,7 +161,7 @@ function pyOutput {
 	0) WC_MODIFIED=False ;;
 	1) WC_MODIFIED=True ;;
 	esac
-	cat > "${TARGETFILE}" << EOF
+	cat << EOF
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
@@ -182,7 +180,7 @@ EOF
 
 # For Perl output
 function plOutput {
-	cat > "${TARGETFILE}" << EOF
+	cat << EOF
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
@@ -207,8 +205,6 @@ elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
 elif [[ -d .svn ]] && [[ ! -z "$(svn info 2>/dev/null)" ]]; then
 	svnRepo
-elif [[ ! -z "${VAROUT}" ]] && [[ -f "${TARGETFILE}" ]] && [[ "sh" = "${AFILETYPE}" ]]; then
-	. "${TARGETFILE}"
 else
 	echo "error: No repo detected."
 	exit 1
