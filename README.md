@@ -10,7 +10,7 @@ To use pass a type and a path to the desired output file:
 ```
 
 If you pass a variable name it will echo it to the standard output.
-If used with the sh output it will cashe the output for use outside a repo.
+If used with the sh output it will cache the output for use outside a repo.
 
 For a list of the variables you can pass see the *Currently Extracted Data* section.
 
