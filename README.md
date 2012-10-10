@@ -36,6 +36,7 @@ Currently Supported Repository Types
 
 * **Mercurial**: A version greater than 1.6 is recommended.
 
+* *Subversion**: Any production version
 
 Currently Extracted Data
 ------------------------

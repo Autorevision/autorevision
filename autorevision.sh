@@ -86,6 +86,34 @@ function hgRepo {
 	VCS_DATE="$(hg log -r ${VCS_NUM} -l 1 --template '{date|isodatesec}\n')"
 }
 
+# For svn repos
+function svnRepo {
+	# Is the working copy clean?
+        test -z "$(svn diff 2>/dev/null)"
+	WC_MODIFIED=$?
+
+	# Enumeration of changesets
+	VCS_NUM="$(svn info | sed -n 's/Last Changed Rev: //p')"
+
+	# The full revision hash
+	VCS_FULL_HASH="$VCS_NUM"
+
+	# The short hash
+	VCS_SHORT_HASH="$VCS_NUM"
+
+	# Current branch - can't be extracted since a checkout directory
+	# may contain all branches or be a checkout of a single one.
+	VCS_URI=""
+
+	# Current tag (or uri if there is no tag). But "current tag" can't
+	# be extracted reliably because Subversion doesn't have tags the way
+	# other VCSes do.
+	VCS_TAG=""
+
+	# Date of the current commit
+	VCS_DATE="$(svn info | sed -n -e 's/Last Changed Date: //p' | sed 's/ (.*)//')"
+}
+
 
 # Functions to output data in different formats.
 # For header output
@@ -177,6 +205,8 @@ if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
 	gitRepo
 elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
+elif [[ -d .svn ]] && [[ ! -z "$(svn info 2>/dev/null)" ]]; then
+	svnRepo
 elif [[ ! -z "${VAROUT}" ]] && [[ -f "${TARGETFILE}" ]] && [[ "sh" = "${AFILETYPE}" ]]; then
 	. "${TARGETFILE}"
 else
