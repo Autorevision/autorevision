@@ -147,6 +147,29 @@ function hOutput {
 EOF
 }
 
+# A header output for use with xcode to populate info.plist strings
+function xcodeOutput {
+	cat << EOF
+/* ${VCS_FULL_HASH} */
+#ifndef AUTOREVISION_H
+#define AUTOREVISION_H
+
+#define VCS_TYPE		${VCS_TYPE}
+#define VCS_NUM			${VCS_NUM}
+#define VCS_DATE		${VCS_DATE}
+#define VCS_URI			${VCS_URI}
+#define VCS_TAG			${VCS_TAG}
+
+#define VCS_FULL_HASH					${VCS_FULL_HASH}
+#define VCS_SHORT_HASH					${VCS_SHORT_HASH}
+
+#define VCS_WC_MODIFIED					${WC_MODIFIED}
+
+#endif
+
+EOF
+}
+
 # For bash output
 function shOutput {
 	cat << EOF
@@ -247,6 +270,8 @@ fi
 # Detect requested output type and use it.
 if [ "${AFILETYPE}" = "h" ]; then
 	hOutput
+elif [ "${AFILETYPE}" = "xcode" ]; then
+	xcodeOutput
 elif [ "${AFILETYPE}" = "sh" ]; then
 	shOutput
 elif [ "${AFILETYPE}" = "py" ]; then

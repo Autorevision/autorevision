@@ -21,11 +21,13 @@ Currently Supported Output Types
 
 `h`: A header file suitable for c/c++.
 
+`xcode`: A header output for use with xcode to populate info.plist strings.
+
 `sh`: A text file suitable for including from a bash script with variables defined.
 
-'py': A Python source file setting Python variables.
+`py`: A Python source file setting Python variables.
 
-'pl': A Perl source file setting Perl variables.
+`pl`: A Perl source file setting Perl variables.
 
 
 Currently Supported Repository Types
@@ -35,12 +37,12 @@ Currently Supported Repository Types
 
 * **Mercurial**: A version greater than 1.6 is recommended.
 
-* *Subversion**: Any production version
+* **Subversion**: Any production version
 
 Currently Extracted Data
 ------------------------
 
-`VCS_TYPE': The repository type - "git", "hg", or "svn".
+`VCS_TYPE`: The repository type - "git", "hg", or "svn".
 
 `VCS_NUM`: A count of revisions there have been between the current one and the initial one; useful for build numbers.
 
