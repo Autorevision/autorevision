@@ -274,7 +274,9 @@ fi
 
 
 if [[ ! -z "${VAROUT}" ]]; then
-	if [[ "${VAROUT}" = "VCS_NUM" ]]; then
+	if [[ "${VAROUT}" = "VCS_TYPE" ]]; then
+		echo "${VCS_TYPE}"
+	elif [[ "${VAROUT}" = "VCS_NUM" ]]; then
 		echo "${VCS_NUM}"
 	elif [[ "${VAROUT}" = "VCS_DATE" ]]; then
 		echo "${VCS_DATE}"
