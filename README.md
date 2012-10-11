@@ -1,15 +1,17 @@
 Autorevision
 ============
 
-A script for extracting version information useful in release/build scripting.
+A script for extracting version information useful in release/build scripting from repositories.
 
-To use pass a type. The report will be omitted to standard output.
+To use pass a type and a path to the cache file (if any) or a cache file and the desired single varible to output:
 
 ```bash
-./autorevision.sh <output_type> [<variable>]
+./autorevision -t <output_type> [-o <cache_file>]
+./autorevision -o <cache_file> -s <VARIABLE>
 ```
 
-If you pass a variable name it will echo it to the standard output.
+All output (except for the cache file) will be piped to stdout.
+A cache file is required for autorevision to output anything outside of a repository.
 
 For a list of the variables you can pass see the *Currently Extracted Data* section.
 

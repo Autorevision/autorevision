@@ -4,14 +4,36 @@
 # See http://opensource.org/licenses/bsd-license.php for licence terms
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
-# To use pass a type.
-# ./autorevision.sh <output_type> [<VARIABLE>]
-# If you pass a variable name, that variable will be echoed to the standard output.
-# Note: the script must be run at the root level of the repository from which it is to extract information.
+# To use pass a type and a path to the cache file (if any) or a cache file and the desired single varible to output:
+# ./autorevision -t <output_type> [-o <cache_file>]
+# ./autorevision -o <cache_file> -s <VARIABLE>
+# All output (except for the cache file) will be piped to stdout.
+# Note: the script will run at the root level of the repository that it is in.
 
 # Config
-AFILETYPE="${1}"
-VAROUT="${2}"
+TARGETFILE="/dev/stdout"
+while getopts ":t:o:s:" OPTION; do
+	case $OPTION in
+		t)
+			AFILETYPE="${OPTARG}"
+		;;
+		o)
+			CACHEFILE="${OPTARG}"
+		;;
+		s)
+			VAROUT="${OPTARG}"
+		;;
+		?)
+			echo "error: Invalid arguments." 1>&2
+			exit 1
+		;;
+	esac
+done
+
+if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
+	echo "error: Improper argument combo." 1>&2
+	exit 1
+fi
 
 
 # Functions to extract data from different repo types.
@@ -28,7 +50,7 @@ function gitRepo {
 	# Enumeration of changesets
 	VCS_NUM="$(git rev-list --count HEAD)"
 	if [ -z "${VCS_NUM}" ]; then
-		echo "warning: Counting the number of revisions may be slower due to an outdated git version less than 1.7.2.3. If something breaks, please update it."
+		echo "warning: Counting the number of revisions may be slower due to an outdated git version less than 1.7.2.3. If something breaks, please update it." 1>&2
 		VCS_NUM="$(git rev-list HEAD | wc -l)"
 	fi
 
@@ -126,7 +148,7 @@ function hOutput {
 	1) WC_MODIFIED='true' ;;
 	0) WC_MODIFIED='false' ;;
 	esac
-	cat << EOF
+	cat > "${TARGETFILE}" << EOF
 /* ${VCS_FULL_HASH} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -149,7 +171,7 @@ EOF
 
 # A header output for use with xcode to populate info.plist strings
 function xcodeOutput {
-	cat << EOF
+	cat > "${TARGETFILE}" << EOF
 /* ${VCS_FULL_HASH} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -172,7 +194,7 @@ EOF
 
 # For bash output
 function shOutput {
-	cat << EOF
+	cat > "${TARGETFILE}" << EOF
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
@@ -196,7 +218,7 @@ function pyOutput {
 	0) WC_MODIFIED=False ;;
 	1) WC_MODIFIED=True ;;
 	esac
-	cat << EOF
+	cat > "${TARGETFILE}" << EOF
 # ${VCS_FULL_HASH}
 # AUTOREVISION_SH
 
@@ -242,8 +264,11 @@ elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
 elif [[ -d .svn ]] && [[ ! -z "$(svn info 2>/dev/null)" ]]; then
 	svnRepo
+elif [[ -f "${CACHEFILE}" ]]; then
+	# We are not in a repo; try to use a previously generated cache to populate our variables.
+	source "${CACHEFILE}"
 else
-	echo "error: No repo detected."
+	echo "error: No repo or cache detected." 1>&2
 	exit 1
 fi
 
@@ -268,17 +293,26 @@ fi
 
 
 # Detect requested output type and use it.
-if [ "${AFILETYPE}" = "h" ]; then
-	hOutput
-elif [ "${AFILETYPE}" = "xcode" ]; then
-	xcodeOutput
-elif [ "${AFILETYPE}" = "sh" ]; then
+if [[ ! -z "${AFILETYPE}" ]]; then
+	if [[ "${AFILETYPE}" = "h" ]]; then
+		hOutput
+	elif [ "${AFILETYPE}" = "xcode" ]; then
+		xcodeOutput
+	elif [ "${AFILETYPE}" = "sh" ]; then
+		shOutput
+	elif [ "${AFILETYPE}" = "py" ]; then
+		pyOutput
+	elif [ "${AFILETYPE}" = "pl" ]; then
+		plOutput
+	else
+		echo "error: Not a valid output type." 1>&2
+		exit 1
+	fi
+fi
+
+
+# If requested, make a cache file.
+if [[ ! -z "${CACHEFILE}" ]]; then
+	TARGETFILE="${CACHEFILE}"
 	shOutput
-elif [ "${AFILETYPE}" = "py" ]; then
-	pyOutput
-elif [ "${AFILETYPE}" = "pl" ]; then
-	plOutput
-else
-	echo "error: Not a valid output type."
-	exit 1
 fi
