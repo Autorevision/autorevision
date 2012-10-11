@@ -41,7 +41,7 @@ fi
 function gitRepo {
 	cd "$(git rev-parse --show-toplevel)"
 
-        VCS_TYPE="git"
+	VCS_TYPE="git"
 
 	# Is the working copy clean?
 	git diff --quiet HEAD &> /dev/null
@@ -77,7 +77,7 @@ function gitRepo {
 function hgRepo {
 	cd "$(hg root)"
 
-        VCS_TYPE="hg"
+	VCS_TYPE="hg"
 
 	# Is the working copy clean?
 	hg sum | grep -q 'commit: (clean)'
@@ -112,7 +112,7 @@ function hgRepo {
 
 # For svn repos
 function svnRepo {
-        VCS_TYPE="svn"
+	VCS_TYPE="svn"
 
 	# Is the working copy clean?
         test -z "$(svn diff 2>/dev/null)"
