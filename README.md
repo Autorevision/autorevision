@@ -9,6 +9,8 @@ To use pass a type and a path to the desired output file:
 ./autorevision.sh <output_type> <file> [<variable>]
 ```
 
+Passing `--` as the file name will cause output to be redirected to stdout.
+
 If you pass a variable name it will echo it to the standard output.
 If used with the sh output it will use the file as a cache for use outside a repo so it can still send the stored values of variables to stdout.
 
