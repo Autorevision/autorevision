@@ -4,17 +4,36 @@
 # See http://opensource.org/licenses/bsd-license.php for licence terms
 
 # autorevision.sh - a shell script to get git / hg revisions etc. into binary builds.
-# To use pass a type and a path to the desired output file:
-# ./autorevision.sh <output_type> <file> [<VARIABLE>]
-# Passing '--' as the file name will cause output to be redirected to stdout.
-# If you pass a variable name it will echo it to the standard output.
-# If used with the sh output it will use the file as a cache for use outside a repo.
+# To use pass a type and a path to the cache file (if any) or a cache file and the desired single varible to output:
+# ./autorevision -t <output_type> [-o <cache_file>]
+# ./autorevision -o <cache_file> -s <VARIABLE>
+# All output (except for the cache file) will be piped to stdout.
 # Note: the script will run at the root level of the repository that it is in.
 
 # Config
-AFILETYPE="${1}"
-TARGETFILE="${2}"
-VAROUT="${3}"
+TARGETFILE="/dev/stdout"
+while getopts ":t:o:s:" OPTION; do
+	case $OPTION in
+		t)
+			AFILETYPE="${OPTARG}"
+		;;
+		o)
+			CACHEFILE="${OPTARG}"
+		;;
+		s)
+			VAROUT="${OPTARG}"
+		;;
+		?)
+			echo "error: Invalid arguments." 1>&2
+			exit 1
+		;;
+	esac
+done
+
+if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
+	echo "error: Improper argument combo." 1>&2
+	exit 1
+fi
 
 
 # Functions to extract data from different repo types.
@@ -131,22 +150,16 @@ EOF
 }
 
 
-# Tranform -- to stdout if necessary.
-if [[ "${TARGETFILE}" = "--" ]]; then
-	TARGETFILE="/dev/stdout"
-fi
-
 # Detect and collect repo data.
 if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]]; then
 	gitRepo
 elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 	hgRepo
-elif [[ ! -z "${VAROUT}" ]] && [[ -f "${TARGETFILE}" ]] && [[ ! "${TARGETFILE}" = "/dev/stdout" ]] && [[ "sh" = "${AFILETYPE}" ]]; then
-	# We are not in a repo and sh file output has be specified and a stdout response has been requested;
-	# try to use a previously generated output to populate our variables.
-	source "${TARGETFILE}"
+elif [[ -f "${CACHEFILE}" ]]; then
+	# We are not in a repo; try to use a previously generated cache to populate our variables.
+	source "${CACHEFILE}"
 else
-	echo "error: No repo detected." 1>&2
+	echo "error: No repo or cache detected." 1>&2
 	exit 1
 fi
 
@@ -171,11 +184,20 @@ fi
 
 
 # Detect requested output type and use it.
-if [ "${AFILETYPE}" = "h" ]; then
-	hOutput
-elif [ "${AFILETYPE}" = "sh" ]; then
+if [[ ! -z "${AFILETYPE}" ]]; then
+	if [[ "${AFILETYPE}" = "h" ]]; then
+		hOutput
+	elif [[ "${AFILETYPE}" = "sh" ]]; then
+		shOutput
+	else
+		echo "error: Not a valid output type." 1>&2
+		exit 1
+	fi
+fi
+
+
+# If requested, make a cache file.
+if [[ ! -z "${CACHEFILE}" ]]; then
+	TARGETFILE="${CACHEFILE}"
 	shOutput
-else
-	echo "error: Not a valid output type." 1>&2
-	exit 1
 fi
