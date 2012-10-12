@@ -31,7 +31,10 @@ while getopts ":t:o:s:" OPTION; do
 done
 
 if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
-	echo "error: Improper argument combo." 1>&2
+	echo "error: Improper argument combination." 1>&2
+	exit 1
+elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
+	echo "error: Improper argument combination." 1>&2
 	exit 1
 fi
 
