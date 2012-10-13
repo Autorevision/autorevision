@@ -10,9 +10,11 @@
 # All output (except for the cache file) will be piped to stdout.
 # Note: the script will run at the root level of the repository that it is in.
 
+version="1.0"
+
 # Config
 TARGETFILE="/dev/stdout"
-while getopts ":t:o:s:" OPTION; do
+while getopts "t:o:s:V" OPTION; do
 	case $OPTION in
 		t)
 			AFILETYPE="${OPTARG}"
@@ -22,6 +24,9 @@ while getopts ":t:o:s:" OPTION; do
 		;;
 		s)
 			VAROUT="${OPTARG}"
+		;;
+		V)
+			echo "autorevision $version"; exit 0
 		;;
 		?)
 			echo "error: Invalid arguments." 1>&2

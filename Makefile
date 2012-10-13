@@ -1,5 +1,6 @@
 # Makefile for the autorevision project
-VERS=1.0
+
+VERS=$(shell sed -n 's/version="\(.\+\)"/\1/p' autorevision)
 
 .SUFFIXES: .md .html
 
@@ -9,8 +10,8 @@ VERS=1.0
 MANDIR=/usr/share/man/man1
 BINDIR=/usr/bin
 
-DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asc
-SOURCES = autorevision manlifter Makefile $(DOCS) control
+DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asc NEWS
+SOURCES = autorevision Makefile $(DOCS) control
 
 all: autorevision-$(VERS).tar.gz
 
@@ -34,7 +35,7 @@ autorevision-$(VERS).tar.gz: $(SOURCES) autorevision.1
 dist: autorevision-$(VERS).tar.gz
 
 clean:
-	rm -f autorevision.html autorevision.1 manlifter.1 *.tar.gz 
+	rm -f autorevision.html autorevision.1 *.tar.gz 
 	rm -f *~  SHIPPER.* index.html
 
 release: autorevision-$(VERS).tar.gz autorevision.html README.html COPYING.html CONTRIBUTING.html
