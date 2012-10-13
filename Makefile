@@ -36,7 +36,8 @@ autorevision-$(VERS).tar.gz: $(SOURCES) autorevision.1
 dist: autorevision-$(VERS).tar.gz
 
 clean:
-	rm -f autorevision.html autorevision.tmp autorevision.1 *.tar.gz
+	rm -f autorevision.html autorevision.1 *.tar.gz
+	rm -f autorevision.tmp docbook-xsl.css
 	rm -f *~  SHIPPER.* index.html
 
 release: autorevision-$(VERS).tar.gz autorevision.html README.html COPYING.html CONTRIBUTING.html
