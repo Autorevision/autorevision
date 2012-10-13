@@ -1,6 +1,6 @@
 # Makefile for the autorevision project
 
-VERS=$(shell sed -n 's/version="\(.\+\)"/\1/p' autorevision)
+VERS=$(shell ./autorevision -o autorevision.tmp -s VCS_TAG | sed -n 's:refs/heads/::')
 
 .SUFFIXES: .md .html
 
@@ -12,6 +12,7 @@ BINDIR=/usr/bin
 
 DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asc NEWS
 SOURCES = autorevision Makefile $(DOCS) control
+EXTRA_DIST = autorevision.tmp
 
 all: autorevision-$(VERS).tar.gz
 
@@ -27,15 +28,15 @@ autorevision.1: autorevision.asc
 	a2x -f manpage autorevision.asc
 
 autorevision.html: autorevision.asc
-	a2x -f html autorevision.asc
+	a2x -f xhtml autorevision.asc
 
 autorevision-$(VERS).tar.gz: $(SOURCES) autorevision.1 
-	tar --transform='s:^:autorevision-$(VERS)/:' --show-transformed-names -cvzf autorevision-$(VERS).tar.gz $(SOURCES)
+	tar --transform='s:^:autorevision-$(VERS)/:' --show-transformed-names -cvzf autorevision-$(VERS).tar.gz $(SOURCES) $(EXTRA_DIST)
 
 dist: autorevision-$(VERS).tar.gz
 
 clean:
-	rm -f autorevision.html autorevision.1 *.tar.gz 
+	rm -f autorevision.html autorevision.tmp autorevision.1 *.tar.gz
 	rm -f *~  SHIPPER.* index.html
 
 release: autorevision-$(VERS).tar.gz autorevision.html README.html COPYING.html CONTRIBUTING.html
