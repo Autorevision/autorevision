@@ -13,7 +13,7 @@
 # Config
 ARVERSION="1.0"
 TARGETFILE="/dev/stdout"
-while getopts "t:o:s:V" OPTION; do
+while getopts ":t:o:s:V" OPTION; do
 	case $OPTION in
 		t)
 			AFILETYPE="${OPTARG}"
