@@ -1,6 +1,6 @@
 # Makefile for the autorevision project
 
-VERS=$(shell ./autorevision -o autorevision.tmp -s VCS_TAG | sed -n 's:refs/heads/::')
+VERS=$(shell ./autorevision -o autorevision.tmp -s VCS_TAG | sed -e 's:refs/heads/::' -e 's:v/::')
 
 .SUFFIXES: .md .html
 
