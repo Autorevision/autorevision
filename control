@@ -1,0 +1,23 @@
+# This is not a real Debian control file, though the syntax is compatible.
+# It's project metadata for the shipper tool
+
+Package: autorevision
+
+Description: Extracts metadata about the head version of your repository.
+ This program is meant to be used by project build systems to extract properties
+ that can be used in software version strings. It can create files containing
+ variable and macro definitions suitable for C, C++, sh, Python, Perl, 
+ and XCode project descriptions.
+
+#XBS-Github-URL: git://github.com/Autorevision/autorevision.git
+
+XBS-Ohloh-URL: http://www.ohloh.net/p/autorevision
+
+#XBS-Destinations: freecode
+
+Homepage: http://www.catb.org/~esr/autorevision
+
+XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
+
+XBS-Project-Tag-List: svn git hg perl python c c++ bash build_tools
+
