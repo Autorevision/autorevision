@@ -5,6 +5,39 @@
 #
 # autorevision - extracts metadata about the head version of your repository.
 
+# Usage message.
+function arUsage {
+	cat > "/dev/stderr" << EOF
+usage: ./autorevision {-t output-type | -s variable} [-o cache-file] [-V]
+	Options include:
+	-t output-type		= specify output type
+	-s variable		= specify variable output
+	-o cache-file		= specify cache file location
+	-V			= emit version and exit
+	-?			= help message
+
+The folowing are valid output types:
+	h			= Header for use with c/c++
+	xcode			= Header useful for populating info.plist files
+	sh			= Bash sytax
+	py			= Phython file
+	pl			= Perl file
+	lua			= Lua file
+
+The following are valid variables:
+	VCS_TYPE
+	VCS_BASENAME
+	VCS_NUM
+	VCS_DATE
+	VCS_URI
+	VCS_TAG
+	VCS_FULL_HASH
+	VCS_SHORT_HASH
+	VCS_WC_MODIFIED
+EOF
+	exit 1
+}
+
 # Config
 ARVERSION="1.0"
 TARGETFILE="/dev/stdout"
@@ -25,8 +58,7 @@ while getopts ":t:o:s:V" OPTION; do
 		;;
 		?)
 			# If an unknown flag is used (or -?):
-			echo "error: Invalid arguments." 1>&2
-			exit 1
+			arUsage
 		;;
 	esac
 done
@@ -37,8 +69,7 @@ if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
 	exit 1
 elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
 	# If neither -s or -t are specified:
-	echo "error: Improper argument combination." 1>&2
-	exit 1
+	arUsage
 fi
 
 
