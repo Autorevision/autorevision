@@ -139,15 +139,18 @@ function svnRepo {
 	*) VCS_BASENAME=$(basename $PWD) ;;
 	esac
 
+	# Cache svnversion output
+	SVNVERSION="$(svnversion)"
+
 	# Is the working copy clean?
-        test -z "$(svn diff 2>/dev/null)"
-	WC_MODIFIED=$?
+    echo "${SVNVERSION}" | grep -vq "M"
+	WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
-	VCS_NUM="$(svnversion)"
+	VCS_NUM="$(echo ${SVNVERSION} | cut -d : -f 1 | sed -e 's:M::' -e 's:S::' -e 's:P::')"
 
 	# The full revision hash
-	VCS_FULL_HASH="$VCS_NUM"
+	VCS_FULL_HASH="${SVNVERSION}"
 
 	# The short hash
 	VCS_SHORT_HASH="$VCS_NUM"
@@ -162,7 +165,7 @@ function svnRepo {
 	VCS_TAG=""
 
 	# Date of the current commit
-	VCS_DATE="$(svn info | sed -n -e 's:Last Changed Date: ::p' | sed 's: (.*)::' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(svn info | sed -n -e 's:Last Changed Date\: ::p' | sed 's: (.*)::' | sed -e 's: :T:' | sed -e 's: ::')"
 }
 
 
