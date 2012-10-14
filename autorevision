@@ -130,7 +130,7 @@ function svnRepo {
 	/*trunk*|/*branches*|/*tags*)
 		fn=$PWD
 		while [[ $(basename $fn) != 'trunk' ]] && [[ $(basename $fn) != 'branches' ]] && [[ $(basename $fn) != 'tags' ]] && [[ $(basename $fn) != '/' ]]
-		do 
+		do
 		    fn=$(dirname $fn)
 		done
 		fn=$(dirname $fn)
