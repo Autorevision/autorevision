@@ -24,6 +24,7 @@ while getopts ":t:o:s:V" OPTION; do
 			exit 0
 		;;
 		?)
+			# If an unknown flag is used (or -?):
 			echo "error: Invalid arguments." 1>&2
 			exit 1
 		;;
@@ -31,9 +32,11 @@ while getopts ":t:o:s:V" OPTION; do
 done
 
 if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
+	# If both -s and -t are specified:
 	echo "error: Improper argument combination." 1>&2
 	exit 1
 elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
+	# If neither -s or -t are specified:
 	echo "error: Improper argument combination." 1>&2
 	exit 1
 fi
