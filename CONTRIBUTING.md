@@ -38,7 +38,7 @@ Other Conventions
 
 * You generally should *not* assume that any extras, extensions or otherwise non-default commands are available.
 * Any use of `sed` *should* use `:` as a delimiter whenever feasible.
-* All variables should be written in the form `${<variable>}`
-* All error messages should be prefixed with `error: `
-* All warning messages should be prefixed with `warning: `
+* All variables should be written in the form `"${<variable>}"`.
+* All error messages should be prefixed with `error: `.
+* All warning messages should be prefixed with `warning: `.
 * Try to avoid stderr output from any subcommand leaking through.
