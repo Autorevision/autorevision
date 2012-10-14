@@ -46,7 +46,7 @@ function gitRepo {
 
 	VCS_TYPE="git"
 
-	VCS_BASENAME=`basename $PWD`
+	VCS_BASENAME="$(basename $PWD)"
 
 	# Is the working copy clean?
 	git diff --quiet HEAD &> /dev/null
@@ -84,7 +84,7 @@ function hgRepo {
 
 	VCS_TYPE="hg"
 
-	VCS_BASENAME=$(basename $PWD)
+	VCS_BASENAME="$(basename $PWD)"
 
 	# Is the working copy clean?
 	hg sum | grep -q 'commit: (clean)'
@@ -179,7 +179,7 @@ function hOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		"${VCS_TYPE}"
-#define VCS_BASENAME		"${VCS_BASENAME}"
+#define VCS_BASENAME	"${VCS_BASENAME}"
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_URI			"${VCS_URI}"
@@ -204,7 +204,7 @@ function xcodeOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		${VCS_TYPE}
-#define VCS_BASENAME		${VCS_BASENAME}
+#define VCS_BASENAME	${VCS_BASENAME}
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		${VCS_DATE}
 #define VCS_URI			${VCS_URI}
