@@ -6,8 +6,7 @@ A script for extracting version information useful in release/build scripting fr
 To use pass a type and a path to the cache file (if any) or a cache file and the desired single varible to output:
 
 ```bash
-./autorevision -t <output_type> [-o <cache_file>]
-./autorevision -o <cache_file> -s <VARIABLE>
+./autorevision {-t <output_type> | -s <VARIABLE>} [-o <cache_file>] [-V]
 ```
 
 All output (except for the cache file) will be piped to stdout.
