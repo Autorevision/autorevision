@@ -51,6 +51,8 @@ function gitRepo {
 
 	VCS_TYPE="git"
 
+	VCS_BASENAME=`basename $PWD`
+
 	# Is the working copy clean?
 	git diff --quiet HEAD &> /dev/null
 	WC_MODIFIED="${?}"
@@ -87,6 +89,8 @@ function hgRepo {
 
 	VCS_TYPE="hg"
 
+	VCS_BASENAME=$(basename $PWD)
+
 	# Is the working copy clean?
 	hg sum | grep -q 'commit: (clean)'
 	WC_MODIFIED="${?}"
@@ -122,12 +126,30 @@ function hgRepo {
 function svnRepo {
 	VCS_TYPE="svn"
 
+	case $PWD in
+	/*trunk*|/*branches*|/*tags*)
+		fn=$PWD
+		while [[ $(basename $fn) != 'trunk' ]] && [[ $(basename $fn) != 'branches' ]] && [[ $(basename $fn) != 'tags' ]] && [[ $(basename $fn) != '/' ]]
+		do 
+		    fn=$(dirname $fn)
+		done
+		fn=$(dirname $fn)
+		if [ $fn == '/' ]
+		then
+		    VCS_BASENAME=$(basename $PWD)
+		else
+		    VCS_BASENAME=$(basename $fn)
+		fi
+		;;
+	*) VCS_BASENAME=$(basename $PWD) ;;
+	esac
+
 	# Is the working copy clean?
         test -z "$(svn diff 2>/dev/null)"
 	WC_MODIFIED=$?
 
 	# Enumeration of changesets
-	VCS_NUM="$(svn info | sed -n 's/Last Changed Rev: //p')"
+	VCS_NUM="$(svnversion)"
 
 	# The full revision hash
 	VCS_FULL_HASH="$VCS_NUM"
@@ -162,6 +184,7 @@ function hOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		"${VCS_TYPE}"
+#define VCS_BASENAME		"${VCS_BASENAME}"
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_URI			"${VCS_URI}"
@@ -185,6 +208,7 @@ function xcodeOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		${VCS_TYPE}
+#define VCS_BASENAME		${VCS_BASENAME}
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		${VCS_DATE}
 #define VCS_URI			${VCS_URI}
@@ -207,6 +231,7 @@ function shOutput {
 # AUTOREVISION_SH
 
 VCS_TYPE="${VCS_TYPE}"
+VCS_BASENAME="${VCS_BASENAME}"
 VCS_NUM="${VCS_NUM}"
 VCS_DATE="${VCS_DATE}"
 VCS_URI="${VCS_URI}"
@@ -231,6 +256,7 @@ function pyOutput {
 # AUTOREVISION_SH
 
 VCS_TYPE = "${VCS_TYPE}"
+VCS_BASENAME = "${VCS_BASENAME}"
 VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_URI = "${VCS_URI}"
@@ -251,6 +277,7 @@ function plOutput {
 # AUTOREVISION_SH
 
 \$VCS_TYPE = "${VCS_TYPE}";
+\$VCS_BASENAME = "${VCS_BASENAME}"
 \$VCS_NUM = ${VCS_NUM};
 \$VCS_DATE = "${VCS_DATE}";
 \$VCS_URI = "${VCS_URI}";
