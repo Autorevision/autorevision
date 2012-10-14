@@ -31,7 +31,11 @@ autorevision.html: autorevision.asc
 	a2x -f xhtml autorevision.asc
 
 autorevision-$(VERS).tar.gz: $(SOURCES) autorevision.1 
-	tar --transform='s:^:autorevision-$(VERS)/:' --show-transformed-names -cvzf autorevision-$(VERS).tar.gz $(SOURCES) $(EXTRA_DIST)
+	mkdir autorevision-$(VERS)
+	cp -r $(SOURCES) autorevision-$(VERS)
+	tar -czf autorevision-$(VERS).tar.gz autorevision-$(VERS)
+	rm -fr autorevision-$(VERS)
+	ls -l autorevision-$(VERS).tar.gz
 
 dist: autorevision-$(VERS).tar.gz
 
