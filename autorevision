@@ -8,6 +8,7 @@
 # Config
 ARVERSION="1.0"
 TARGETFILE="/dev/stdout"
+AFILETYPE="sh"
 while getopts ":t:o:s:V" OPTION; do
 	case $OPTION in
 		t)
@@ -29,15 +30,6 @@ while getopts ":t:o:s:V" OPTION; do
 		;;
 	esac
 done
-
-if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
-	echo "error: Improper argument combination." 1>&2
-	exit 1
-elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
-	echo "error: Improper argument combination." 1>&2
-	exit 1
-fi
-
 
 # Functions to extract data from different repo types.
 # For git repos
