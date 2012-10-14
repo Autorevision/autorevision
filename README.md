@@ -43,7 +43,7 @@ Currently Supported Repository Types
 Currently Extracted Data
 ------------------------
 
-`VCS_TYPE`: The repository type - "git", "hg", or "svn".
+`VCS_TYPE`: The repository type - `git`, `hg`, or `svn`.
 
 `VCS_BASENAME`: The basename of the directory root.
 
@@ -51,9 +51,9 @@ Currently Extracted Data
 
 `VCS_DATE`: The date of the current commit in true ISO-8601/RFC3339 format, including seconds.
 
-`VCS_URI`: Repository dependent: for Git the full refspec & for Mercurial the bookmark or the branch if there is no bookmark.
+`VCS_URI`: Repository dependent: for Git the full refspec & for Mercurial the bookmark or the branch if there is no bookmark, empty for Subversion; meant to provide information on the current head's name.
 
-`VCS_TAG`: The current tag or a synonym for `VCS_URI` if not currently on a tag.
+`VCS_TAG`: The exact current tag or a synonym for `VCS_URI` if not currently on a tag; useful to to rely on for a version string. Empty under Subversion.
 
 `VCS_FULL_HASH`: A full unique identifier for the current revision.
 
