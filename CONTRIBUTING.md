@@ -21,7 +21,7 @@ Support For New Output Types
 
 When supporting new types of outputs you *should* use all of the currently set variables; if you do not, that needs to be explicitly documented.
 
-Support for new outputs should include a function named in the form `<output_type>Output`; find one that's similar to your targht language, clone it, and modify it.
+Support for new outputs should include a function named in the form `<output_type>Output`; find one that's similar to your target language, clone it, and modify it.
 
 Other Conventions
 -----------------
