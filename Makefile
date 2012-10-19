@@ -33,6 +33,7 @@ autorevision.html: autorevision.asc
 autorevision-$(VERS).tgz: $(SOURCES) autorevision.1
 	mkdir autorevision-$(VERS)
 	cp -r $(SOURCES) autorevision-$(VERS)
+	COPYFILE_DISABLE=1; export COPYFILE_DISABLE; \
 	tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 	ls -l autorevision-$(VERS).tgz
@@ -43,6 +44,8 @@ clean:
 	rm -f autorevision.html autorevision.1 *.tgz
 	rm -f autorevision.tmp docbook-xsl.css
 	rm -f *~  SHIPPER.* index.html
+
+docs: autorevision.html README.html COPYING.html CONTRIBUTING.html
 
 release: autorevision-$(VERS).tgz autorevision.html README.html COPYING.html CONTRIBUTING.html
 	shipper -u -m -t; make clean
