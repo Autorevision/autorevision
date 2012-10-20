@@ -129,6 +129,6 @@ Emits the autorevision version and exits.
 
 == AUTHORS ==
 
-dak180@users.sf.net: concept, bash/C/C++/XCode/PHP/ini support, git and
-hg extraction.  Eric S. Raymond <esr@thyrsus.com>: Python/Perl support,
-svn extraction, CLI design, man page.
+dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
+support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
+Python/Perl support, svn extraction, CLI design, man page.
