@@ -9,4 +9,4 @@ Emitted information includes the ID of the most recent commit, its branch, its d
 
 There is support for reading and writing a cache file so autorevision will remain useful during a build from an unpacked distribution tarball.
 
-See the manual page, included in the distribution, for invocation details.
+See the [manual page](https://github.com/Autorevision/autorevision/blob/master/autorevision.asciidoc), included in the distribution, for invocation details.
