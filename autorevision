@@ -8,10 +8,10 @@
 # Usage message.
 function arUsage {
 	cat > "/dev/stderr" << EOF
-usage: ./autorevision {-t output-type | -s variable} [-o cache-file] [-V]
+usage: ./autorevision {-t output-type | -s symbol} [-o cache-file] [-V]
 	Options include:
 	-t output-type		= specify output type
-	-s variable		= specify variable output
+	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
 	-V			= emit version and exit
 	-?			= help message
@@ -27,7 +27,7 @@ The folowing are valid output types:
 	ini			= INI file
 	js			= javascript file
 
-The following are valid variables:
+The following are valid symbols:
 	VCS_TYPE
 	VCS_BASENAME
 	VCS_NUM
@@ -447,7 +447,7 @@ elif [[ -d .hg ]] && [[ ! -z "$(hg root 2>/dev/null)" ]]; then
 elif [[ -d .svn ]] && [[ ! -z "$(svn info 2>/dev/null)" ]]; then
 	svnRepo
 elif [[ -f "${CACHEFILE}" ]]; then
-	# We are not in a repo; try to use a previously generated cache to populate our variables.
+	# We are not in a repo; try to use a previously generated cache to populate our symbols.
 	source "${CACHEFILE}"
 else
 	echo "error: No repo or cache detected." 1>&2

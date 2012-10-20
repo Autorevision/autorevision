@@ -5,21 +5,24 @@
 autorevision - extract head metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* {-t output-type | -s variable} [-o cache-file] [-V]
+*autorevision* {*-t* output-type | *-s* symbol} [*-o* cache-file] [*-V*]
 
 == DESCRIPTION ==
-*autorevision* extracts metadata about the head version of your repository.
+*autorevision* extracts metadata about the head version of your
+repository.
 
 This program is meant to be used by project build systems to extract
 properties that can be used in software version strings. It can emit
 source files containing variable and macro definitions suitable for
-use with C, C++, sh, Python, Perl, and Mac info.plist files.
+use with C, C++, sh, Python, Perl, Mac info.plist and other types of
+files (see below for the full list).
 
-The generated source is written to standard output. 
+The generated source is written to standard output.
 
 This program must be called from the top-level (root) directory
-of a repository. Exception: it can be called from any level of a Subversion 
-checkout directory, but not from within a Subversion repository directory.
+of a repository. Exception: it can be called from any level of a
+Subversion checkout directory, but not from within a Subversion
+repository directory.
 
 If you specify a cache file, then when *autorevision* is run where no
 repository can be recognized, the values from the cache file will be
@@ -27,16 +30,17 @@ used instead.  If a repository can be recognized, the cache is
 rewritten. This feature makes it possible for your build to run
 from an unpacked tarball that includes the cache file.
 
-The following repository types will be automatically recognized:
+=== Valid Repository Types ===
 
 *Git*: A version greater than 1.7.2.3 is recommended.
 
 *Mercurial*: A version greater than 1.6 is recommended.
 
 *Subversion*: Any production version.  Warning: due to limitations in
-Subversion this program can run very long on large Subversion repositories.
+Subversion this program can run very long on large Subversion
+repositories.
 
-The following output types may be specified:
+=== Valid Output Types ===
 
 *h*::
 A header file suitable for C/C++.
@@ -65,7 +69,7 @@ A ini source file setting ini variables.
 *js*::
 A javascript source file setting javascript variables.
 
-Each generated source file defines the following symbols:
+=== Valid Symbol Names ===
 
 *VCS_TYPE*::
 The repository type - "git", "hg", or "svn".
@@ -107,17 +111,21 @@ literals, true will mean modified and false unmodified.
 
 == OPTIONS ==
 
-The -t option sets the output type. It is required unless -s is
-specified; both -t and -s cannot be used in the same invocation.
+*-t* 'output-type'::
+Sets the output type. It is required unless -s is specified; both *-t*
+and *-s* cannot be used in the same invocation.
 
-The -o option sets he name of the cache file.
+*-o* 'cache-file'::
+Sets the name of the cache file.
 
-The -s option changes the reporting behavior; instead of emitting
-a symbol file to stdout, only the value of that individual variable
-will be reported. It is required unless -t is specified; both -t
-and -s cannot be used in the same invocation.
+*-s* 'symbol'::
+Changes the reporting behavior; instead of emitting a symbol file to
+stdout, only the value of that individual symbol will be reported. It
+is required unless *-t* is specified; both *-t* and *-s* cannot be used
+in the same invocation.
 
-The -V option emits the autorevision version and exits.
+*-V*::
+Emits the autorevision version and exits.
 
 == AUTHORS ==
 
