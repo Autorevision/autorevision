@@ -10,7 +10,7 @@ VERS=$(shell ./autorevision -o autorevision.tmp -s VCS_TAG | sed -e 's:refs/head
 MANDIR=/usr/share/man/man1
 BINDIR=/usr/bin
 
-DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asc NEWS
+DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asciidoc NEWS
 SOURCES = autorevision Makefile $(DOCS) control
 EXTRA_DIST = autorevision.tmp
 
@@ -24,11 +24,11 @@ install: autorevision.1
 uninstall:
 	rm -f $(BINDIR)/autorevision $(MANDIR)/autorevision.1.gz
 
-autorevision.1: autorevision.asc
-	a2x -f manpage autorevision.asc
+autorevision.1: autorevision.asciidoc
+	a2x -f manpage autorevision.asciidoc
 
-autorevision.html: autorevision.asc
-	a2x -f xhtml autorevision.asc
+autorevision.html: autorevision.asciidoc
+	a2x -f xhtml autorevision.asciidoc
 
 autorevision-$(VERS).tgz: $(SOURCES) autorevision.1
 	mkdir autorevision-$(VERS)
