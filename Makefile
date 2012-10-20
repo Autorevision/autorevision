@@ -43,6 +43,7 @@ dist: autorevision-$(VERS).tgz
 clean:
 	rm -f autorevision.html autorevision.1 *.tgz
 	rm -f autorevision.tmp docbook-xsl.css
+	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~  SHIPPER.* index.html
 
 docs: autorevision.html README.html COPYING.html CONTRIBUTING.html
