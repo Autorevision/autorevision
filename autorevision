@@ -105,11 +105,8 @@ function gitRepo {
 	# Current branch
 	VCS_URI=`git rev-parse --symbolic-full-name --verify $(git name-rev --name-only --no-undefined HEAD)`
 
-	# Current tag (or uri if there is no tag)
+	# Current tag (exact matches only)
 	VCS_TAG="$(git describe --exact-match --tags 2>/dev/null)"
-	if [ -z "${VCS_TAG}" ]; then
-		VCS_TAG="${VCS_URI}"
-	fi
 
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
@@ -143,11 +140,9 @@ function hgRepo {
 		VCS_URI="$(hg id -b)"
 	fi
 
-	# Current tag (or uri if there is no tag)
+	# Current tag (exact matches only)
 	if [ "$(hg log -r ${VCS_NUM} -l 1 --template '{latesttagdistance}\n')" = "0" ]; then
 		VCS_TAG="`hg id -t | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --color never qtop 2>/dev/null)::" | cut -d ' ' -f 1`"
-	else
-		VCS_TAG="${VCS_URI}"
 	fi
 
 	# Date of the current commit
@@ -196,7 +191,7 @@ function svnRepo {
 	# may contain all branches or be a checkout of a single one.
 	VCS_URI=""
 
-	# Current tag (or uri if there is no tag). But "current tag" can't
+	# Current tag (exact matches only). But "current tag" can't
 	# be extracted reliably because Subversion doesn't have tags the way
 	# other VCSes do.
 	VCS_TAG=""
@@ -452,6 +447,12 @@ elif [[ -f "${CACHEFILE}" ]]; then
 else
 	echo "error: No repo or cache detected." 1>&2
 	exit 1
+fi
+
+
+# If VCS_TAG is empty, alias it to VCS_URI.
+if [ -z "${VCS_TAG}" ]; then
+	VCS_TAG="${VCS_URI}"
 fi
 
 
