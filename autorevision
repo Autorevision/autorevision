@@ -103,10 +103,10 @@ function gitRepo {
 	VCS_SHORT_HASH="$(echo "${VCS_FULL_HASH}" | cut -b 1-7)"
 
 	# Current branch
-	VCS_URI="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD)")"
+	VCS_URI="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" 2>/dev/null)"
 
 	# Current tag (exact matches only)
-	VCS_TAG="$(git describe --exact-match --tags)"
+	VCS_TAG="$(git describe --exact-match --tags 2>/dev/null)"
 
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
