@@ -8,11 +8,12 @@
 # Usage message.
 function arUsage {
 	cat > "/dev/stderr" << EOF
-usage: ./autorevision {-t output-type | -s symbol} [-o cache-file] [-V]
+usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	Options include:
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
+	-f			= force the use cache data
 	-V			= emit version and exit
 	-?			= help message
 
@@ -44,13 +45,16 @@ EOF
 # Config
 ARVERSION="1.0"
 TARGETFILE="/dev/stdout"
-while getopts ":t:o:s:V" OPTION; do
+while getopts ":t:o:s:Vf" OPTION; do
 	case "${OPTION}" in
 		t)
 			AFILETYPE="${OPTARG}"
 		;;
 		o)
 			CACHEFILE="${OPTARG}"
+		;;
+		f)
+			CACHEFORCE="1"
 		;;
 		s)
 			VAROUT="${OPTARG}"
@@ -72,6 +76,9 @@ if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
 	exit 1
 elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
 	# If neither -s or -t are specified:
+	arUsage
+elif [[ -z "${CACHEFILE}"  ]] && [[ "${CACHEFORCE}" = "1" ]]; then
+	# If -f is specified without -o:
 	arUsage
 fi
 
@@ -460,7 +467,10 @@ EOF
 
 
 # Detect and collect repo data.
-if [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD)" ]]; then
+if [[ -f "${CACHEFILE}" ]] && [[ "${CACHEFORCE}" = "1" ]];
+	# When requested only read from the cache to populate our symbols.
+	source "${CACHEFILE}"
+elif [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD)" ]]; then
 	gitRepo
 elif [[ -d .hg ]] && [[ ! -z "$(hg root)" ]]; then
 	hgRepo
@@ -533,7 +543,7 @@ fi
 
 
 # If requested, make a cache file.
-if [[ ! -z "${CACHEFILE}" ]]; then
+if [[ ! -z "${CACHEFILE}" ]] && [[ ! "${CACHEFORCE}" = "1" ]]; then
 	TARGETFILE="${CACHEFILE}"
 	shOutput
 fi

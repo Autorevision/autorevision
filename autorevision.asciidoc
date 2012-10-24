@@ -125,6 +125,10 @@ and *-s* cannot be used in the same invocation.
 *-o* 'cache-file'::
 Sets the name of the cache file.
 
+*-f*::
+Forces the use cache data even when in a repo; useful if you want to
+preprocess the data before final output.
+
 *-s* 'symbol'::
 Changes the reporting behavior; instead of emitting a symbol file to
 stdout, only the value of that individual symbol will be reported. It
