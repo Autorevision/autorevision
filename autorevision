@@ -187,9 +187,33 @@ function svnRepo {
 	# The short hash
 	VCS_SHORT_HASH="$VCS_NUM"
 
-	# Current branch - can't be extracted since a checkout directory
-	# may contain all branches or be a checkout of a single one.
-	VCS_URI=""
+	# Current branch 
+	case "${PWD}" in
+	/*trunk*|/*branches*|/*tags*)
+		lastbase=""
+		fn="${PWD}"
+		while :
+		do
+		    base="$(basename "${fn}")"
+		    if [[ "$base" = 'trunk' ]]
+		    then
+			VCS_URI='trunk'
+			break
+		    elif [[ "$base" = 'branches' ]] || [[ "$base" = 'tags' ]]
+		    then
+			VCS_URI="${lastbase}"
+			break
+		    elif [[ "$base" = '/' ]]
+		    then
+			VCS_URI=""
+			break
+		    fi
+		    lastbase="$base"
+		    fn="$(dirname "${fn}")"
+		done
+		;;
+	*) VCS_URI="" ;;
+	esac
 
 	# Current tag (exact matches only). But "current tag" can't
 	# be extracted reliably because Subversion doesn't have tags the way
