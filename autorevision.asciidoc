@@ -88,7 +88,7 @@ one; useful for reporting build numbers.
 The date of the most recent commit in true ISO-8601/RFC3339
 format, including seconds.
 
-*VCS_BRANCH*:: 
+*VCS_BRANCH*::
 The name of the branch of the commit graph that was selected when
 autoversion was run. Under Subversion this will normally be either
 'trunk' or the basename of some branch or tag subdirectory, depending

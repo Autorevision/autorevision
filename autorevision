@@ -188,7 +188,7 @@ function svnRepo {
 	# The short hash
 	VCS_SHORT_HASH="$VCS_NUM"
 
-	# Current branch 
+	# Current branch
 	case "${PWD}" in
 	/*trunk*|/*branches*|/*tags*)
 		lastbase=""
