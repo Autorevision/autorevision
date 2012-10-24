@@ -35,6 +35,7 @@ The following are valid symbols:
 	VCS_DATE
 	VCS_BRANCH
 	VCS_TAG
+	VCS_TICK
 	VCS_FULL_HASH
 	VCS_SHORT_HASH
 	VCS_WC_MODIFIED
@@ -152,6 +153,7 @@ function hgRepo {
 	if [ "$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttagdistance}\n')" = "0" ]; then
 		VCS_TAG="$(hg id -t | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --color never qtop)::" | cut -d ' ' -f 1)"
 	fi
+	VCS_TICK=""
 
 	# Date of the current commit
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n'   | sed -e 's: :T:' | sed -e 's: ::')"
@@ -227,6 +229,7 @@ function svnRepo {
 	# be extracted reliably because Subversion doesn't have tags the way
 	# other VCSes do.
 	VCS_TAG=""
+	VCS_TICK=""
 
 	# Date of the current commit
 	VCS_DATE="$(svn info | sed -n -e 's:Last Changed Date\: ::p' | sed 's: (.*)::' | sed -e 's: :T:' | sed -e 's: ::')"
@@ -251,6 +254,7 @@ function hOutput {
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_BRANCH		"${VCS_BRANCH}"
 #define VCS_TAG			"${VCS_TAG}"
+#define VCS_TICK		"${VCS_TICK}"
 
 #define VCS_FULL_HASH		"${VCS_FULL_HASH}"
 #define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
@@ -276,6 +280,7 @@ function xcodeOutput {
 #define VCS_DATE		${VCS_DATE}
 #define VCS_BRANCH			${VCS_BRANCH}
 #define VCS_TAG			${VCS_TAG}
+#define VCS_TICK		${VCS_TICK}
 
 #define VCS_FULL_HASH					${VCS_FULL_HASH}
 #define VCS_SHORT_HASH					${VCS_SHORT_HASH}
@@ -299,6 +304,7 @@ VCS_NUM=${VCS_NUM}
 VCS_DATE="${VCS_DATE}"
 VCS_BRANCH="${VCS_BRANCH}"
 VCS_TAG="${VCS_TAG}"
+VCS_TICK="${VCS_TICK}"
 
 VCS_FULL_HASH="${VCS_FULL_HASH}"
 VCS_SHORT_HASH="${VCS_SHORT_HASH}"
@@ -324,6 +330,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TICK = "${VCS_TICK}"
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -345,6 +352,7 @@ function plOutput {
 \$VCS_DATE = "${VCS_DATE}";
 \$VCS_BRANCH = "${VCS_BRANCH}";
 \$VCS_TAG = "${VCS_TAG}";
+\$VCS_TICK = "${VCS_TICK}";
 
 \$VCS_FULL_HASH = "${VCS_FULL_HASH}";
 \$VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
@@ -370,6 +378,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TICK = "${VCS_TICK}"
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -398,6 +407,7 @@ $GLOBALS["VCS_NUM"] = ${VCS_NUM};
 $GLOBALS["VCS_DATE"] = "${VCS_DATE}";
 $GLOBALS["VCS_BRANCH"] = "${VCS_BRANCH}";
 $GLOBALS["VCS_TAG"] = "${VCS_TAG}";
+$GLOBALS["VCS_TICK"] = "${VCS_TICK}";
 
 $GLOBALS["VCS_FULL_HASH"] = "${VCS_FULL_HASH}";
 $GLOBALS["VCS_SHORT_HASH"] = "${VCS_SHORT_HASH}";
@@ -426,6 +436,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TICK = "${VCS_TICK}"
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 VCS_WC_MODIFIED = ${WC_MODIFIED}
@@ -449,6 +460,7 @@ var autorevision = {
 	VCS_DATE: "${VCS_DATE}",
 	VCS_BRANCH: "${VCS_BRANCH}",
 	VCS_TAG: "${VCS_TAG}",
+	VCS_TICK: "${VCS_TICK}",
 
 	VCS_FULL_HASH: "${VCS_FULL_HASH}",
 	VCS_SHORT_HASH: "${VCS_SHORT_HASH}",
@@ -485,12 +497,6 @@ else
 fi
 
 
-# If VCS_TAG is empty, alias it to VCS_BRANCH.
-if [ -z "${VCS_TAG}" ]; then
-	VCS_TAG="${VCS_BRANCH}"
-fi
-
-
 # -s output is handled here.
 if [[ ! -z "${VAROUT}" ]]; then
 	if [[ "${VAROUT}" = "VCS_TYPE" ]]; then
@@ -505,6 +511,8 @@ if [[ ! -z "${VAROUT}" ]]; then
 		echo "${VCS_BRANCH}"
 	elif [[ "${VAROUT}" = "VCS_TAG" ]]; then
 		echo "${VCS_TAG}"
+	elif [[ "${VAROUT}" = "VCS_TICK" ]]; then
+		echo "${VCS_TICK}"
 	elif [[ "${VAROUT}" = "VCS_FULL_HASH" ]]; then
 		echo "${VCS_FULL_HASH}"
 	elif [[ "${VAROUT}" = "VCS_SHORT_HASH" ]]; then
