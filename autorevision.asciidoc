@@ -88,10 +88,17 @@ one; useful for reporting build numbers.
 The date of the most recent commit in true ISO-8601/RFC3339
 format, including seconds.
 
-*VCS_URI*::
-Repository dependent: for Git the full refspec & for Mercurial the
-bookmark or the branch if there is no bookmark, empty for Subversion;
-meant to provide information on the current head's name.
+*VCS_BRANCH*:: The name of the branch of the commit graph that was
+selected when autoversion was run. Under Subversion this will normally
+be either 'trunk' or the basename of some branch or tag subdirectory,
+depending on where *autoversion* was run. Under git, this will
+normally be the shortname of the current branch (the asterisked line
+in the output of of git branch) except that when the branch doesn't
+have a shortname it will be a full refspec. Under hg the feature that
+is called 'branches' is actually a sort of graph coloring (multiple
+heads can have the same branch name) so this variable is filled withe
+current bookmark if it exists, with the current branch name as a
+fallback.
 
 *VCS_TAG*::
 The exact current tag or a synonym for `VCS_URI` if not currently on a
