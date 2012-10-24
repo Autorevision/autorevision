@@ -113,9 +113,11 @@ function gitRepo {
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" | sed -e 's:refs/heads/::' | sed -e 's:refs/::' 2>/dev/null)"
 
-	# Current tag (exact matches only)
+	# Current or last tag
 	description="$(git describe --long --tags 2>/dev/null)"
 	VCS_TAG="$(echo $description | cut -d '-' -f 1)"
+
+	# Distance to last tag
 	VCS_TICK="$(echo $description | cut -d '-' -f 2)"
 
 	# Date of the current commit
@@ -151,11 +153,11 @@ function hgRepo {
 		VCS_BRANCH="$(hg id -b)"
 	fi
 
-	# Current tag (exact matches only)
-	if [ "$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttagdistance}\n')" = "0" ]; then
-		VCS_TAG="$(hg id -t | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --color never qtop)::" | cut -d ' ' -f 1)"
-	fi
-	VCS_TICK=""
+	# Current or last tag (excluding auto tags)
+	VCS_TAG="$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttag}\n' | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --color never qtop)::" | cut -d ' ' -f 1)"
+
+	# Distance to last tag
+	VCS_TICK="$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttagdistance}\n')"
 
 	# Date of the current commit
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n'   | sed -e 's: :T:' | sed -e 's: ::')"
