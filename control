@@ -7,7 +7,8 @@ Description: Extracts metadata about the head version of your repository.
  This program is meant to be used by project build systems to extract properties
  that can be used in software version strings. It can create files containing
  variable and macro definitions suitable for C, C++, sh, Python, Perl, PHP,
- lua, Javascript, and XCode project descriptions.
+ lua, Javascript, and header files suitable for use with preprocessing
+ Info.plist files.
 
 XBS-Github-URL: git://github.com/Autorevision/autorevision.git
 
