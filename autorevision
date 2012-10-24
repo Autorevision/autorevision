@@ -467,7 +467,7 @@ EOF
 
 
 # Detect and collect repo data.
-if [[ -f "${CACHEFILE}" ]] && [[ "${CACHEFORCE}" = "1" ]];
+if [[ -f "${CACHEFILE}" ]] && [[ "${CACHEFORCE}" = "1" ]]; then
 	# When requested only read from the cache to populate our symbols.
 	source "${CACHEFILE}"
 elif [[ -d .git ]] && [[ ! -z "$(git rev-parse HEAD)" ]]; then
