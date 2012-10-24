@@ -20,7 +20,7 @@ The folowing are valid output types:
 	h			= Header for use with c/c++
 	xcode			= Header useful for populating info.plist files
 	sh			= Bash sytax
-	py			= Phython file
+	py			= Python file
 	pl			= Perl file
 	lua			= Lua file
 	php			= PHP file
