@@ -114,7 +114,9 @@ function gitRepo {
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" | sed -e 's:refs/heads/::' | sed -e 's:refs/::' 2>/dev/null)"
 
 	# Current tag (exact matches only)
-	VCS_TAG="$(git describe --exact-match --tags 2>/dev/null)"
+	description="$(git describe --long --tags 2>/dev/null)"
+	VCS_TAG="$(echo $description | cut -d '-' -f 1)"
+	VCS_TICK="$(echo $description | cut -d '-' -f 2)"
 
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
@@ -254,7 +256,7 @@ function hOutput {
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_BRANCH		"${VCS_BRANCH}"
 #define VCS_TAG			"${VCS_TAG}"
-#define VCS_TICK		"${VCS_TICK}"
+#define VCS_TICK		${VCS_TICK}
 
 #define VCS_FULL_HASH		"${VCS_FULL_HASH}"
 #define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
@@ -275,17 +277,17 @@ function xcodeOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		${VCS_TYPE}
-#define VCS_BASENAME	${VCS_BASENAME}
+#define VCS_BASENAME		${VCS_BASENAME}
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		${VCS_DATE}
-#define VCS_BRANCH			${VCS_BRANCH}
+#define VCS_BRANCH		${VCS_BRANCH}
 #define VCS_TAG			${VCS_TAG}
 #define VCS_TICK		${VCS_TICK}
 
-#define VCS_FULL_HASH					${VCS_FULL_HASH}
-#define VCS_SHORT_HASH					${VCS_SHORT_HASH}
+#define VCS_FULL_HASH		${VCS_FULL_HASH}
+#define VCS_SHORT_HASH		${VCS_SHORT_HASH}
 
-#define VCS_WC_MODIFIED					${WC_MODIFIED}
+#define VCS_WC_MODIFIED		${WC_MODIFIED}
 
 #endif
 
@@ -304,7 +306,7 @@ VCS_NUM=${VCS_NUM}
 VCS_DATE="${VCS_DATE}"
 VCS_BRANCH="${VCS_BRANCH}"
 VCS_TAG="${VCS_TAG}"
-VCS_TICK="${VCS_TICK}"
+VCS_TICK=${VCS_TICK}
 
 VCS_FULL_HASH="${VCS_FULL_HASH}"
 VCS_SHORT_HASH="${VCS_SHORT_HASH}"
@@ -330,7 +332,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
-VCS_TICK = "${VCS_TICK}"
+VCS_TICK = ${VCS_TICK}
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -352,7 +354,7 @@ function plOutput {
 \$VCS_DATE = "${VCS_DATE}";
 \$VCS_BRANCH = "${VCS_BRANCH}";
 \$VCS_TAG = "${VCS_TAG}";
-\$VCS_TICK = "${VCS_TICK}";
+\$VCS_TICK = ${VCS_TICK};
 
 \$VCS_FULL_HASH = "${VCS_FULL_HASH}";
 \$VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
@@ -378,7 +380,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
-VCS_TICK = "${VCS_TICK}"
+VCS_TICK = ${VCS_TICK}
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -407,7 +409,7 @@ $GLOBALS["VCS_NUM"] = ${VCS_NUM};
 $GLOBALS["VCS_DATE"] = "${VCS_DATE}";
 $GLOBALS["VCS_BRANCH"] = "${VCS_BRANCH}";
 $GLOBALS["VCS_TAG"] = "${VCS_TAG}";
-$GLOBALS["VCS_TICK"] = "${VCS_TICK}";
+$GLOBALS["VCS_TICK"] = ${VCS_TICK};
 
 $GLOBALS["VCS_FULL_HASH"] = "${VCS_FULL_HASH}";
 $GLOBALS["VCS_SHORT_HASH"] = "${VCS_SHORT_HASH}";
@@ -436,7 +438,7 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
-VCS_TICK = "${VCS_TICK}"
+VCS_TICK = ${VCS_TICK}
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 VCS_WC_MODIFIED = ${WC_MODIFIED}
@@ -460,7 +462,7 @@ var autorevision = {
 	VCS_DATE: "${VCS_DATE}",
 	VCS_BRANCH: "${VCS_BRANCH}",
 	VCS_TAG: "${VCS_TAG}",
-	VCS_TICK: "${VCS_TICK}",
+	VCS_TICK: ${VCS_TICK},
 
 	VCS_FULL_HASH: "${VCS_FULL_HASH}",
 	VCS_SHORT_HASH: "${VCS_SHORT_HASH}",

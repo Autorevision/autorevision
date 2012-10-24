@@ -101,8 +101,12 @@ branch name) so this variable is filled with the current bookmark if
 it exists, with the current branch name as a fallback.
 
 *VCS_TAG*::
-The exact current tag or a synonym for `VCS_URI` if not currently on a
-tag; useful to to rely on for a version string. Empty under Subversion.
+The name of the most recent tag ancestral to the current commit.
+Empty under Subversion.
+
+*VCS_TICK*::
+A count of commits since most recent tag ancestral to the current commit.
+Empty under Subversion.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
