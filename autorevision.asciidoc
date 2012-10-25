@@ -105,7 +105,8 @@ The name of the most recent tag ancestral to the current commit.
 Empty under Subversion.
 
 *VCS_TICK*::
-A count of commits since most recent tag ancestral to the current commit.
+A count of commits since most recent tag ancestral to the current commit or
+an alias of *VCS_NUM* if there are no prior tags.
 Empty under Subversion.
 
 *VCS_FULL_HASH*::
