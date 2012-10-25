@@ -3,7 +3,7 @@
 # Copyright (c) 2012 dak180
 # See http://opensource.org/licenses/bsd-license.php for licence terms
 #
-# autorevision - extracts metadata about the head version of your repository.
+# autorevision - extracts metadata about the head version from your repository.
 
 # Usage message.
 function arUsage {
