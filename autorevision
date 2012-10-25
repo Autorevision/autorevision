@@ -598,7 +598,7 @@ if [[ ! -z "${AFILETYPE}" ]]; then
 		luaOutput
 	elif [[ "${AFILETYPE}" = "php" ]]; then
 		phpOutput
-	elif [ "${AFILETYPE}" = "ini" ]]; then
+	elif [[ "${AFILETYPE}" = "ini" ]]; then
 		iniOutput
 	elif [[ "${AFILETYPE}" = "js" ]]; then
 		jsOutput
