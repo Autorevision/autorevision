@@ -13,7 +13,7 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
-	-f			= force the use cache data
+	-f			= force the use of cache data
 	-V			= emit version and exit
 	-?			= help message
 
