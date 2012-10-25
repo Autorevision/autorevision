@@ -153,4 +153,4 @@ Emits the autorevision version and exits.
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
-Python/Perl support, svn extraction, CLI design, man page.
+Python/Perl/lua support, svn extraction, CLI design, man page.
