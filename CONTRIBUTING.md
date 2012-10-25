@@ -26,6 +26,7 @@ Support for new outputs should include a function named in the form `<output_typ
 Other Conventions
 -----------------
 
+* Do not forget to update the documentation.
 * You generally should *not* assume that any extras, extensions or otherwise non-default commands are available.
 * Any use of `sed` *should* use `:` as a delimiter whenever feasible.
 * All variables should be written in the form `"${<variable>}"`.
