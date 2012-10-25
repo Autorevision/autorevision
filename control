@@ -6,8 +6,8 @@ Package: autorevision
 Description: Extracts metadata about the head version of your repository.
  This program is meant to be used by project build systems to extract properties
  that can be used in software version strings. It can create files containing
- variable and macro definitions suitable for C, C++, sh, Python, Perl, PHP,
- lua, Javascript, and header files suitable for use with preprocessing
+ variable and macro definitions suitable for C, C++, Java, sh, Python, Perl,
+ PHP, lua, Javascript, and header files suitable for use with preprocessing
  Info.plist files.
 
 XBS-Github-URL: https://github.com/Autorevision/autorevision

@@ -14,8 +14,8 @@ repository.
 This program is meant to be used by project build systems to extract
 properties that can be used in software version strings. It can emit
 source files containing variable and macro definitions suitable for
-use with C, C++, sh, Python, Perl, Mac info.plist and other types of
-files (see below for the full list).
+use with C, C++, Java, sh, Python, Perl, Mac info.plist and other
+types of files (see below for the full list).
 
 The generated source is written to standard output.
 
@@ -68,6 +68,9 @@ A ini source file setting ini variables.
 
 *js*::
 A javascript source file setting javascript variables.
+
+*java*::
+A Java source file setting class properties.
 
 === Valid Symbol Names ===
 
