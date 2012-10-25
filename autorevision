@@ -162,7 +162,7 @@ function hgRepo {
 	fi
 
 	# Current or last tag ancestor (excluding auto tags, empty if no tags)
-	VCS_TAG="$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttag}\n' 2>/dev/null | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --color never qtop)::" | cut -d ' ' -f 1)"
+	VCS_TAG="$(hg log -r "${VCS_NUM}" -l 1 --template '{latesttag}\n' 2>/dev/null | sed -e 's:qtip::' -e 's:tip::' -e 's:qbase::' -e 's:qparent::' -e "s:$(hg --config 'extensions.color=' --color never qtop 2>/dev/null)::" | cut -d ' ' -f 1)"
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	if [[ ! -z "${VCS_TAG}" ]]; then
