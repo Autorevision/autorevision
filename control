@@ -10,11 +10,11 @@ Description: Extracts metadata about the head version of your repository.
  lua, Javascript, and header files suitable for use with preprocessing
  Info.plist files.
 
-XBS-Github-URL: git://github.com/Autorevision/autorevision.git
+XBS-Github-URL: https://github.com/Autorevision
 
 XBS-Ohloh-URL: http://www.ohloh.net/p/autorevision
 
-#XBS-Destinations: freecode
+XBS-Destinations: freecode
 
 Homepage: http://www.catb.org/~esr/autorevision
 
