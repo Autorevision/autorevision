@@ -49,5 +49,5 @@ clean:
 docs: autorevision.html README.html COPYING.html CONTRIBUTING.html
 
 release: autorevision-$(VERS).tgz autorevision.html README.html COPYING.html CONTRIBUTING.html
-	shipper -u -m -t; make clean
+	shipper -u -m; make clean
 
