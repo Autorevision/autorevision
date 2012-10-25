@@ -263,7 +263,7 @@ function hOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		"${VCS_TYPE}"
-#define VCS_BASENAME		"${VCS_BASENAME}"
+#define VCS_BASENAME	"${VCS_BASENAME}"
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_BRANCH		"${VCS_BRANCH}"
@@ -289,7 +289,7 @@ function xcodeOutput {
 #define AUTOREVISION_H
 
 #define VCS_TYPE		${VCS_TYPE}
-#define VCS_BASENAME		${VCS_BASENAME}
+#define VCS_BASENAME	${VCS_BASENAME}
 #define VCS_NUM			${VCS_NUM}
 #define VCS_DATE		${VCS_DATE}
 #define VCS_BRANCH		${VCS_BRANCH}
