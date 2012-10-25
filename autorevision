@@ -113,12 +113,14 @@ function gitRepo {
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" | sed -e 's:refs/heads/::' | sed -e 's:refs/::' 2>/dev/null)"
 
-	# Current or last tag
+	# Cache the description
 	description="$(git describe --long --tags 2>/dev/null)"
-	VCS_TAG="$(echo $description | cut -d '-' -f 1)"
+
+	# Current or last tag
+	VCS_TAG="$(echo "${description}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" | sed -e 's:-[0-9]*$::')"
 
 	# Distance to last tag
-	VCS_TICK="$(echo $description | cut -d '-' -f 2)"
+	VCS_TICK="$(echo "${description}" | sed -e "s:${VCS_TAG}-::" -e "s:-g${VCS_SHORT_HASH}::")"
 
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
