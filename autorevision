@@ -215,16 +215,16 @@ function svnRepo {
 		    then
 			VCS_BRANCH='trunk'
 			break
-		    elif [[ "$base" = 'branches' ]] || [[ "$base" = 'tags' ]]
+		    elif [[ "${base}" = 'branches' ]] || [[ "${base}" = 'tags' ]]
 		    then
 			VCS_BRANCH="${lastbase}"
 			break
-		    elif [[ "$base" = '/' ]]
+		    elif [[ "${base}" = '/' ]]
 		    then
 			VCS_BRANCH=""
 			break
 		    fi
-		    lastbase="$base"
+		    lastbase="${base}"
 		    fn="$(dirname "${fn}")"
 		done
 		;;
