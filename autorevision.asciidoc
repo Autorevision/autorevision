@@ -37,25 +37,25 @@ from an unpacked tarball that includes the cache file.
 *Mercurial*: A version greater than 1.6 is recommended.
 
 *Subversion*: Any production version.  Warning: due to limitations in
-Subversion this program can run very long on large Subversion
-repositories.
+Subversion this program can take a very long time to report on large
+Subversion repositories.
 
 === Valid Output Types ===
 
 *h*::
 A header file suitable for C/C++.
 
-*xcode*::
-A header output for use with xcode to populate info.plist strings.
+*ini*::
+A ini source file setting ini variables.
 
-*sh*::
-A text file suitable for including from a bash script.  Will work with Ruby.
+*java*::
+A Java source file setting class properties.
 
-*py*::
-A Python source file setting Python variables.
+*javaprop*::
+A Java properties file (like ini); useful when META-INF is readable in Java.
 
-*pl*::
-A Perl source file setting Perl variables.
+*js*::
+A javascript source file setting javascript variables.
 
 *lua*::
 A lua source file setting lua variables.
@@ -63,17 +63,18 @@ A lua source file setting lua variables.
 *php*::
 A PHP source file setting PHP variables.
 
-*ini*::
-A ini source file setting ini variables.
+*pl*::
+A Perl source file setting Perl variables.
 
-*js*::
-A javascript source file setting javascript variables.
+*py*::
+A Python source file setting Python variables.
 
-*java*::
-A Java source file setting class properties.
+*sh*::
+A text file suitable for including from a bash script.  Will work with Ruby.
 
-*javaprop*::
-A Java properties file (like ini); useful when META-INF is readable in Java.
+*xcode*::
+A header output for use with xcode to populate info.plist strings.
+
 
 === Valid Symbol Names ===
 
