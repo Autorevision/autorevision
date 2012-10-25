@@ -3,7 +3,7 @@ Autorevision
 
 A program for extracting version information useful in release/build scripting from repositories. 
 
-Supported repository types include `git`, `hg`, and `svn`. The record can be emitted in a ready-to-use form for `C`, `C++`, `bash`, `Python`, `Perl`, `lua`, `php`, `ini` and others. 
+Supported repository types include `git`, `hg`, and `svn`. The record can be emitted in a ready-to-use form for `C`, `C++`, `Java`, `bash`, `Python`, `Perl`, `lua`, `php`, `ini` and others. 
 
 Emitted information includes the ID of the most recent commit, its branch, its date, and several other useful pieces of meta-information.
 
