@@ -72,6 +72,9 @@ A javascript source file setting javascript variables.
 *java*::
 A Java source file setting class properties.
 
+*javaprop*::
+A Java properties file (like ini); useful when META-INF is readable in Java.
+
 === Valid Symbol Names ===
 
 *VCS_TYPE*::
