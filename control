@@ -18,7 +18,7 @@ XBS-Destinations: freecode
 
 Homepage: http://www.catb.org/~esr/autorevision
 
-#XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
+XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
 
 XBS-Project-Tag-List: svn git hg perl python c c++ bash build_tools
 
