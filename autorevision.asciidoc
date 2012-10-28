@@ -8,8 +8,7 @@ autorevision - extract head metadata from version-control repositories
 *autorevision* {*-t* output-type | *-s* symbol} [*-o* cache-file] [*-V*]
 
 == DESCRIPTION ==
-*autorevision* extracts metadata about the head version of your
-repository.
+*autorevision* extracts metadata about the head revision from your repository.
 
 This program is meant to be used by project build systems to extract
 properties that can be used in software version strings. It can emit
@@ -36,9 +35,7 @@ from an unpacked tarball that includes the cache file.
 
 *Mercurial*: A version greater than 1.6 is recommended.
 
-*Subversion*: Any production version.  Warning: due to limitations in
-Subversion this program can take a very long time to report on large
-Subversion repositories.
+*Subversion*: Any production version.
 
 === Valid Output Types ===
 
@@ -144,8 +141,8 @@ preprocess the data before final output.
 *-s* 'symbol'::
 Changes the reporting behavior; instead of emitting a symbol file to
 stdout, only the value of that individual symbol will be reported. It
-is required unless *-t* is specified; both *-t* and *-s* cannot be used
-in the same invocation.
+is required unless *-t* is specified; *-t* and *-s* cannot both be
+used in the same invocation.
 
 *-V*::
 Emits the autorevision version and exits.
