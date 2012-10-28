@@ -46,7 +46,7 @@ EOF
 }
 
 # Config
-ARVERSION="1.0"
+ARVERSION="1.1"
 TARGETFILE="/dev/stdout"
 while getopts ":t:o:s:Vf" OPTION; do
 	case "${OPTION}" in
