@@ -18,10 +18,10 @@ types of files (see below for the full list).
 
 The generated source is written to standard output.
 
-This program must be called from the top-level (root) directory
-of a repository. Exception: it can be called from any level of a
-Subversion checkout directory, but not from within a Subversion
-repository directory.
+This program must be called from the top-level (root) directory of a
+repository (or, in bzr, a branch checkout). Exception: it can be
+called from any level of a Subversion checkout directory, but not from
+within a Subversion repository directory.
 
 If you specify a cache file, then when *autorevision* is run where no
 repository can be recognized, the values from the cache file will be
@@ -36,6 +36,8 @@ from an unpacked tarball that includes the cache file.
 *Mercurial*: A version greater than 1.6 is recommended.
 
 *Subversion*: Any production version.
+
+*Bazaar*: Any production version.
 
 === Valid Output Types ===
 
@@ -102,16 +104,17 @@ of "git branch") except that when the branch doesn't have a shortname it
 will be a full refspec. Under hg the feature that is called 'branches'
 is actually a sort of graph coloring (multiple heads can have the same
 branch name) so this variable is filled with the current bookmark if
-it exists, with the current branch name as a fallback.
+it exists, with the current branch name as a fallback. Under bzr, this
+is the nick of the branch you are on.
 
 *VCS_TAG*::
 The name of the most recent tag ancestral to the current commit.
-Empty under Subversion.
+Empty under Subversion and bzr.
 
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current commit or
 an alias of *VCS_NUM* if there are no prior tags.
-Empty under Subversion.
+Empty under Subversion and bzr.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
@@ -151,4 +154,4 @@ Emits the autorevision version and exits.
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
-Python/Perl/lua support, svn extraction, CLI design, man page.
+Python/Perl/lua support, svn and bzr extraction, CLI design, man page.
