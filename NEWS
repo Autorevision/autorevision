@@ -3,6 +3,7 @@
 1.2 @
   Bazaar extractor added.
   autorevision can now usually be called safely from subdirectories.
+  Drop back to numeric VCS_WC_MODIFIED so the C processor can use it.
 
 1.1 @ 2012-10-28
   Java and Jave properties support added.
