@@ -73,14 +73,14 @@ while getopts ":t:o:s:Vf" OPTION; do
 	esac
 done
 
-if [[ ! -z "${VAROUT}"  ]] && [[ ! -z "${AFILETYPE}" ]]; then
+if [[ ! -z "${VAROUT}" ]] && [[ ! -z "${AFILETYPE}" ]]; then
 	# If both -s and -t are specified:
 	echo "error: Improper argument combination." 1>&2
 	exit 1
-elif [[ -z "${VAROUT}"  ]] && [[ -z "${AFILETYPE}" ]]; then
+elif [[ -z "${VAROUT}" ]] && [[ -z "${AFILETYPE}" ]]; then
 	# If neither -s or -t are specified:
 	arUsage
-elif [[ -z "${CACHEFILE}"  ]] && [[ "${CACHEFORCE}" = "1" ]]; then
+elif [[ -z "${CACHEFILE}" ]] && [[ "${CACHEFORCE}" = "1" ]]; then
 	# If -f is specified without -o:
 	arUsage
 fi
@@ -175,7 +175,7 @@ function hgRepo {
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' | sed -e 's: ::')"
 }
 
-# for bzr repos
+# For bzr repos
 function bzrRepo {
 	cd "$(bzr root)"
 
@@ -184,8 +184,8 @@ function bzrRepo {
 	VCS_BASENAME="$(basename "${PWD}")"
 
 	# Is the working copy clean?
-	echo "$(bzr status)" | grep -q "^modified:"
-	case $?	in 0) VCS_WC_MODIFIED="1";; 1) VCS_WC_MODIFIED="0";; esac 
+	bzr version-info --custom --template='{clean}\n' | grep -q '1'
+	VCS_WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
 	VCS_NUM="$(bzr revno)"
@@ -201,10 +201,12 @@ function bzrRepo {
 
 	# Current or last tag ancestor (excluding auto tags, empty if no tags)
 	VCS_TAG=""
+
+	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	VCS_TICK=""
 
 	# Date of the current commit
-	VCS_DATE="$(bzr log -l 1 | sed -n -e '/timestamp: /s/timestamp: ... //p' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' | sed -e 's: ::')"
 }
 
 # For svn repos
@@ -232,7 +234,10 @@ function svnRepo {
 
 	# Is the working copy clean?
 	echo "${SVNVERSION}" | grep -q "M"
-	case $?	in 0) VCS_WC_MODIFIED="1";; 1) VCS_WC_MODIFIED="0";; esac 
+	case "${?}" in
+		0) VCS_WC_MODIFIED="1";;
+		1) VCS_WC_MODIFIED="0";;
+	esac
 
 	# Enumeration of changesets
 	VCS_NUM="$(echo "${SVNVERSION}" | cut -d : -f 1 | sed -e 's:M::' -e 's:S::' -e 's:P::')"
@@ -250,19 +255,19 @@ function svnRepo {
 		fn="${PWD}"
 		while :
 		do
-		    base="$(basename "${fn}")"
-		    if [[ "$base" = 'trunk' ]]; then
+			base="$(basename "${fn}")"
+			if [[ "$base" = 'trunk' ]]; then
 				VCS_BRANCH='trunk'
 				break
-		    elif [[ "${base}" = 'branches' ]] || [[ "${base}" = 'tags' ]]; then
+			elif [[ "${base}" = 'branches' ]] || [[ "${base}" = 'tags' ]]; then
 				VCS_BRANCH="${lastbase}"
 				break
-		    elif [[ "${base}" = '/' ]]; then
+			elif [[ "${base}" = '/' ]]; then
 				VCS_BRANCH=""
 				break
-		    fi
-		    lastbase="${base}"
-		    fn="$(dirname "${fn}")"
+			fi
+			lastbase="${base}"
+			fn="$(dirname "${fn}")"
 		done
 		;;
 	*) VCS_BRANCH="" ;;
