@@ -175,6 +175,7 @@ function hgRepo {
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' | sed -e 's: ::')"
 }
 
+# for bzr repos
 function bzrRepo {
 	cd "$(bzr root)"
 
@@ -190,10 +191,10 @@ function bzrRepo {
 	VCS_NUM="$(bzr revno)"
 
 	# The full revision hash
-	VCS_FULL_HASH="$VCS_NUM"
+	VCS_FULL_HASH="$(bzr version-info --custom --template='{revision_id}\n')"
 
 	# The short hash
-	VCS_SHORT_HASH="$VCS_FULL_HASH"
+	VCS_SHORT_HASH="$VCS_NUM"
 
 	# Nick of the current branch
 	VCS_BRANCH="$(bzr nick)"
