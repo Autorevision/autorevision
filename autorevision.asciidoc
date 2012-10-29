@@ -21,7 +21,7 @@ The generated source is written to standard output.
 This program can normally be called from anywhere within a repository
 copy.  Under bzr the copy must be of a branch, not a full multibranch
 repository.  Under Subversion it must be called under a repository
-checkout, not the repository.
+checkout, not the repository itself.
 
 If you specify a cache file, then when *autorevision* is run where no
 repository can be recognized, the values from the cache file will be
@@ -120,7 +120,7 @@ Empty under Subversion and bzr.
 A full unique identifier for the current revision.
 
 *VCS_SHORT_HASH*::
-A shortened version VCS_FULL_HASH, but VCS_FULL_HASH
+A shortened version of VCS_FULL_HASH, but VCS_FULL_HASH
 if it cannot be shortened.
 
 *VCS_WC_MODIFIED*::
