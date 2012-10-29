@@ -2,7 +2,7 @@
 :doctype: manpage
 
 == NAME ==
-autorevision - extract head metadata from version-control repositories
+autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
 *autorevision* {*-t* output-type | *-s* symbol} [*-o* cache-file] [*-V*]

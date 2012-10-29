@@ -3,7 +3,7 @@
 
 Package: autorevision
 
-Description: Extracts metadata about the head revision from your repository.
+Description: Extracts metadata about the current revision from your repository.
  This program is meant to be used by project build systems to extract
  properties that can be used in software version strings. Repository
  types supported include git, hg, bzr, and svn. It can create files
