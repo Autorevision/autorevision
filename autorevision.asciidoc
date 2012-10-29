@@ -18,10 +18,10 @@ types of files (see below for the full list).
 
 The generated source is written to standard output.
 
-This program must be called from the top-level (root) directory of a
-repository (or, in bzr, a branch checkout). Exception: it can be
-called from any level of a Subversion checkout directory, but not from
-within a Subversion repository directory.
+This program can normally be called from anywhere within a repository
+copy.  Under bzr the copy must be of a branch, not a full multibranch
+repository.  Under Subversion it must be called under a repository
+checkout, not the repository.
 
 If you specify a cache file, then when *autorevision* is run where no
 repository can be recognized, the values from the cache file will be

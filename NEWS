@@ -2,6 +2,7 @@
 
 1.2 @
   Bazaar extractor added.
+  autorevision can now usually be called safely from subdirectories.
 
 1.1 @ 2012-10-28
   Java and Jave properties support added.

@@ -176,6 +176,8 @@ function hgRepo {
 }
 
 function bzrRepo {
+	cd "$(bzr root)"
+
 	VCS_TYPE="bzr"
 
 	VCS_BASENAME="$(basename "${PWD}")"
