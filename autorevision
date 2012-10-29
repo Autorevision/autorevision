@@ -203,7 +203,11 @@ function bzrRepo {
 	VCS_TAG="$(bzr tags --sort=time | sed '/?$/d' | tail -n1 | cut -d ' ' -f1)"
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
-	VCS_TICK=""
+	if [[ ! -z "${VCS_TAG}" ]]; then
+		VCS_TICK="$(bzr log --line -r "tag:${VCS_TAG}.." | tail -n +2 | wc -l | sed -e 's:^ *::')"
+	else
+		VCS_TICK="${VCS_NUM}"
+	fi
 
 	# Date of the current commit
 	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' | sed -e 's: ::')"
