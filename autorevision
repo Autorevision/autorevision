@@ -200,7 +200,7 @@ function bzrRepo {
 	VCS_BRANCH="$(bzr nick)"
 
 	# Current or last tag ancestor (excluding auto tags, empty if no tags)
-	VCS_TAG=""
+	VCS_TAG="$(bzr tags --sort=time | sed '/?$/d' | tail -n1 | cut -d ' ' -f1)"
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	VCS_TICK=""
