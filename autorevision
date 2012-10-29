@@ -230,8 +230,8 @@ function svnRepo {
 	SVNVERSION="$(svnversion)"
 
 	# Is the working copy clean?
-	echo "${SVNVERSION}" | grep -vq "M"
-	VCS_WC_MODIFIED="${?}"
+	echo "${SVNVERSION}" | grep -q "M"
+	case $?	in 0) VCS_WC_MODIFIED="1";; 1) VCS_WC_MODIFIED="0";; esac 
 
 	# Enumeration of changesets
 	VCS_NUM="$(echo "${SVNVERSION}" | cut -d : -f 1 | sed -e 's:M::' -e 's:S::' -e 's:P::')"
