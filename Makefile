@@ -46,7 +46,10 @@ clean:
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~  SHIPPER.* index.html
 
-# Don't forget to release-tag the repo *before* calling make release.
+docs: autorevision.html README.html COPYING.html CONTRIBUTING.html
+
+# Don't forget to release-tag (signed or annotated) the repo *before*
+# calling make release.
 # This is required for the release number to be correct.
 release: autorevision-$(VERS).tgz autorevision.html README.html COPYING.html CONTRIBUTING.html
 	shipper -u -m; make clean
