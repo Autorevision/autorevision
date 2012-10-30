@@ -151,6 +151,9 @@ used in the same invocation.
 *-V*::
 Emits the autorevision version and exits.
 
+== BUGS ==
+The bzr extractor is not very well tested as yet.
+
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
