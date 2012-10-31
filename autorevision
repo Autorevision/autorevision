@@ -46,7 +46,7 @@ EOF
 }
 
 # Config
-ARVERSION="1.1"
+ARVERSION="1.2"
 TARGETFILE="/dev/stdout"
 while getopts ":t:o:s:Vf" OPTION; do
 	case "${OPTION}" in
@@ -194,7 +194,7 @@ function bzrRepo {
 	VCS_FULL_HASH="$(bzr version-info --custom --template='{revision_id}\n')"
 
 	# The short hash
-	VCS_SHORT_HASH="$VCS_NUM"
+	VCS_SHORT_HASH="${VCS_NUM}"
 
 	# Nick of the current branch
 	VCS_BRANCH="$(bzr nick)"
@@ -250,7 +250,7 @@ function svnRepo {
 	VCS_FULL_HASH="${SVNVERSION}"
 
 	# The short hash
-	VCS_SHORT_HASH="$VCS_NUM"
+	VCS_SHORT_HASH="${VCS_NUM}"
 
 	# Current branch
 	case "${PWD}" in
@@ -260,7 +260,7 @@ function svnRepo {
 		while :
 		do
 			base="$(basename "${fn}")"
-			if [[ "$base" = 'trunk' ]]; then
+			if [[ "${base}" = 'trunk' ]]; then
 				VCS_BRANCH='trunk'
 				break
 			elif [[ "${base}" = 'branches' ]] || [[ "${base}" = 'tags' ]]; then
