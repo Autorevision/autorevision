@@ -109,12 +109,12 @@ is the nick of the branch you are on.
 
 *VCS_TAG*::
 The name of the most recent tag ancestral to the current commit.
-Empty under Subversion and bzr.
+Empty under Subversion.
 
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current commit or
 an alias of *VCS_NUM* if there are no prior tags.
-Empty under Subversion and bzr.
+Empty under Subversion.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
