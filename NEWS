@@ -1,5 +1,8 @@
 			autorevision history
 
+1.3 @ 2012-12-09
+  (La)TeX output support added.
+
 1.2 @ 2012-10-30
   Bazaar extractor added.
   autorevision can now usually be called safely from subdirectories.
