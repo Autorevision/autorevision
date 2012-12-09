@@ -71,6 +71,10 @@ A Python source file setting Python variables.
 *sh*::
 A text file suitable for including from a bash script.  Will work with Ruby.
 
+*tex*::
+A TeX source file defining TeX macros.  Note that the symbols are given
+different names since the underscore has a special meaning in TeX.
+
 *xcode*::
 A header output for use with xcode to populate info.plist strings.
 
