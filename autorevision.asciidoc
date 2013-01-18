@@ -76,6 +76,9 @@ A TeX source file defining TeX macros.  Note that the symbols are given
 different names since the underscore has a special meaning in TeX.
 For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
 
+*m4*
+An m4 source file defining m4 macros.
+
 *xcode*::
 A header output for use with xcode to populate info.plist strings.
 
@@ -83,7 +86,7 @@ A header output for use with xcode to populate info.plist strings.
 === Valid Symbol Names ===
 
 *VCS_TYPE*::
-The repository type - "git", "hg", or "svn".
+The repository type - "git", "hg", "bzr", or "svn".
 
 *VCS_BASENAME*::
 The basename of the directory root. For most VCSes this will simply

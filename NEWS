@@ -1,5 +1,8 @@
 			autorevision history
 
+1.4 @
+  Remove bashisms.  Add "python" and "perl" language synonyms.  Add m4.
+
 1.3 @ 2012-12-09
   (La)TeX output support added.
 

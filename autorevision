@@ -30,6 +30,7 @@ The folowing are valid output types:
 	java			= Java file
 	javaprop		= Java properties file
 	tex			= (La)TeX file
+	m4			= m4 file
 
 The following are valid symbols:
 	VCS_TYPE
@@ -574,6 +575,22 @@ VCS_WC_MODIFIED=${VCS_WC_MODIFIED}
 EOF
 }
 
+# For m4 output
+m4Output() {
+	cat > "${TARGETFILE}" << EOF
+define(\`VCS_TYPE', \`${VCS_TYPE}')dnl
+define(\`VCS_BASENAME', \`${VCS_BASENAME}')dnl
+define(\`VCS_NUM', \`${VCS_NUM}')dnl
+define(\`VCS_DATE', \`${VCS_DATE}')dnl
+define(\`VCS_BRANCH', \`${VCS_BRANCH}')dnl
+define(\`VCS_TAG', \`${VCS_TAG}')dnl
+define(\`VCS_TICK', \`${VCS_TICK}')dnl
+define(\`VCS_FULLHASH', \`${VCS_FULL_HASH}')dnl
+define(\`VCS_SHIRTHASH', \`${VCS_SHORT_HASH}')dnl
+define(\`VCS_WC_MODIFIED', \`${VCS_WC_MODIFIED}')dnl
+EOF
+}
+
 # For (La)TeX output
 texOutput() {
 	case "${VCS_WC_MODIFIED}" in
@@ -595,6 +612,7 @@ texOutput() {
 \endinput
 EOF
 }
+
 
 
 # Detect and collect repo data.
@@ -670,6 +688,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		javapropOutput
 	elif [ "${AFILETYPE}" = "tex" ]; then
 		texOutput
+	elif [ "${AFILETYPE}" = "m4" ]; then
+		m4Output
 	else
 		echo "error: Not a valid output type." 1>&2
 		exit 1
