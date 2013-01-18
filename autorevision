@@ -225,7 +225,7 @@ svnRepo() {
 			fn="$(dirname "${fn}")"
 		done
 		fn="$(dirname "${fn}")"
-		if [ "${fn}" == '/' ]; then
+		if [ "${fn}" = '/' ]; then
 			VCS_BASENAME="$(basename "${PWD}")"
 		else
 			VCS_BASENAME="$(basename "${fn}")"
