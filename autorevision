@@ -97,8 +97,8 @@ gitRepo() {
 
 	VCS_BASENAME="$(basename "${PWD}")"
 
-	# Is the working copy clean?
-	git diff --quiet HEAD &> /dev/null
+	 # Is the working copy clean?
+	test -z "$(git status -uno --porcelain)"
 	VCS_WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
