@@ -652,9 +652,9 @@ if [ ! -z "${AFILETYPE}" ]; then
 		xcodeOutput
 	elif [ "${AFILETYPE}" = "sh" ]; then
 		shOutput
-	elif [ "${AFILETYPE}" = "py" ]; then
+	elif [ "${AFILETYPE}" = "py" -o "${AFILETYPE}" = "python" ]; then
 		pyOutput
-	elif [ "${AFILETYPE}" = "pl" ]; then
+	elif [ "${AFILETYPE}" = "pl" -o "${AFILETYPE}" = "perl" ]; then
 		plOutput
 	elif [ "${AFILETYPE}" = "lua" ]; then
 		luaOutput
