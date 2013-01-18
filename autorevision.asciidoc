@@ -130,7 +130,7 @@ if it cannot be shortened.
 
 *VCS_WC_MODIFIED*::
 Set to 1 if the current working directory has been modified and 0 if
-not. If the output language id unterpreted and has native Boolean
+not. If the output language is interpreted and has native Boolean
 literals, true will mean modified and false unmodified.  The C/C++
 output is left as numeric so the preporocessor can test it.
 
