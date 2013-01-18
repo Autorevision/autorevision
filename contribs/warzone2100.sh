@@ -30,7 +30,7 @@ fi
 . "${cauto}"
 
 
-if [[ ! "${VCS_TICK}" = "0" ]]; then
+if [ ! "${VCS_TICK}" = "0" ]; then
 	# If we are not exactly on a tag make the branch look better and use the value for the tag too.
 	N_VCS_BRANCH="$(echo "${VCS_BRANCH}" | sed -e 's:remotes/:remote/:' -e 's:master:Master:')"
 	sed -e "s:${VCS_BRANCH}:${N_VCS_BRANCH}:" -e "s:${VCS_TAG}:${N_VCS_BRANCH}:" "${cauto}" > "${tauto}"
@@ -43,7 +43,7 @@ fi
 
 # Output for src/autorevision.h.
 ./build_tools/autorevision -f -o "${cauto}" -t h > "${xauto}"
-if [[ ! -f "${fauto}" ]] || ! cmp -s "${xauto}" "${fauto}"; then
+if [ ! -f "${fauto}" ] || ! cmp -s "${xauto}" "${fauto}"; then
 	# Only copy `src/autorevision.h` in if there have been changes.
 	cp -a "${xauto}" "${fauto}"
 fi
