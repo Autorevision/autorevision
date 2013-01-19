@@ -1,6 +1,6 @@
 # Makefile for the autorevision project
 
-VERS=$(shell ./autorevision -o autorevision.tmp -s VCS_TAG | sed -e 's:refs/heads/::' -e 's:v/::')
+VERS=$(shell ./autorevision -V | sed '/autorevision /s///')
 
 .SUFFIXES: .md .html
 
@@ -48,8 +48,6 @@ clean:
 
 docs: autorevision.html README.html COPYING.html CONTRIBUTING.html
 
-# Don't forget to release-tag (signed or annotated) in the repo and update
-# 'ARVERSION' autorevision *before* calling make release.
-# This is required for the release number to be correct.
-release: autorevision-$(VERS).tgz autorevision.html README.html COPYING.html CONTRIBUTING.html
-	shipper -u -m; make clean
+# Update ARVERSION in the script before running this.
+release: autorevision.html README.html COPYING.html CONTRIBUTING.html
+	shipper -u -m -t; make clean
