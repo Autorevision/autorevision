@@ -23,3 +23,4 @@ XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
 
 XBS-Project-Tag-List: svn git hg perl python c c++ bash build_tools
 
+XBS-Tagtemplate: v/%s

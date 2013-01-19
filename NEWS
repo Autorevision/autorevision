@@ -1,7 +1,8 @@
 			autorevision history
 
-1.4 @
+1.4 @ 2013-01-18
   Remove bashisms.  Add "python" and "perl" language synonyms.  Add m4.
+  Work around unreliable return value of git diff in 1.7.9.5.
 
 1.3 @ 2012-12-09
   (La)TeX output support added.
