@@ -63,10 +63,10 @@ A lua source file setting lua variables.
 A PHP source file setting PHP variables.
 
 *pl*::
-A Perl source file setting Perl variables.
+A Perl source file setting Perl variables  (*perl* is an acceptable synonym).
 
 *py*::
-A Python source file setting Python variables.
+A Python source file setting Python variables (*python* is an acceptable synonym).
 
 *sh*::
 A text file suitable for including from a bash script.  Will work with Ruby.
