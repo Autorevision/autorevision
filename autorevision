@@ -99,7 +99,7 @@ gitRepo() {
 	VCS_BASENAME="$(basename "${PWD}")"
 
 	 # Is the working copy clean?
-	test -z "$(git status -uno --porcelain)"
+	test -z "$(git status --untracked-files=normal --porcelain)"
 	VCS_WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
@@ -152,7 +152,7 @@ hgRepo() {
 	VCS_BASENAME="$(basename "${PWD}")"
 
 	# Is the working copy clean?
-	hg sum | grep -q 'commit: (clean)'
+	test -z "$(hg status -duram)"
 	VCS_WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
@@ -250,8 +250,17 @@ svnRepo() {
 	# Is the working copy clean?
 	echo "${SVNVERSION}" | grep -q "M"
 	case "${?}" in
-		0) VCS_WC_MODIFIED="1";;
-		1) VCS_WC_MODIFIED="0";;
+		0)
+			VCS_WC_MODIFIED="1"
+		;;
+		1)
+			# `svnversion` does not detect untracked files and `svn status` is really slow, so only run it if we really have to.
+			if [ -z "$(svn status)" ]; then
+				VCS_WC_MODIFIED="0"
+			else
+				VCS_WC_MODIFIED="1"
+			fi
+		;;
 	esac
 
 	# Enumeration of changesets
