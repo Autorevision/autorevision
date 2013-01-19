@@ -133,9 +133,10 @@ if it cannot be shortened.
 
 *VCS_WC_MODIFIED*::
 Set to 1 if the current working directory has been modified and 0 if
-not. If the output language is interpreted and has native Boolean
-literals, true will mean modified and false unmodified.  The C/C++
-output is left as numeric so the preprocessor can test it.
+not. Untracked files are ignored. If the output language is
+interpreted and has native Boolean literals, true will mean modified
+and false unmodified.  The C/C++ output is left as numeric so the
+preprocessor can test it.
 
 == OPTIONS ==
 
@@ -169,4 +170,4 @@ a supported option of their date(1) command.
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
-Python/Perl/lua support, svn and bzr extraction, CLI design, man page.
+Python/Perl/lua/m4 support, svn and bzr extraction, CLI design, man page.
