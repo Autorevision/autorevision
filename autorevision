@@ -629,7 +629,7 @@ elif [ ! -z "$(svn info 2>/dev/null)" ]; then
 	svnRepo
 elif [ -f "${CACHEFILE}" ]; then
 	# We are not in a repo; try to use a previously generated cache to populate our symbols.
-	source "${CACHEFILE}"
+	. "${CACHEFILE}"
 else
 	echo "error: No repo or cache detected." 1>&2
 	exit 1
