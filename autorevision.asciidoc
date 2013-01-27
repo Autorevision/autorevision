@@ -163,9 +163,6 @@ Emits the autorevision version and exits.
 == BUGS ==
 The bzr extractor is not very well tested as yet.
 
-The Java extractor will fail under FreeBSD.  The problem is that -d is not
-a supported option of their date(1) command.
-
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini

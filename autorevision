@@ -538,7 +538,7 @@ public class autorevision {
     public static final String VCS_TYPE = "${VCS_TYPE}";
     public static final String VCS_BASENAME = "${VCS_BASENAME}";
     public static final long VCS_NUM = ${VCS_NUM};
-    public static final Date VCS_DATE = new Date($(date -d ${VCS_DATE} +%s));
+    public static final String VCS_DATE = "${VCS_DATE}";
     public static final String VCS_BRANCH = "${VCS_BRANCH}";
     public static final String VCS_TAG = "${VCS_TAG}";
     public static final long VCS_TICK = ${VCS_TICK};
