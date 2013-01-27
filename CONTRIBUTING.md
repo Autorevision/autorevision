@@ -23,6 +23,8 @@ When supporting new types of outputs you *should* use all of the currently set s
 
 Support for new outputs should include a function named in the form `<output_type>Output`; find one that's similar to your target language, clone it, and modify it.
 
+Make sure that you commit an example of the output into the `example` directory.
+
 Other Conventions
 -----------------
 
