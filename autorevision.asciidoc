@@ -163,6 +163,9 @@ Emits the autorevision version and exits.
 == BUGS ==
 The bzr extractor is not very well tested as yet.
 
+Nested repositories, particularly repositories of different types, may
+result in incorrect and unintended behavior.
+
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
