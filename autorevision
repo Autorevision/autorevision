@@ -108,11 +108,19 @@ gitRepo() {
 		VCS_NUM="$(git rev-list HEAD | wc -l)"
 	fi
 
-	# The full revision hash
-	VCS_FULL_HASH="$(git rev-parse HEAD)"
+	# This may be a git-svn remote.  If so, report the Subversion revision.
+	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]
+	then
+		# The full revision hash
+		VCS_FULL_HASH="$(git rev-parse HEAD)"
 
-	# The short hash
-	VCS_SHORT_HASH="$(echo "${VCS_FULL_HASH}" | cut -b 1-7)"
+		# The short hash
+		VCS_SHORT_HASH="$(echo "${VCS_FULL_HASH}" | cut -b 1-7)"
+	else
+		# The git-svn revision number
+		VCS_FULL_HASH="$(git svn find-rev HEAD)"
+		VCS_SHORT_HASH=$VCS_FULL_HASH
+	fi
 
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
