@@ -1,5 +1,8 @@
 			autorevision history
 
+1.5 @
+  Add support for git-svn - gives back the Subversion revision, not the hash.
+
 1.4 @ 2013-01-18
   Remove bashisms.  Add "python" and "perl" language synonyms.  Add m4.
   Work around unreliable return value of git diff in 1.7.9.5.

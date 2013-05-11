@@ -163,6 +163,11 @@ Emits the autorevision version and exits.
 == BUGS ==
 The bzr extractor is not very well tested as yet.
 
+When a git repo is actually a git-svn remote, this tool tries to do
+the right thing and return a Subversion revision. The bug is that the
+detector code for this case is somewhat unreliable; you will get the
+hash instead if your configuration doesn't use svn-remote.svn.url.
+
 Nested repositories, particularly repositories of different types, may
 result in incorrect and unintended behavior.
 
@@ -170,4 +175,5 @@ result in incorrect and unintended behavior.
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
-Python/Perl/lua/m4 support, svn and bzr extraction, CLI design, man page.
+Python/Perl/lua/m4 support, svn and bzr extraction, git-svn support,
+CLI design, man page.
