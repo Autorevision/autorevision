@@ -56,6 +56,9 @@ A Java properties file (like ini); useful when META-INF is readable in Java.
 *js*::
 A javascript source file setting javascript variables.
 
+*json*::
+A JSON format file.
+
 *lua*::
 A lua source file setting lua variables.
 
