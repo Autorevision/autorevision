@@ -27,6 +27,7 @@ The folowing are valid output types:
 	php			= PHP file
 	ini			= INI file
 	js			= javascript file
+	json                    = JSON file
 	java			= Java file
 	javaprop		= Java properties file
 	tex			= (La)TeX file
@@ -531,6 +532,30 @@ if (typeof module !== 'undefined') {
 EOF
 }
 
+# For JSON output
+jsonOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		1) VCS_WC_MODIFIED="true" ;;
+		0) VCS_WC_MODIFIED="false" ;;
+	esac
+	cat > "${TARGETFILE}" << EOF
+{
+	"VCS_TYPE": "${VCS_TYPE}",
+	"VCS_BASENAME": "${VCS_BASENAME}",
+	"VCS_NUM": ${VCS_NUM},
+	"VCS_DATE": "${VCS_DATE}",
+	"VCS_BRANCH":"${VCS_BRANCH}",
+	"VCS_TAG": "${VCS_TAG}",
+	"VCS_TICK": ${VCS_TICK},
+
+	"VCS_FULL_HASH": "${VCS_FULL_HASH}",
+	"VCS_SHORT_HASH": "${VCS_SHORT_HASH}",
+
+	"VCS_WC_MODIFIED": ${VCS_WC_MODIFIED}
+}
+EOF
+}
+
 # For Java output
 javaOutput() {
 	case "${VCS_WC_MODIFIED}" in
@@ -690,6 +715,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		iniOutput
 	elif [ "${AFILETYPE}" = "js" ]; then
 		jsOutput
+	elif [ "${AFILETYPE}" = "json" ]; then
+		jsonOutput
 	elif [ "${AFILETYPE}" = "java" ]; then
 		javaOutput
 	elif [ "${AFILETYPE}" = "javaprop" ]; then
