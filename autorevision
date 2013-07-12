@@ -651,7 +651,7 @@ EOF
 # Detect and collect repo data.
 if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
-	source "${CACHEFILE}"
+	. "${CACHEFILE}"
 elif [ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]; then
 	gitRepo
 elif [ ! -z "$(hg root 2>/dev/null)" ]; then
@@ -663,6 +663,8 @@ elif [ ! -z "$(svn info 2>/dev/null)" ]; then
 elif [ -f "${CACHEFILE}" ]; then
 	# We are not in a repo; try to use a previously generated cache to populate our symbols.
 	. "${CACHEFILE}"
+	# Do not overwrite the cache if we know we are not going to write anything new.
+	CACHEFORCE="1"
 else
 	echo "error: No repo or cache detected." 1>&2
 	exit 1
@@ -691,6 +693,9 @@ if [ ! -z "${VAROUT}" ]; then
 		echo "${VCS_SHORT_HASH}"
 	elif [ "${VAROUT}" = "VCS_WC_MODIFIED" ]; then
 		echo "${VCS_WC_MODIFIED}"
+	else
+		echo "error: Not a valid output symbol." 1>&2
+		exit 1
 	fi
 fi
 
