@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2012 dak180
+# Copyright (c) 2012 - 2013 dak180
 # See http://opensource.org/licenses/bsd-license.php for licence terms
 #
 # autorevision - extracts metadata about the head version from your repository.
@@ -14,6 +14,7 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
 	-f			= force the use of cache data
+	-U			= Check for untracked files in svn
 	-V			= emit version and exit
 	-?			= help message
 
@@ -27,7 +28,7 @@ The folowing are valid output types:
 	php			= PHP file
 	ini			= INI file
 	js			= javascript file
-	json                    = JSON file
+	json			= JSON file
 	java			= Java file
 	javaprop		= Java properties file
 	tex			= (La)TeX file
@@ -64,6 +65,9 @@ while getopts ":t:o:s:Vf" OPTION; do
 		;;
 		s)
 			VAROUT="${OPTARG}"
+		;;
+		U)
+			UNTRACKEDFILES="1"
 		;;
 		V)
 			echo "autorevision ${ARVERSION}"
@@ -254,11 +258,13 @@ svnRepo() {
 			VCS_WC_MODIFIED="1"
 		;;
 		1)
+			if [ ! -z "${UNTRACKEDFILES}"]; then
 			# `svnversion` does not detect untracked files and `svn status` is really slow, so only run it if we really have to.
-			if [ -z "$(svn status)" ]; then
-				VCS_WC_MODIFIED="0"
-			else
-				VCS_WC_MODIFIED="1"
+				if [ -z "$(svn status)" ]; then
+					VCS_WC_MODIFIED="0"
+				else
+					VCS_WC_MODIFIED="1"
+				fi
 			fi
 		;;
 	esac
