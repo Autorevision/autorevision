@@ -120,14 +120,14 @@ gitRepo() {
 	else
 		# The git-svn revision number
 		VCS_FULL_HASH="$(git svn find-rev HEAD)"
-		VCS_SHORT_HASH=$VCS_FULL_HASH
+		VCS_SHORT_HASH="${VCS_FULL_HASH}"
 	fi
 
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
 
 	# Cache the description
-	DESCRIPTION="$(git describe --long --tags 2>/dev/null)"
+	local DESCRIPTION="$(git describe --long --tags 2>/dev/null)"
 
 	# Current or last tag ancestor (empty if no tags)
 	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" | sed -e 's:-[0-9]*$::')"
@@ -230,9 +230,9 @@ svnRepo() {
 
 	case "${PWD}" in
 	/*trunk*|/*branches*|/*tags*)
-		fn="${PWD}"
+		local fn="${PWD}"
 		while [ "$(basename "${fn}")" != 'trunk' ] && [ "$(basename "${fn}")" != 'branches' ] && [ "$(basename "${fn}")" != 'tags' ] && [ "$(basename "${fn}")" != '/' ]; do
-			fn="$(dirname "${fn}")"
+			local fn="$(dirname "${fn}")"
 		done
 		fn="$(dirname "${fn}")"
 		if [ "${fn}" = '/' ]; then
@@ -245,7 +245,7 @@ svnRepo() {
 	esac
 
 	# Cache svnversion output
-	SVNVERSION="$(svnversion)"
+	local SVNVERSION="$(svnversion)"
 
 	# Is the working copy clean?
 	echo "${SVNVERSION}" | grep -q "M"
@@ -266,8 +266,8 @@ svnRepo() {
 	# Current branch
 	case "${PWD}" in
 	/*trunk*|/*branches*|/*tags*)
-		lastbase=""
-		fn="${PWD}"
+		local lastbase=""
+		loacl fn="${PWD}"
 		while :
 		do
 			base="$(basename "${fn}")"
@@ -281,8 +281,8 @@ svnRepo() {
 				VCS_BRANCH=""
 				break
 			fi
-			lastbase="${base}"
-			fn="$(dirname "${fn}")"
+			local lastbase="${base}"
+			local fn="$(dirname "${fn}")"
 		done
 		;;
 	*) VCS_BRANCH="" ;;
