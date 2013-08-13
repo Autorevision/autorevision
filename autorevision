@@ -1,9 +1,11 @@
 #!/bin/sh
 
-# Copyright (c) 2012 - 2013 dak180
-# See http://opensource.org/licenses/bsd-license.php for licence terms
-#
-# autorevision - extracts metadata about the head version from your repository.
+# Copyright (c) 2012 - 2013 dak180 and contributors. See
+# http://opensource.org/licenses/bsd-license.php or the included
+# COPYING.md for licence terms.
+# 
+# autorevision - extracts metadata about the head version from your
+# repository.
 
 # Usage message.
 arUsage() {

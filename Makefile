@@ -1,5 +1,11 @@
 # Makefile for the autorevision project
 
+# `a2x` is required to generate the Man page.
+# `markdown` is required for the `docs` target, though it is not
+# strictly necessary for packaging.
+# `shipper` is required for the `release` target, which should only be
+# used if you are shipping tarballs (you probably are not).
+
 VERS=$(shell ./autorevision -V | sed '/autorevision /s///')
 
 .SUFFIXES: .md .html
@@ -11,10 +17,21 @@ prefix?=/usr/local
 mandir?=share/man
 target=$(DESTDIR)$(prefix)
 
-DOCS    = README.md COPYING.md CONTRIBUTING.md autorevision.asciidoc NEWS
-SOURCES = autorevision Makefile $(DOCS) control
+DOCS = \
+	NEWS \
+	autorevision.asciidoc \
+	README.md \
+	CONTRIBUTING.md \
+	AUTHORS \
+	COPYING.md
 
-all: docs
+SOURCES = \
+	$(DOCS) \
+	autorevision \
+	Makefile \
+	control
+
+all : man docs
 
 install: autorevision autorevision.1
 	install -d "$(target)/bin"
@@ -28,9 +45,11 @@ uninstall:
 autorevision.1: autorevision.asciidoc
 	a2x -f manpage autorevision.asciidoc
 
+# Also produces docbook-xsl.css which makes it look better
 autorevision.html: autorevision.asciidoc
 	a2x -f xhtml autorevision.asciidoc
 
+# The tarball
 autorevision-$(VERS).tgz: $(SOURCES) autorevision.1
 	mkdir autorevision-$(VERS)
 	cp -r $(SOURCES) autorevision-$(VERS)
@@ -46,8 +65,16 @@ clean:
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~  SHIPPER.* index.html
 
-docs: autorevision.1 autorevision.html README.html COPYING.html CONTRIBUTING.html
+# The Man Page
+man: autorevision.1
+
+# HTML versions of doc files suitable for use on a website
+docs: \
+	autorevision.html \
+	README.html \
+	CONTRIBUTING.html \
+	COPYING.html
 
 # Update ARVERSION in the script before running this.
-release: autorevision.html README.html COPYING.html CONTRIBUTING.html
+release: docs
 	shipper -u -m -t; make clean
