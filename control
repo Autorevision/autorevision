@@ -17,9 +17,7 @@ XBS-Ohloh-URL: http://www.ohloh.net/p/autorevision
 
 XBS-Destinations: freecode
 
-Homepage: http://www.catb.org/~esr/autorevision
-
-XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
+Homepage: http://www.catb.org/esr/autorevision
 
 XBS-Project-Tag-List: svn git hg perl python c c++ bash build_tools
 
