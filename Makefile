@@ -6,16 +6,16 @@
 # `shipper` is required for the `release` target, which should only be
 # used if you are shipping tarballs (you probably are not).
 
-VERS=$(shell ./autorevision -V | sed '/autorevision /s///')
+VERS := $(shell ./autorevision -V | sed -e 's:autorevision ::')
 
 .SUFFIXES: .md .html
 
 .md.html:
 	markdown $< > $@
 
-prefix?=/usr/local
-mandir?=share/man
-target=$(DESTDIR)$(prefix)
+prefix ?= /usr/local
+mandir ?= /share/man
+target = $(DESTDIR)$(prefix)
 
 DOCS = \
 	NEWS \
@@ -36,11 +36,11 @@ all : man docs
 install: autorevision autorevision.1
 	install -d "$(target)/bin"
 	install -m 755 autorevision $(target)/bin/autorevision
-	install -d "$(target)/$(mandir)/man1"
-	gzip < autorevision.1 > $(target)/$(mandir)/man1/autorevision.1.gz
+	install -d "$(target)$(mandir)/man1"
+	gzip < autorevision.1 > $(target)$(mandir)/man1/autorevision.1.gz
 
 uninstall:
-	rm -f $(target)/bin/autorevision $(target)/$(mandir)/man1/autorevision.1.gz
+	rm -f $(target)/bin/autorevision $(target)$(mandir)/man1/autorevision.1.gz
 
 autorevision.1: autorevision.asciidoc
 	a2x -f manpage autorevision.asciidoc
