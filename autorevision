@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copyright (c) 2012 - 2013 dak180 and contributors. See
 # http://opensource.org/licenses/bsd-license.php or the included
@@ -92,6 +92,12 @@ elif [ -z "${VAROUT}" ] && [ -z "${AFILETYPE}" ]; then
 elif [ -z "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# If -f is specified without -o:
 	arUsage
+fi
+
+# Make sure that the path we are given is one we can source
+# (dash, we are looking at you).
+if ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
+	CACHEFILE="./${CACHEFILE}"
 fi
 
 
