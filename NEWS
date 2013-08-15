@@ -1,5 +1,9 @@
 			autorevision history
 
+1.6 @ 2013-
+  Add an AUTHORS file.
+  Switch back to bash since dash hates us.
+
 1.5 @ 2013-08-12
   Add support for git-svn - gives back the Subversion revision, not the hash.
   Add a -U to check for unversioned files in svn.
