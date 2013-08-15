@@ -1,6 +1,7 @@
 			autorevision history
 
 1.6 @ 2013-
+  Use autorevision in autorevision
   Ensure that the cache path is one that can be sourced.
   Add an AUTHORS file.
 

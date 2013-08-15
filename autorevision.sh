@@ -3,7 +3,7 @@
 # Copyright (c) 2012 - 2013 dak180 and contributors. See
 # http://opensource.org/licenses/mit-license.php or the included
 # COPYING.md for licence terms.
-# 
+#
 # autorevision - extracts metadata about the head version from your
 # repository.
 
@@ -52,7 +52,7 @@ EOF
 }
 
 # Config
-ARVERSION="1.5"
+ARVERSION="&&ARVERSION&&"
 TARGETFILE="/dev/stdout"
 while getopts ":t:o:s:Vf" OPTION; do
 	case "${OPTION}" in

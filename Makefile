@@ -6,13 +6,15 @@
 # `shipper` is required for the `release` target, which should only be
 # used if you are shipping tarballs (you probably are not).
 
-VERS := $(shell ./autorevision -V | sed -e 's:autorevision ::')
+# Get the version number
+VERS := $(shell ./autorevision.sh -s VCS_TAG -o ./autorevision.cache | sed -e 's:v/::')
 
 .SUFFIXES: .md .html
 
 .md.html:
 	markdown $< > $@
 
+# `prefix`, `mandir` & `DESTDIR` can and should be set on the command line to control installation locations
 prefix ?= /usr/local
 mandir ?= /share/man
 target = $(DESTDIR)$(prefix)
@@ -27,11 +29,37 @@ DOCS = \
 
 SOURCES = \
 	$(DOCS) \
-	autorevision \
+	autorevision.sh \
 	Makefile \
 	control
 
-all : man docs
+EXTRA_DIST = autorevision.cache
+
+all : cmd man docs
+
+# The script
+cmd: autorevision
+
+autorevision: autorevision.sh
+	sed -e 's:&&ARVERSION&&:$(VERS):g' autorevision.sh > autorevision
+	chmod +x autorevision
+
+# The Man Page
+man: autorevision.1
+
+autorevision.1: autorevision.asciidoc
+	a2x -f manpage autorevision.asciidoc
+
+# HTML representation of the man page
+autorevision.html: autorevision.asciidoc
+	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
+
+# The tarball
+autorevision-$(VERS).tgz: $(SOURCES) autorevision autorevision.1
+	mkdir autorevision-$(VERS)
+	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
+	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
+	rm -fr autorevision-$(VERS)
 
 install: autorevision autorevision.1
 	install -d "$(target)/bin"
@@ -42,31 +70,17 @@ install: autorevision autorevision.1
 uninstall:
 	rm -f $(target)/bin/autorevision $(target)$(mandir)/man1/autorevision.1.gz
 
-autorevision.1: autorevision.asciidoc
-	a2x -f manpage autorevision.asciidoc
-
-# HTML representation of the man page
-autorevision.html: autorevision.asciidoc
-	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
-
-# The tarball
-autorevision-$(VERS).tgz: $(SOURCES) autorevision.1
-	mkdir autorevision-$(VERS)
-	cp -r $(SOURCES) autorevision-$(VERS)
-	COPYFILE_DISABLE=1; export COPYFILE_DISABLE; \
-	tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
-	rm -fr autorevision-$(VERS)
-
 dist: autorevision-$(VERS).tgz
 
 clean:
-	rm -f autorevision.html autorevision.1 *.tgz
-	rm -f autorevision.tmp docbook-xsl.css
+	rm -f autorevision autorevision.html autorevision.1 *.tgz
+	rm -f docbook-xsl.css
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~  SHIPPER.* index.html
 
-# The Man Page
-man: autorevision.1
+# Not safe to run in a tarball
+devclean: clean
+	rm -f autorevision.cache
 
 # HTML versions of doc files suitable for use on a website
 docs: \
@@ -75,6 +89,6 @@ docs: \
 	CONTRIBUTING.html \
 	COPYING.html
 
-# Update ARVERSION in the script before running this.
-release: docs
-	shipper -u -m -t; make clean
+# Tag with `git tag -s v/<number>` before running this.
+release: docs dist
+	shipper -u -m; make clean
