@@ -1,6 +1,6 @@
 # Makefile for the autorevision project
 
-# `a2x` is required to generate the Man page.
+# `a2x / asciidoc` is required to generate the Man page.
 # `markdown` is required for the `docs` target, though it is not
 # strictly necessary for packaging.
 # `shipper` is required for the `release` target, which should only be
@@ -45,9 +45,9 @@ uninstall:
 autorevision.1: autorevision.asciidoc
 	a2x -f manpage autorevision.asciidoc
 
-# Also produces docbook-xsl.css which makes it look better
+# HTML representation of the man page
 autorevision.html: autorevision.asciidoc
-	a2x -f xhtml autorevision.asciidoc
+	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
 
 # The tarball
 autorevision-$(VERS).tgz: $(SOURCES) autorevision.1
