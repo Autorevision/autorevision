@@ -1,5 +1,6 @@
-*.html
-*.css
-*.tmp
-*.1
-*.tgz
+/*.html
+/*.css
+/*.cache
+/*.1
+/*.tgz
+/autorevision
