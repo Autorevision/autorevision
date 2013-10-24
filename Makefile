@@ -35,7 +35,7 @@ SOURCES = \
 
 EXTRA_DIST = autorevision.cache
 
-all : cmd man docs
+all : cmd man
 
 # The script
 cmd: autorevision
