@@ -63,12 +63,12 @@ autorevision-$(VERS).tgz: $(SOURCES) autorevision autorevision.1
 
 install: autorevision autorevision.1
 	install -d "$(target)/bin"
-	install -m 755 autorevision $(target)/bin/autorevision
+	install -m 755 autorevision "$(target)/bin/autorevision"
 	install -d "$(target)$(mandir)/man1"
-	gzip --no-name < autorevision.1 > $(target)$(mandir)/man1/autorevision.1.gz
+	gzip --no-name < autorevision.1 > "$(target)$(mandir)/man1/autorevision.1.gz"
 
 uninstall:
-	rm -f $(target)/bin/autorevision $(target)$(mandir)/man1/autorevision.1.gz
+	rm -f "$(target)/bin/autorevision" "$(target)$(mandir)/man1/autorevision.1.gz"
 
 dist: autorevision-$(VERS).tgz
 
