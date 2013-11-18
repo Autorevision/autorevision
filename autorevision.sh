@@ -96,7 +96,7 @@ fi
 
 # Make sure that the path we are given is one we can source
 # (dash, we are looking at you).
-if ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
+if [ ! -z "${CACHEFILE}" ] && ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
 	CACHEFILE="./${CACHEFILE}"
 fi
 
