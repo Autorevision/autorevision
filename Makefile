@@ -59,7 +59,7 @@ autorevision.html: autorevision.asciidoc
 dist: autorevision-$(VERS).tgz
 
 autorevision-$(VERS).tgz: $(SOURCES) cmd man
-	git log --format='%aN <%aE>' | awk '{arr[$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS
+	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
 	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
