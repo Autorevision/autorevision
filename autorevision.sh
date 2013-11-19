@@ -16,7 +16,7 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
 	-f			= force the use of cache data
-	-U			= Check for untracked files in svn
+	-U			= check for untracked files in svn
 	-V			= emit version and exit
 	-?			= help message
 
@@ -54,7 +54,7 @@ EOF
 # Config
 ARVERSION="&&ARVERSION&&"
 TARGETFILE="/dev/stdout"
-while getopts ":t:o:s:Vf" OPTION; do
+while getopts ":t:o:s:VfU" OPTION; do
 	case "${OPTION}" in
 		t)
 			AFILETYPE="${OPTARG}"
