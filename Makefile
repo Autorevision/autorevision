@@ -24,7 +24,6 @@ DOCS = \
 	autorevision.asciidoc \
 	README.md \
 	CONTRIBUTING.md \
-	AUTHORS \
 	COPYING.md
 
 SOURCES = \
@@ -33,7 +32,9 @@ SOURCES = \
 	Makefile \
 	control
 
-EXTRA_DIST = autorevision.cache
+EXTRA_DIST = \
+	AUTHORS \
+	autorevision.cache
 
 all : cmd man
 
@@ -55,13 +56,16 @@ autorevision.html: autorevision.asciidoc
 	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
 
 # The tarball
-autorevision-$(VERS).tgz: $(SOURCES) autorevision autorevision.1
+dist: autorevision-$(VERS).tgz
+
+autorevision-$(VERS).tgz: $(SOURCES) cmd man
+	git log --format='%aN <%aE>' | awk '{arr[$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
 	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 
-install: autorevision autorevision.1
+install: cmd man
 	install -d "$(target)/bin"
 	install -m 755 autorevision "$(target)/bin/autorevision"
 	install -d "$(target)$(mandir)/man1"
@@ -70,11 +74,10 @@ install: autorevision autorevision.1
 uninstall:
 	rm -f "$(target)/bin/autorevision" "$(target)$(mandir)/man1/autorevision.1.gz"
 
-dist: autorevision-$(VERS).tgz
-
 clean:
 	rm -f autorevision autorevision.html autorevision.1 *.tgz
 	rm -f docbook-xsl.css
+	rm -f AUTHORS
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~  SHIPPER.* index.html
 
