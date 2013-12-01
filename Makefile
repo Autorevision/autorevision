@@ -79,7 +79,7 @@ clean:
 	rm -f docbook-xsl.css
 	rm -f AUTHORS
 	rm -f CONTRIBUTING.html COPYING.html README.html
-	rm -f *~  SHIPPER.* index.html
+	rm -f *~ index.html
 
 # Not safe to run in a tarball
 devclean: clean
@@ -94,4 +94,4 @@ docs: \
 
 # Tag with `git tag -s v/<number>` before running this.
 release: docs dist
-	shipper -u -m; make clean
+	shipper version=$(VERS) | sh -e -x
