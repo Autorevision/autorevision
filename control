@@ -19,6 +19,8 @@ XBS-Destinations: freecode
 
 Homepage: http://www.catb.org/esr/autorevision
 
-XBS-Project-Tag-List: svn git hg perl python c c++ bash build_tools
+XBS-HTML-Target: index.html
 
-XBS-Tagtemplate: v/%s
+XBS-Freecode-Tags: svn git hg perl python c c++ bash build_tools
+
+XBS-VC-Tag-Template: v/%s
