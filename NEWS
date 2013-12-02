@@ -1,6 +1,6 @@
 			autorevision history
 
-1.7 @
+1.7 @ 2013-12-01
   Autogenerate the AUTHORS file.
   Do not set change empty CACHEFILE to `./`.
   Make sure the -U option works properly.
