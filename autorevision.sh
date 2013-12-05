@@ -671,26 +671,102 @@ EOF
 
 
 
-# Detect and collect repo data.
+# Helper functions
+# Count path segments
+pathSegment() {
+	local pathz="${1}"
+	local depth="0"
+
+	if [ ! -z "${pathz}" ]; then
+		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "." ]; do
+			pathz="$(dirname "${pathz}")"
+			depth="$(expr ${depth} + 1)"
+		done
+	fi
+	echo ${depth}
+}
+
+# Largest of four numbers
+multiCompare() {
+	local larger="${1}"
+	local numA="${2}"
+	local numB="${3}"
+	local numC="${4}"
+
+	[ "${numA}" -gt "${larger}" ] && larger="${numA}"
+	[ "${numB}" -gt "${larger}" ] && larger="${numB}"
+	[ "${numC}" -gt "${larger}" ] && larger="${numC}"
+	echo "${larger}"
+}
+
+# Test for repositories
+repoTest() {
+	REPONUM="0"
+	if [ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]; then
+		local gitPath="$(git rev-parse --show-toplevel)"
+		local gitDepth="$(pathSegment "${gitPath}")"
+		REPONUM="$(expr ${REPONUM} + 1)"
+	else
+		local gitDepth="0"
+	fi
+	if [ ! -z "$(hg root 2>/dev/null)" ]; then
+		local hgPath="$(hg root 2>/dev/null)"
+		local hgDepth="$(pathSegment "${hgPath}")"
+		REPONUM="$(expr ${REPONUM} + 1)"
+	else
+		local hgDepth="0"
+	fi
+	if [ ! -z "$(bzr root 2>/dev/null)" ]; then
+		local bzrPath="$(bzr root 2>/dev/null)"
+		local bzrDepth="$(pathSegment "${bzrPath}")"
+		REPONUM="$(expr ${REPONUM} + 1)"
+	else
+		local bzrDepth="0"
+	fi
+	if [ ! -z "$(svn info 2>/dev/null)" ]; then
+		local stringz="Working Copy Root Path: "
+		local svnPath="$(svn info | grep "${stringz}" | tr -d "${stringz}")"
+		local svnDepth="$(pathSegment "${svnPath}")"
+		REPONUM="$(expr ${REPONUM} + 1)"
+	else
+		local svnDepth="0"
+	fi
+
+	# Do not do more work then we have to.
+	if [ "${REPONUM}" = "0" ]; then
+		return
+	fi
+
+	local wonRepo="$(multiCompare "${gitDepth}" "${hgDepth}" "${bzrDepth}" "${svnDepth}")"
+	if [ "${wonRepo}" = "${gitDepth}" ]; then
+		gitRepo
+	elif [ "${wonRepo}" = "${hgDepth}" ]; then
+		hgRepo
+	elif [ "${wonRepo}" = "${bzrDepth}" ]; then
+		bzrRepo
+	elif [ "${wonRepo}" = "${svnDepth}" ]; then
+		svnRepo
+	fi
+}
+
+
+
+# Detect which repos we are in and gather data.
 if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
-elif [ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]; then
-	gitRepo
-elif [ ! -z "$(hg root 2>/dev/null)" ]; then
-	hgRepo
-elif [ ! -z "$(bzr root 2>/dev/null)" ]; then
-	bzrRepo
-elif [ ! -z "$(svn info 2>/dev/null)" ]; then
-	svnRepo
-elif [ -f "${CACHEFILE}" ]; then
-	# We are not in a repo; try to use a previously generated cache to populate our symbols.
-	. "${CACHEFILE}"
-	# Do not overwrite the cache if we know we are not going to write anything new.
-	CACHEFORCE="1"
 else
-	echo "error: No repo or cache detected." 1>&2
-	exit 1
+	repoTest
+
+	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
+		# We are not in a repo; try to use a previously generated cache to populate our symbols.
+		. "${CACHEFILE}"
+		# Do not overwrite the cache if we know we are not going to write anything new.
+		CACHEFORCE="1"
+	elif [ "${REPONUM}" = "0" ]; then
+		echo "error: No repo or cache detected." 1>&2
+		exit 1
+	fi
 fi
 
 
