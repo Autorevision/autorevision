@@ -48,13 +48,16 @@ A header file suitable for C/C++.
 A header like output for use with xcode to populate info.plist strings.
 
 *sh*::
-A text file suitable for including from a bash script.  Will work with Ruby.
+A text file suitable for including from a bash script.  Will work with
+Ruby.
 
 *py*::
-A Python source file setting Python variables (*`python`* is an acceptable synonym).
+A Python source file setting Python variables (*`python`* is an
+acceptable synonym).
 
 *pl*::
-A Perl source file setting Perl variables  (*`perl`* is an acceptable synonym).
+A Perl source file setting Perl variables  (*`perl`* is an acceptable
+synonym).
 
 *lua*::
 A lua source file setting lua variables.
@@ -75,7 +78,8 @@ A JSON format file.
 A Java source file setting class properties.
 
 *javaprop*::
-A Java properties file (like ini); useful when META-INF is readable in Java.
+A Java properties file (like ini); useful when META-INF is readable in
+Java.
 
 *tex*::
 A TeX source file defining TeX macros.  Note that the symbols are given
@@ -128,8 +132,13 @@ The name of the most recent tag ancestral to the current commit.
 Empty under Subversion.
 
 *VCS_TICK*::
-A count of commits since most recent tag ancestral to the current commit or an alias of *VCS_NUM* if there are no prior tags. +
+A count of commits since most recent tag ancestral to the current
+commit or an alias of *VCS_NUM* if there are no prior tags.
 Empty under Subversion.
+
+*VCS_EXTRA*::
+A symbol set aside specifically to be set by the user through the
+environment or via scripts.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.

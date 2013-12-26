@@ -45,6 +45,7 @@ The following are valid symbols:
 	VCS_BRANCH
 	VCS_TAG
 	VCS_TICK
+	VCS_EXTRA
 	VCS_FULL_HASH
 	VCS_SHORT_HASH
 	VCS_WC_MODIFIED
@@ -351,6 +352,7 @@ hOutput() {
 #define VCS_BRANCH		"${VCS_BRANCH}"
 #define VCS_TAG			"${VCS_TAG}"
 #define VCS_TICK		${VCS_TICK}
+#define VCS_EXTRA			"${VCS_EXTRA}"
 
 #define VCS_FULL_HASH		"${VCS_FULL_HASH}"
 #define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
@@ -378,6 +380,7 @@ xcodeOutput() {
 #define VCS_BRANCH		${VCS_BRANCH}
 #define VCS_TAG			${VCS_TAG}
 #define VCS_TICK		${VCS_TICK}
+#define VCS_EXTRA			${VCS_EXTRA}
 
 #define VCS_FULL_HASH		${VCS_FULL_HASH}
 #define VCS_SHORT_HASH		${VCS_SHORT_HASH}
@@ -403,6 +406,7 @@ VCS_DATE="${VCS_DATE}"
 VCS_BRANCH="${VCS_BRANCH}"
 VCS_TAG="${VCS_TAG}"
 VCS_TICK=${VCS_TICK}
+VCS_EXTRA="${VCS_EXTRA}"
 
 VCS_FULL_HASH="${VCS_FULL_HASH}"
 VCS_SHORT_HASH="${VCS_SHORT_HASH}"
@@ -430,6 +434,7 @@ VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
 VCS_TICK = ${VCS_TICK}
+VCS_EXTRA = "${VCS_EXTRA}"
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -453,6 +458,7 @@ plOutput() {
 \$VCS_BRANCH = "${VCS_BRANCH}";
 \$VCS_TAG = "${VCS_TAG}";
 \$VCS_TICK = ${VCS_TICK};
+\$VCS_EXTRA = "${VCS_EXTRA}";
 
 \$VCS_FULL_HASH = "${VCS_FULL_HASH}";
 \$VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
@@ -480,6 +486,7 @@ VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
 VCS_TICK = ${VCS_TICK}
+VCS_EXTRA = "${VCS_EXTRA}"
 
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
@@ -508,6 +515,7 @@ $GLOBALS["VCS_DATE"] = "${VCS_DATE}";
 $GLOBALS["VCS_BRANCH"] = "${VCS_BRANCH}";
 $GLOBALS["VCS_TAG"] = "${VCS_TAG}";
 $GLOBALS["VCS_TICK"] = ${VCS_TICK};
+$GLOBALS["VCS_EXTRA"] = "${VCS_EXTRA}";
 
 $GLOBALS["VCS_FULL_HASH"] = "${VCS_FULL_HASH}";
 $GLOBALS["VCS_SHORT_HASH"] = "${VCS_SHORT_HASH}";
@@ -536,6 +544,7 @@ VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
 VCS_TICK = ${VCS_TICK}
+VCS_EXTRA = "${VCS_EXTRA}"
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED}
@@ -561,6 +570,7 @@ var autorevision = {
 	VCS_BRANCH: "${VCS_BRANCH}",
 	VCS_TAG: "${VCS_TAG}",
 	VCS_TICK: ${VCS_TICK},
+	VCS_EXTRA: "${VCS_EXTRA}",
 
 	VCS_FULL_HASH: "${VCS_FULL_HASH}",
 	VCS_SHORT_HASH: "${VCS_SHORT_HASH}",
@@ -593,6 +603,7 @@ jsonOutput() {
 	"VCS_BRANCH":"${VCS_BRANCH}",
 	"VCS_TAG": "${VCS_TAG}",
 	"VCS_TICK": ${VCS_TICK},
+	"VCS_EXTRA": "${VCS_EXTRA}",
 
 	"VCS_FULL_HASH": "${VCS_FULL_HASH}",
 	"VCS_SHORT_HASH": "${VCS_SHORT_HASH}",
@@ -622,6 +633,7 @@ public class autorevision {
     public static final String VCS_BRANCH = "${VCS_BRANCH}";
     public static final String VCS_TAG = "${VCS_TAG}";
     public static final long VCS_TICK = ${VCS_TICK};
+    public static final String VCS_EXTRA = "${VCS_EXTRA}";
 
     public static final String VCS_FULL_HASH = "${VCS_FULL_HASH}";
     public static final String VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
@@ -648,6 +660,7 @@ VCS_DATE=${VCS_DATE}
 VCS_BRANCH=${VCS_BRANCH}
 VCS_TAG=${VCS_TAG}
 VCS_TICK=${VCS_TICK}
+VCS_EXTRA=${VCS_EXTRA}
 
 VCS_FULL_HASH=${VCS_FULL_HASH}
 VCS_SHORT_HASH=${VCS_SHORT_HASH}
@@ -667,6 +680,7 @@ define(\`VCS_DATE', \`${VCS_DATE}')dnl
 define(\`VCS_BRANCH', \`${VCS_BRANCH}')dnl
 define(\`VCS_TAG', \`${VCS_TAG}')dnl
 define(\`VCS_TICK', \`${VCS_TICK}')dnl
+define(\`VCS_EXTRA', \`${VCS_EXTRA}')dnl
 define(\`VCS_FULLHASH', \`${VCS_FULL_HASH}')dnl
 define(\`VCS_SHORTHASH', \`${VCS_SHORT_HASH}')dnl
 define(\`VCS_WC_MODIFIED', \`${VCS_WC_MODIFIED}')dnl
@@ -689,6 +703,7 @@ texOutput() {
 \def \vcsBranch {${VCS_BRANCH}}
 \def \vcsTag {${VCS_TAG}}
 \def \vcsTick {${VCS_TICK}}
+\def \vcsExtra {${VCS_EXTRA}}
 \def \vcsFullHash {${VCS_FULL_HASH}}
 \def \vcsShortHash {${VCS_SHORT_HASH}}
 \def \vcsWCModified {${VCS_WC_MODIFIED}}
@@ -784,6 +799,10 @@ if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
 else
+	# If a value is not set through the environment set VCS_EXTRA to nothing.
+	if [ -z "${VCS_EXTRA}" ]; then
+		VCS_EXTRA=""
+	fi
 	repoTest
 
 	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
