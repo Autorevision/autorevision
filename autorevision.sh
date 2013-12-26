@@ -642,7 +642,7 @@ define(\`VCS_BRANCH', \`${VCS_BRANCH}')dnl
 define(\`VCS_TAG', \`${VCS_TAG}')dnl
 define(\`VCS_TICK', \`${VCS_TICK}')dnl
 define(\`VCS_FULLHASH', \`${VCS_FULL_HASH}')dnl
-define(\`VCS_SHIRTHASH', \`${VCS_SHORT_HASH}')dnl
+define(\`VCS_SHORTHASH', \`${VCS_SHORT_HASH}')dnl
 define(\`VCS_WC_MODIFIED', \`${VCS_WC_MODIFIED}')dnl
 EOF
 }
@@ -737,6 +737,7 @@ repoTest() {
 		return
 	fi
 
+	# Figure out which repo is the deepest and use it.
 	local wonRepo="$(multiCompare "${gitDepth}" "${hgDepth}" "${bzrDepth}" "${svnDepth}")"
 	if [ "${wonRepo}" = "${gitDepth}" ]; then
 		gitRepo
