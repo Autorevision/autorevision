@@ -1,10 +1,11 @@
 define(`VCS_TYPE', `git')dnl
 define(`VCS_BASENAME', `autorevision')dnl
-define(`VCS_NUM', `168')dnl
-define(`VCS_DATE', `2013-01-27T11:31:52-0500')dnl
+define(`VCS_UUID', `da2830f81fec4c6ebce8ebf23f35b0e6b066c149')dnl
+define(`VCS_NUM', `205')dnl
+define(`VCS_DATE', `2013-12-26T11:31:07-0500')dnl
 define(`VCS_BRANCH', `master')dnl
-define(`VCS_TAG', `v/1.4')dnl
+define(`VCS_TAG', `v/1.7')dnl
 define(`VCS_TICK', `3')dnl
-define(`VCS_FULLHASH', `10861f3d608c71135545d77edea8029a56d09230')dnl
-define(`VCS_SHIRTHASH', `10861f3')dnl
-define(`VCS_WC_MODIFIED', `0')dnl
+define(`VCS_FULLHASH', `1ef79ce3f75279b20ed603d5d82a65f34bca22cc')dnl
+define(`VCS_SHORTHASH', `1ef79ce')dnl
+define(`VCS_WC_MODIFIED', `1')dnl

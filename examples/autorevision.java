@@ -5,14 +5,15 @@ import java.util.Date;
 public class autorevision {
     public static final String VCS_TYPE = "git";
     public static final String VCS_BASENAME = "autorevision";
-    public static final long VCS_NUM = 168;
-    public static final String VCS_DATE = "2013-01-27T11:31:52-0500";
+    public static final String VCS_UUID = "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
+    public static final long VCS_NUM = 205;
+    public static final String VCS_DATE = "2013-12-26T11:31:07-0500";
     public static final String VCS_BRANCH = "master";
-    public static final String VCS_TAG = "v/1.4";
+    public static final String VCS_TAG = "v/1.7";
     public static final long VCS_TICK = 3;
 
-    public static final String VCS_FULL_HASH = "10861f3d608c71135545d77edea8029a56d09230";
-    public static final String VCS_SHORT_HASH = "10861f3";
+    public static final String VCS_FULL_HASH = "1ef79ce3f75279b20ed603d5d82a65f34bca22cc";
+    public static final String VCS_SHORT_HASH = "1ef79ce";
 
-    public static final boolean VCS_WC_MODIFIED = false;
+    public static final boolean VCS_WC_MODIFIED = true;
 }

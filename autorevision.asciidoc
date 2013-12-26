@@ -101,6 +101,11 @@ directories to find the actual root.
 A count of revisions between the current one and the initial
 one; useful for reporting build numbers.
 
+*VCS_UUID*::
+A universally unique identifier, generated from the root commit in git
+and hg; for svn it uses the supplied UUID.
+Not currently implemented for bzr.
+
 *VCS_DATE*::
 The date of the most recent commit in true ISO-8601/RFC3339
 format, including seconds.

@@ -1,14 +1,15 @@
 {
 	"VCS_TYPE": "git",
 	"VCS_BASENAME": "autorevision",
-	"VCS_NUM": 170,
-	"VCS_DATE": "2013-02-06T14:04:08+0800",
+	"VCS_UUID": "da2830f81fec4c6ebce8ebf23f35b0e6b066c149",
+	"VCS_NUM": 205,
+	"VCS_DATE": "2013-12-26T11:31:07-0500",
 	"VCS_BRANCH":"master",
-	"VCS_TAG": "v/1.4",
-	"VCS_TICK": 5,
+	"VCS_TAG": "v/1.7",
+	"VCS_TICK": 3,
 
-	"VCS_FULL_HASH": "f236a6b3f70f580e32567448b040b8d2d5b81a43",
-	"VCS_SHORT_HASH": "f236a6b",
+	"VCS_FULL_HASH": "1ef79ce3f75279b20ed603d5d82a65f34bca22cc",
+	"VCS_SHORT_HASH": "1ef79ce",
 
-	"VCS_WC_MODIFIED": false
+	"VCS_WC_MODIFIED": true
 }
