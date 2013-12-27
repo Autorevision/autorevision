@@ -33,10 +33,10 @@ SOURCES = \
 	control
 
 EXTRA_DIST = \
-	AUTHORS \
+	AUTHORS.txt \
 	autorevision.cache
 
-all : cmd man
+all : cmd man auth
 
 # The script
 cmd: autorevision
@@ -55,11 +55,14 @@ autorevision.1: autorevision.asciidoc
 autorevision.html: autorevision.asciidoc
 	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
 
+# Authors
+auth:
+	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS.txt
+
 # The tarball
 dist: autorevision-$(VERS).tgz
 
-autorevision-$(VERS).tgz: $(SOURCES) cmd man
-	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS
+autorevision-$(VERS).tgz: $(SOURCES) all
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
 	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
@@ -77,7 +80,7 @@ uninstall:
 clean:
 	rm -f autorevision autorevision.html autorevision.1 *.tgz
 	rm -f docbook-xsl.css
-	rm -f AUTHORS
+	rm -f AUTHORS AUTHORS.txt
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~ index.html
 
