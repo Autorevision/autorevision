@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.8 @ 2013-12-27
   Added user-set symbol VC_EXTRA and VCS_UUID as a unique repostory key.
 
 1.7 @ 2013-12-01
