@@ -22,5 +22,3 @@ Homepage: http://www.catb.org/esr/autorevision
 XBS-HTML-Target: index.html
 
 XBS-Freecode-Tags: svn git hg perl python c c++ bash build_tools
-
-XBS-VC-Tag-Template: v/%(version)s
