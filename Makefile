@@ -95,6 +95,5 @@ docs: \
 	CONTRIBUTING.html \
 	COPYING.html
 
-# Tag with `git tag -s v/<number>` before running this.
 release: docs dist
 	shipper version=$(VERS) | sh -e -x
