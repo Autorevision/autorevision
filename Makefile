@@ -97,4 +97,5 @@ docs: \
 
 # Tag with `git tag -s v/<number>` before running this.
 release: docs dist
+	git tag -v "v/$(VERS)"
 	shipper version=$(VERS) | sh -e -x
