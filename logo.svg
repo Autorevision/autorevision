@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024">
 	<defs>
 		<marker refX="100" refY="50" markerHeight="5" markerWidth="5" viewBox="0 0 100 100" se_type="rightarrow" orient="auto" markerUnits="strokeWidth" id="arrow">
-			<path stroke-width="10" stroke="black" fill="black" d="m 100,50 l -100,40 l 30,-40 l -30,-40 z" />
+			<path stroke-width="10" stroke="black" fill="black" d="m 100,50 l -100,40 l 0,-40 l 0,-40 z" />
 		</marker>
 	</defs>
 	<g fill-opacity="0">

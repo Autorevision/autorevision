@@ -33,6 +33,7 @@ SOURCES = \
 	control
 
 EXTRA_DIST = \
+	logo.svg \
 	AUTHORS.txt \
 	autorevision.cache
 
