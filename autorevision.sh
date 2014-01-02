@@ -352,7 +352,7 @@ hOutput() {
 #define VCS_BRANCH		"${VCS_BRANCH}"
 #define VCS_TAG			"${VCS_TAG}"
 #define VCS_TICK		${VCS_TICK}
-#define VCS_EXTRA			"${VCS_EXTRA}"
+#define VCS_EXTRA		"${VCS_EXTRA}"
 
 #define VCS_FULL_HASH		"${VCS_FULL_HASH}"
 #define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
@@ -380,7 +380,7 @@ xcodeOutput() {
 #define VCS_BRANCH		${VCS_BRANCH}
 #define VCS_TAG			${VCS_TAG}
 #define VCS_TICK		${VCS_TICK}
-#define VCS_EXTRA			${VCS_EXTRA}
+#define VCS_EXTRA		${VCS_EXTRA}
 
 #define VCS_FULL_HASH		${VCS_FULL_HASH}
 #define VCS_SHORT_HASH		${VCS_SHORT_HASH}
