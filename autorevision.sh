@@ -280,7 +280,7 @@ svnRepo() {
 			VCS_WC_MODIFIED="1"
 		;;
 		1)
-			if [ ! -z "${UNTRACKEDFILES}"]; then
+			if [ ! -z "${UNTRACKEDFILES}" ]; then
 			# `svnversion` does not detect untracked files and `svn status` is really slow, so only run it if we really have to.
 				if [ -z "$(svn status)" ]; then
 					VCS_WC_MODIFIED="0"
@@ -720,10 +720,10 @@ pathSegment() {
 	if [ ! -z "${pathz}" ]; then
 		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "." ]; do
 			pathz="$(dirname "${pathz}")"
-			depth="$(expr ${depth} + 1)"
+			depth="$((depth+1))"
 		done
 	fi
-	echo ${depth}
+	echo "${depth}"
 }
 
 # Largest of four numbers
@@ -745,21 +745,21 @@ repoTest() {
 	if [ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]; then
 		local gitPath="$(git rev-parse --show-toplevel)"
 		local gitDepth="$(pathSegment "${gitPath}")"
-		REPONUM="$(expr ${REPONUM} + 1)"
+		REPONUM="$((REPONUM+1))"
 	else
 		local gitDepth="0"
 	fi
 	if [ ! -z "$(hg root 2>/dev/null)" ]; then
 		local hgPath="$(hg root 2>/dev/null)"
 		local hgDepth="$(pathSegment "${hgPath}")"
-		REPONUM="$(expr ${REPONUM} + 1)"
+		REPONUM="$((REPONUM+1))"
 	else
 		local hgDepth="0"
 	fi
 	if [ ! -z "$(bzr root 2>/dev/null)" ]; then
 		local bzrPath="$(bzr root 2>/dev/null)"
 		local bzrDepth="$(pathSegment "${bzrPath}")"
-		REPONUM="$(expr ${REPONUM} + 1)"
+		REPONUM="$((REPONUM+1))"
 	else
 		local bzrDepth="0"
 	fi
@@ -767,7 +767,7 @@ repoTest() {
 		local stringz="Working Copy Root Path: "
 		local svnPath="$(svn info | grep "${stringz}" | tr -d "${stringz}")"
 		local svnDepth="$(pathSegment "${svnPath}")"
-		REPONUM="$(expr ${REPONUM} + 1)"
+		REPONUM="$((REPONUM+1))"
 	else
 		local svnDepth="0"
 	fi
