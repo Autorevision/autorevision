@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Add a logo.
+
 1.8 @ 2013-12-27
   Added user-set symbol VC_EXTRA.
   Added VCS_UUID as a unique repostory key.
