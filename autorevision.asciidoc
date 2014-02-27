@@ -197,6 +197,13 @@ _may_ result in incorrect and unintended behavior.
 Unpacking a tarball into a repository _will_ result in incorrect and
 unintended behavior.
 
+== Notes ==
+Development of autorevision is carried out at
+https://github.com/Autorevision/autorevision
+
+Tarballs and HTML rendered docs are also hosted at
+http://www.catb.org/esr/autorevision/
+
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
