@@ -883,6 +883,15 @@ fi
 
 # If requested, make a cache file.
 if [ ! -z "${CACHEFILE}" ] && [ ! "${CACHEFORCE}" = "1" ]; then
-	TARGETFILE="${CACHEFILE}"
+	TARGETFILE="${CACHEFILE}.tmp"
 	shOutput
+
+	# Check to see if there have been any actual changes.
+	if [ ! -f "${CACHEFILE}" ]; then
+		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
+	elif cmp -s "${CACHEFILE}.tmp" "${CACHEFILE}"; then
+		rm -f "${CACHEFILE}.tmp"
+	else
+		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
+	fi
 fi
