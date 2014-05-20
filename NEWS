@@ -3,6 +3,7 @@
 Repository head:
   Add a logo.
   Only update the cache file when there are changes.
+  New dependency `cmp`.
 
 1.8 @ 2013-12-27
   Added user-set symbol VC_EXTRA.
