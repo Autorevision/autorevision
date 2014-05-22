@@ -34,6 +34,7 @@ SOURCES = \
 
 EXTRA_DIST = \
 	contribs/logo.svg \
+	contribs/autorevision.mk \
 	AUTHORS.txt \
 	autorevision.cache
 
