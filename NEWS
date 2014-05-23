@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.9 @ 2014-5-23
   Add a logo.
   Only update the cache file when there are changes.
   New dependency `cmp`.
