@@ -109,6 +109,7 @@ one; useful for reporting build numbers.
 *VCS_UUID*::
 A universally unique identifier, generated from the root commit in git
 and hg; for svn it uses the supplied UUID.{br}
+For git we choose the oldest commit if there is more than one.{br}
 Not currently implemented for bzr.
 
 *VCS_DATE*::
