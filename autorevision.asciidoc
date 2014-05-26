@@ -146,15 +146,14 @@ environment or via scripts.
 A full unique identifier for the current revision.
 
 *VCS_SHORT_HASH*::
-A shortened version of VCS_FULL_HASH, but VCS_FULL_HASH if it cannot be
-shortened.
+A shortened version of *VCS_FULL_HASH*, but *VCS_FULL_HASH* if it
+cannot be shortened.
 
 *VCS_WC_MODIFIED*::
 Set to `1` if the current working directory has been modified and `0`
 if not. 'Untracked files are not ignored; see *`-U`* for details.'  If
 the output language is interpreted and has native Boolean literals,
-true will mean modified and false unmodified.  The C/C++ output is left
-as numeric so the preprocessor can test it.
+true will mean modified and false unmodified.  The C/C++ output is left as numeric so the preprocessor can test it.
 
 == OPTIONS ==
 
