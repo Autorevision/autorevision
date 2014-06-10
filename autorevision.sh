@@ -801,9 +801,7 @@ elif [ "${CACHEFORCE}" = "1" ]; then
 	exit 1
 else
 	# If a value is not set through the environment set VCS_EXTRA to nothing.
-	if [ -z "${VCS_EXTRA}" ]; then
-		VCS_EXTRA=""
-	fi
+	: "${VCS_EXTRA:=""}"
 	repoTest
 
 	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
