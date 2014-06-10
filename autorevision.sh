@@ -94,6 +94,10 @@ elif [ -z "${VAROUT}" ] && [ -z "${AFILETYPE}" ]; then
 elif [ -z "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# If -f is specified without -o:
 	arUsage
+elif [ ! -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
+	# If we are forced to use the cache but it does not exist.
+	echo "error: Cache forced but no cache found." 1>&2
+	exit 1
 fi
 
 # Make sure that the path we are given is one we can source
@@ -796,9 +800,6 @@ repoTest() {
 if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
-elif [ "${CACHEFORCE}" = "1" ]; then
-	echo "error: cache forced but no cache found." 1>&2
-	exit 1
 else
 	# If a value is not set through the environment set VCS_EXTRA to nothing.
 	: "${VCS_EXTRA:=""}"
