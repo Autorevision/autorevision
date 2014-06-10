@@ -796,6 +796,9 @@ repoTest() {
 if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
+elif [ "${CACHEFORCE}" = "1" ]; then
+	echo "error: cache forced but no cache found." 1>&2
+	exit 1
 else
 	# If a value is not set through the environment set VCS_EXTRA to nothing.
 	if [ -z "${VCS_EXTRA}" ]; then
