@@ -801,10 +801,6 @@ if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
 else
-	# If a value is not set through the environment set VCS_EXTRA to nothing.
-	: "${VCS_EXTRA:=""}"
-	repoTest
-
 	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
 		# We are not in a repo; try to use a previously generated cache to populate our symbols.
 		. "${CACHEFILE}"
@@ -814,6 +810,10 @@ else
 		echo "error: No repo or cache detected." 1>&2
 		exit 1
 	fi
+
+	# If a value is not set through the environment set VCS_EXTRA to nothing.
+	: "${VCS_EXTRA:=""}"
+	repoTest
 fi
 
 
