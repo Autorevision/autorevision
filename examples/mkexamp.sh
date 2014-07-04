@@ -4,6 +4,7 @@
 read -d '' formats << EOF
 h
 xcode
+swift
 sh
 py
 pl

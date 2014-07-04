@@ -48,6 +48,9 @@ A header file suitable for C/C++.
 *xcode*::
 A header like output for use with xcode to populate info.plist strings.
 
+*swift*::
+A Swift source file setting Swift global constants.
+
 *sh*::
 A text file suitable for including from a bash script.  Will work with
 Ruby.
