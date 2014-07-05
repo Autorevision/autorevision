@@ -330,9 +330,9 @@ svnRepo() {
 	*) VCS_BRANCH="" ;;
 	esac
 
-	# Current or last tag ancestor (empty if no tags). But "current tag"
-	# can't be extracted reliably because Subversion doesn't have tags the
-	# way other VCSes do.
+	# Current or last tag ancestor (empty if no tags). But "current
+	# tag" can't be extracted reliably because Subversion doesn't
+	# have tags the way other VCSes do.
 	VCS_TAG=""
 	VCS_TICK=""
 
