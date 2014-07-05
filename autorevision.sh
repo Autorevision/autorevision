@@ -404,6 +404,8 @@ swiftOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
+	# For values that may not exist depending on the type of repo we
+	# have read from, set them to `nil` when they are empty.
 	if [ -z "${VCS_UUID}" ]; then
 		VCS_UUID="nil"
 	else
