@@ -88,9 +88,9 @@ A Java properties file (like ini); useful when META-INF is readable in
 Java.
 
 *tex*::
-A TeX source file defining TeX macros.  Note that the symbols are given
-different names since the underscore has a special meaning in TeX.
-For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
+A TeX source file defining TeX macros.  Note that the symbols are
+given different names since the underscore has a special meaning in
+TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
 
 *m4*::
 An m4 source file defining m4 macros.
@@ -123,15 +123,18 @@ format, including seconds.
 
 *VCS_BRANCH*::
 The name of the branch of the commit graph that was selected when
-autoversion was run.  Under Subversion this will normally be either
-'trunk' or the basename of some branch or tag subdirectory, depending
-on where *autoversion* was run.  Under git, this will normally be the
-shortname of the current branch (the asterisked line in the output of
-of "git branch") except that when the branch doesn't have a shortname
-it will be a full refspec.  Under hg the feature that is called
-'branches' is actually a sort of graph coloring (multiple heads can
-have the same branch name) so this variable is filled with the current
-bookmark if it exists, with the current branch name as a fallback.{br}
+autoversion was run.{br}
+Under git, this will normally be the shortname of the current branch
+(the asterisked line in the output of of "git branch") except that
+when the branch doesn't have a shortname it will be a full
+refspec.{br}
+Under hg the feature that is called 'branches' is actually a sort of
+graph coloring (multiple heads can have the same branch name) so this
+symbol is filled with the current bookmark if it exists, with the
+current branch name as a fallback.{br}
+Under Subversion this will normally be either 'trunk' or the basename
+of some branch or tag subdirectory, depending on where *autoversion*
+was run.{br}
 Under bzr, this is the nick of the branch you are on.
 
 *VCS_TAG*::
@@ -156,19 +159,20 @@ cannot be shortened.
 
 *VCS_WC_MODIFIED*::
 Set to `1` if the current working directory has been modified and `0`
-if not. 'Untracked files are not ignored; see *`-U`* for details.'  If
-the output language is interpreted and has native Boolean literals,
-true will mean modified and false unmodified.  The C/C++ output is left as numeric so the preprocessor can test it.
+if not.  If the output language has native Boolean literals, true will
+mean modified and false unmodified.  The C/C++ output is left as
+numeric so the preprocessor can test it.{br}
+'Untracked files are not ignored; see *`-U`* for details.'
 
 == OPTIONS ==
 
 *-t* '<output-type>'::
-Sets the output type. It is required unless *`-s`* is specified; both
+Sets the output type.  It is required unless *`-s`* is specified; both
 *`-t`* and *`-s`* cannot be used in the same invocation.
 
 *-s* '<symbol>'::
 Changes the reporting behavior; instead of emitting a symbol file to
-stdout, only the value of that individual symbol will be reported. It
+stdout, only the value of that individual symbol will be reported.  It
 is required unless *`-t`* is specified; both *`-t`* and *`-s`* cannot
 be used in the same invocation.
 
@@ -192,7 +196,7 @@ Emits the autorevision version and exits.
 The bzr extractor is not very well tested as yet.
 
 When a git repo is actually a git-svn remote, this tool tries to do
-the right thing and return a Subversion revision. The bug is that the
+the right thing and return a Subversion revision.  The bug is that the
 detector code for this case is somewhat unreliable; you will get the
 hash instead if your configuration doesn't use svn-remote.svn.url.
 
