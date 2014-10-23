@@ -62,10 +62,13 @@ auth:
 	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS.txt
 
 # The tarball
-dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5
+dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
 
 autorevision-$(VERS).tgz.md5: autorevision-$(VERS).tgz
 	md5 -q autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
+
+autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
+	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
 
 autorevision-$(VERS).tgz: $(SOURCES) all
 	mkdir autorevision-$(VERS)
@@ -84,7 +87,7 @@ uninstall:
 
 clean:
 	rm -f autorevision autorevision.html autorevision.1
-	rm -f *.md5 *.tgz
+	rm -f *.tgz *.md5 *.sig
 	rm -f docbook-xsl.css
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~ index.html
