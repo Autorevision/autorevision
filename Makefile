@@ -86,13 +86,13 @@ clean:
 	rm -f autorevision autorevision.html autorevision.1
 	rm -f *.md5 *.tgz
 	rm -f docbook-xsl.css
-	rm -f AUTHORS AUTHORS.txt
 	rm -f CONTRIBUTING.html COPYING.html README.html
 	rm -f *~ index.html
 
 # Not safe to run in a tarball
 devclean: clean
 	rm -f autorevision.cache
+	rm -f AUTHORS AUTHORS.txt
 
 # HTML versions of doc files suitable for use on a website
 docs: \
