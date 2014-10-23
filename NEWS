@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.10 @ 2014-10-23
   Cover the case of split repository heads.
   Add initial Swift output support.
 
