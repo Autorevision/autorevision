@@ -10,7 +10,7 @@
 # Usage message.
 arUsage() {
 	cat > "/dev/stderr" << EOF
-usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
+usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	Options include:
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
@@ -20,7 +20,7 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-V			= emit version and exit
 	-?			= help message
 
-The folowing are valid output types:
+The following are valid output types:
 	h			= Header for use with c/c++
 	xcode			= Header useful for populating info.plist files
 	swift			= Swift file
