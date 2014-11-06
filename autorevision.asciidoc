@@ -1,12 +1,10 @@
 = AUTOREVISION(1) =
-:doctype: manpage
-:br: {empty} +
 
 == NAME ==
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*`autorevision`* {*`-t`* `<output-type>` | *`-s`* `<symbol>`} [*`-o`* `<cache-file>` [*`-f`*] ] [*`-U`*] [*`-V`*]
+*autorevision* {*-t* <output-type> | *-s* <symbol>} [*-o* <cache-file> [*-f*]] [*-U*] [*-V*]
 
 == DESCRIPTION ==
 Extracts metadata about the head revision from your repository.
@@ -49,7 +47,7 @@ A header file suitable for C/C++.
 A header like output for use with xcode to populate info.plist strings.
 
 *swift*::
-A Swift source file setting Swift global constants.{br}
+A Swift source file setting Swift global constants. +
 Unless set *VCS_EXTRA* and any symbols that are are missing because of
 repository support are set to `nil`.
 
@@ -95,7 +93,6 @@ TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
 *m4*::
 An m4 source file defining m4 macros.
 
-
 === Valid Symbol Names ===
 
 *VCS_TYPE*::
@@ -113,8 +110,8 @@ one; useful for reporting build numbers.
 
 *VCS_UUID*::
 A universally unique identifier, generated from the root commit in git
-and hg; for svn it uses the supplied UUID.{br}
-For git we choose the oldest commit if there is more than one.{br}
+and hg; for svn it uses the supplied UUID. +
+For git we choose the oldest commit if there is more than one. +
 Not currently implemented for bzr.
 
 *VCS_DATE*::
@@ -123,27 +120,27 @@ format, including seconds.
 
 *VCS_BRANCH*::
 The name of the branch of the commit graph that was selected when
-autoversion was run.{br}
+autoversion was run. +
 Under git, this will normally be the shortname of the current branch
 (the asterisked line in the output of of "git branch") except that
 when the branch doesn't have a shortname it will be a full
-refspec.{br}
+refspec. +
 Under hg the feature that is called 'branches' is actually a sort of
 graph coloring (multiple heads can have the same branch name) so this
 symbol is filled with the current bookmark if it exists, with the
-current branch name as a fallback.{br}
+current branch name as a fallback. +
 Under Subversion this will normally be either 'trunk' or the basename
 of some branch or tag subdirectory, depending on where *autoversion*
-was run.{br}
+was run. +
 Under bzr, this is the nick of the branch you are on.
 
 *VCS_TAG*::
-The name of the most recent tag ancestral to the current commit.{br}
+The name of the most recent tag ancestral to the current commit. +
 Empty under Subversion.
 
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current
-commit or an alias of *VCS_NUM* if there are no prior tags.{br}
+commit or an alias of *VCS_NUM* if there are no prior tags. +
 Empty under Subversion.
 
 *VCS_EXTRA*::
@@ -161,7 +158,7 @@ cannot be shortened.
 Set to `1` if the current working directory has been modified and `0`
 if not.  If the output language has native Boolean literals, true will
 mean modified and false unmodified.  The C/C++ output is left as
-numeric so the preprocessor can test it.{br}
+numeric so the preprocessor can test it. +
 'Untracked files are not ignored; see *`-U`* for details.'
 
 == OPTIONS ==
@@ -216,6 +213,6 @@ http://www.catb.org/esr/autorevision/
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
-support, git and hg extraction.{br}
+support, git and hg extraction. +
 Eric S. Raymond <esr@thyrsus.com>: Python/Perl/lua/m4 support, svn and
 bzr extraction, git-svn support, CLI design, man page.
