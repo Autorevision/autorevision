@@ -1,5 +1,4 @@
 = AUTOREVISION(1) =
-:doctype: manpage
 
 == NAME ==
 autorevision - extract current-revision metadata from version-control repositories
