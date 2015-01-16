@@ -17,6 +17,10 @@ java
 javaprop
 tex
 m4
+scheme
+clojure
+rpm
+sql
 EOF
 
 cd "$(git rev-parse --show-toplevel)"

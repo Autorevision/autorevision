@@ -93,6 +93,18 @@ TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
 *m4*::
 An m4 source file defining m4 macros.
 
+*scheme*::
+A scheme source file setting scheme variables.
+
+*clojure*::
+A clojure source file setting clojure variables.
+
+*rpm*::
+A RPM spec file format setting spec file macros.
+
+*sql*
+A sql table definition and insert line.
+
 === Valid Symbol Names ===
 
 *VCS_TYPE*::
