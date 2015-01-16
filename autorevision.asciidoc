@@ -102,8 +102,18 @@ A clojure source file setting clojure variables.
 *rpm*::
 A RPM spec file format setting spec file macros.
 
-*sql*
+*sql*::
 A sql table definition and insert line.
+
+*hpp*::
+Alternate C++ header file with namespace.  Namespace is assigned
+from VCS_BASENAME.
+
+*matlab*::
+Matlab output.
+
+*octave*::
+Octave output.
 
 === Valid Symbol Names ===
 
