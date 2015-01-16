@@ -21,28 +21,28 @@ usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-?			= help message
 
 The following are valid output types:
+	clojure			= clojure file
 	h			= Header for use with c/c++
-	xcode			= Header useful for populating info.plist files
-	swift			= Swift file
-	sh			= Bash sytax
-	py			= Python file
-	pl			= Perl file
-	lua			= Lua file
-	php			= PHP file
+	hpp			= Alternate C++ header strings with namespace
 	ini			= INI file
-	js			= javascript file
-	json			= JSON file
 	java			= Java file
 	javaprop		= Java properties file
-	tex			= (La)TeX file
+	js			= javascript file
+	json			= JSON file
+	lua			= Lua file
 	m4			= m4 file
-	scheme			= scheme file
-	clojure			= clojure file
+	matlab                  = matlab file
+	octave                  = octave file
+	php			= PHP file
+	pl			= Perl file
+	py			= Python file
 	rpm			= rpm file
+	scheme			= scheme file
+	sh			= Bash sytax
 	sql			= sql schema file
-	hpp			= Alternate C++ header strings with namespace
-        matlab                  = matlab syntax
-        octave                  = octave syntax
+	swift			= Swift file
+	tex			= (La)TeX file
+	xcode			= Header useful for populating info.plist files
 
 
 The following are valid symbols:

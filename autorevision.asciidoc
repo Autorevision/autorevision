@@ -40,43 +40,18 @@ from an unpacked tarball that includes the cache file.
 
 === Valid Output Types ===
 
+*clojure*::
+A clojure source file setting clojure variables.
+
 *h*::
 A header file suitable for C/C++.
 
-*xcode*::
-A header like output for use with xcode to populate info.plist strings.
-
-*swift*::
-A Swift source file setting Swift global constants. +
-Unless set *VCS_EXTRA* and any symbols that are are missing because of
-repository support are set to `nil`.
-
-*sh*::
-A text file suitable for including from a bash script.  Will work with
-Ruby.
-
-*py*::
-A Python source file setting Python variables (*`python`* is an
-acceptable synonym).
-
-*pl*::
-A Perl source file setting Perl variables  (*`perl`* is an acceptable
-synonym).
-
-*lua*::
-A lua source file setting lua variables.
-
-*php*::
-A PHP source file setting PHP variables.
+*hpp*::
+Alternate C++ header file with namespace.  Namespace is assigned
+from VCS_BASENAME.
 
 *ini*::
 A ini source file setting ini variables.
-
-*js*::
-A javascript source file setting javascript variables.
-
-*json*::
-A JSON format file.
 
 *java*::
 A Java source file setting class properties.
@@ -85,35 +60,60 @@ A Java source file setting class properties.
 A Java properties file (like ini); useful when META-INF is readable in
 Java.
 
-*tex*::
-A TeX source file defining TeX macros.  Note that the symbols are
-given different names since the underscore has a special meaning in
-TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
+*js*::
+A javascript source file setting javascript variables.
+
+*json*::
+A JSON format file.
+
+*lua*::
+A lua source file setting lua variables.
 
 *m4*::
 An m4 source file defining m4 macros.
-
-*scheme*::
-A scheme source file setting scheme variables.
-
-*clojure*::
-A clojure source file setting clojure variables.
-
-*rpm*::
-A RPM spec file format setting spec file macros.
-
-*sql*::
-A sql table definition and insert line.
-
-*hpp*::
-Alternate C++ header file with namespace.  Namespace is assigned
-from VCS_BASENAME.
 
 *matlab*::
 Matlab output.
 
 *octave*::
 Octave output.
+
+*php*::
+A PHP source file setting PHP variables.
+
+*pl*::
+A Perl source file setting Perl variables  (*`perl`* is an acceptable
+synonym).
+
+*py*::
+A Python source file setting Python variables (*`python`* is an
+acceptable synonym).
+
+*rpm*::
+A RPM spec file format setting spec file macros.
+
+*scheme*::
+A scheme source file setting scheme variables.
+
+*sh*::
+A text file suitable for including from a bash script.  Will work with
+Ruby.
+
+*sql*::
+A sql table definition and insert line to populate it with version information.
+
+*swift*::
+A Swift source file setting Swift global constants. +
+Unless set *VCS_EXTRA* and any symbols that are are missing because of
+repository support are set to `nil`.
+
+*tex*::
+A TeX source file defining TeX macros.  Note that the symbols are
+given different names since the underscore has a special meaning in
+TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
+
+*xcode*::
+A header like output for use with xcode to populate info.plist strings.
 
 === Valid Symbol Names ===
 
