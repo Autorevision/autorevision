@@ -9,6 +9,9 @@
 # Get the version number
 VERS := $(shell ./autorevision.sh -s VCS_TAG -o ./autorevision.cache | sed -e 's:v/::')
 
+# Find a md5 program
+MD5 := $(shell if which md5 &> /dev/null; then echo "md5 -q"; elif which md5sum &> /dev/null; then echo "md5sum"; fi)
+
 .SUFFIXES: .md .html
 
 .md.html:
@@ -65,7 +68,7 @@ auth:
 dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
 
 autorevision-$(VERS).tgz.md5: autorevision-$(VERS).tgz
-	md5 -q autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
+	$(MD5) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
 
 autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
 	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
