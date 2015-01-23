@@ -10,7 +10,7 @@
 VERS := $(shell ./autorevision.sh -s VCS_TAG -o ./autorevision.cache | sed -e 's:v/::')
 
 # Find a md5 program
-MD5 := $(shell if which md5 &> /dev/null; then echo "md5 -q"; elif which md5sum &> /dev/null; then echo "md5sum"; fi)
+MD5 := $(shell if type "md5" &> /dev/null; then echo "md5 -q"; elif type "md5sum" &> /dev/null; then echo "md5sum"; fi)
 
 .SUFFIXES: .md .html
 
