@@ -28,10 +28,13 @@ Make sure that you commit an example of the output into the `example` directory.
 Other Conventions
 -----------------
 
+* Tabs are preferred to spaces.
 * Do not forget to update the documentation.
 * You generally should *not* assume that any extras, extensions or otherwise non-default commands are available.
+* Again, remember this is not `bash` but POSIX shell.
 * Any use of `sed` *should* use `:` as a delimiter whenever feasible.
 * All variables should be written in the form `"${<variable>}"`.
 * All error messages should be prefixed with `error: `.
 * All warning messages should be prefixed with `warning: `.
 * Try to avoid stderr output from any subcommand leaking through.
+* Test using [http://www.shellcheck.net/](http://www.shellcheck.net/).
