@@ -2,9 +2,11 @@
 
 # `a2x / asciidoc` is required to generate the Man page.
 # `markdown` is required for the `docs` target, though it is not
-# strictly necessary for packaging.
-# `shipper` is required for the `release` target, which should only be
-# used if you are shipping tarballs (you probably are not).
+# strictly necessary for packaging since unless you are planning on
+# serving the docs on a web site they are more readable not as html.
+# `shipper` and `gpg` are required for the `release` target, which
+# should only be used if you are shipping tarballs (you probably are
+# not).
 
 # Get the version number
 VERS := $(shell ./autorevision.sh -s VCS_TAG -o ./autorevision.cache | sed -e 's:v/::')
@@ -41,11 +43,12 @@ EXTRA_DIST = \
 	AUTHORS.txt \
 	autorevision.cache
 
-all : cmd man auth
+all : cmd man
 
 # The script
 cmd: autorevision
 
+# Insert the version number
 autorevision: autorevision.sh
 	sed -e 's:&&ARVERSION&&:$(VERS):g' autorevision.sh > autorevision
 	chmod +x autorevision
@@ -61,25 +64,30 @@ autorevision.html: autorevision.asciidoc
 	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
 
 # Authors
-auth:
+auth: AUTHORS.txt
+
+AUTHORS.txt:
 	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS.txt
 
 # The tarball
 dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
 
+# Make an md5 checksum
 autorevision-$(VERS).tgz.md5: autorevision-$(VERS).tgz
 	$(MD5) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
 
+# Make a detached gpg sig
 autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
 	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
 
-autorevision-$(VERS).tgz: $(SOURCES) all
+# The actual tarball
+autorevision-$(VERS).tgz: $(SOURCES) all auth
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
 	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 
-install: cmd man
+install: all
 	install -d "$(target)/bin"
 	install -m 755 autorevision "$(target)/bin/autorevision"
 	install -d "$(target)$(mandir)/man1"
