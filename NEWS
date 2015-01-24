@@ -1,5 +1,11 @@
 			autorevision history
 
+Repository head:
+  Added scheme, clojure, rpm, and sql outputs.
+  Added hpp, matlab, and octave outputs.
+  Reorder types in help and asciidoc to be more alphabetical.
+  Try using md5sum when md5 is not available when making tarballs.
+
 1.10a @ 2014-10-24
   Emergency bug fix.
 
