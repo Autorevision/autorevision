@@ -5,6 +5,7 @@ Repository head:
   Added hpp, matlab, and octave outputs.
   Reorder types in help and asciidoc to be more alphabetical.
   Try using md5sum when md5 is not available when making tarballs.
+  Fix a typo in the svn driver.
 
 1.10a @ 2014-10-24
   Emergency bug fix.
