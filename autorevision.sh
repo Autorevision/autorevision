@@ -317,7 +317,7 @@ svnRepo() {
 	case "${PWD}" in
 	/*trunk*|/*branches*|/*tags*)
 		local lastbase=""
-		loacl fn="${PWD}"
+		local fn="${PWD}"
 		while :
 		do
 			base="$(basename "${fn}")"
