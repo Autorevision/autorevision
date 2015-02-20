@@ -14,7 +14,7 @@ Repository head:
   Cover the case of split repository heads.
   Add initial Swift output support.
 
-1.9 @ 2014-5-23
+1.9 @ 2014-05-23
   Add a logo.
   Only update the cache file when there are changes.
   New dependency `cmp`.
