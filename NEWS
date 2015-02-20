@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.11 @ 2015-02-20
   Added scheme, clojure, rpm, and sql outputs.
   Added hpp, matlab, and octave outputs.
   Reorder types in help and asciidoc to be more alphabetical.
