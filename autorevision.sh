@@ -281,7 +281,7 @@ svnRepo() {
 	*) VCS_BASENAME="$(basename "${PWD}")" ;;
 	esac
 
-	VCS_UUID="$(svn info | sed -n -e 's:Repository UUID\: ::p')"
+	VCS_UUID="$(svn info --xml | sed -n -e 's:<uuid>::' -e 's:</uuid>::p')"
 
 	# Cache svnversion output
 	local SVNVERSION="$(svnversion)"
@@ -345,7 +345,7 @@ svnRepo() {
 	VCS_TICK=""
 
 	# Date of the current commit
-	VCS_DATE="$(svn info | sed -n -e 's:Last Changed Date\: ::p' | sed 's: (.*)::' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::' -e 's:Z:-0000:p')"
 }
 
 
@@ -1002,8 +1002,9 @@ repoTest() {
 		local bzrDepth="0"
 	fi
 	if [ ! -z "$(svn info 2>/dev/null)" ]; then
-		local stringz="Working Copy Root Path: "
-		local svnPath="$(svn info | grep "${stringz}" | tr -d "${stringz}")"
+		local stringz="<wcroot-abspath>"
+		local stringx="</wcroot-abspath>"
+		local svnPath="$(svn info --xml | sed -n -e "s:${stringz}::" -e "s:${stringx}::p")"
 		local svnDepth="$(pathSegment "${svnPath}")"
 		REPONUM="$((REPONUM+1))"
 	else

@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Use --xml for svn when we care about the output.
+
 1.11 @ 2015-02-20
   Added scheme, clojure, rpm, and sql outputs.
   Added hpp, matlab, and octave outputs.
