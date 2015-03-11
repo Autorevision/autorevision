@@ -163,7 +163,7 @@ gitRepo() {
 	local DESCRIPTION="$(git describe --long --tags 2>/dev/null)"
 
 	# Current or last tag ancestor (empty if no tags)
-	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" | sed -e 's:-[0-9]*$::')"
+	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" -e 's:-[0-9]*$::')"
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	if [ ! -z "${DESCRIPTION}" ]; then
@@ -173,7 +173,7 @@ gitRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
 }
 
 # For hg repos
@@ -218,7 +218,7 @@ hgRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::')"
 }
 
 # For bzr repos
@@ -259,7 +259,7 @@ bzrRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' -e 's: ::')"
 }
 
 # For svn repos
