@@ -118,6 +118,7 @@ fi
 
 # Functions to extract data from different repo types.
 # For git repos
+# shellcheck disable=SC2155
 gitRepo() {
 	cd "$(git rev-parse --show-toplevel)"
 
@@ -262,6 +263,7 @@ bzrRepo() {
 }
 
 # For svn repos
+# shellcheck disable=SC2155
 svnRepo() {
 	VCS_TYPE="svn"
 
@@ -271,7 +273,7 @@ svnRepo() {
 		while [ "$(basename "${fn}")" != 'trunk' ] && [ "$(basename "${fn}")" != 'branches' ] && [ "$(basename "${fn}")" != 'tags' ] && [ "$(basename "${fn}")" != '/' ]; do
 			local fn="$(dirname "${fn}")"
 		done
-		fn="$(dirname "${fn}")"
+		local fn="$(dirname "${fn}")"
 		if [ "${fn}" = '/' ]; then
 			VCS_BASENAME="$(basename "${PWD}")"
 		else
@@ -866,6 +868,7 @@ INSERT INTO vcs (type,basename,uuid,num,date,branch,tag,
 EOF
 }
 
+# shellcheck disable=SC2155
 hppOutput() {
 	local NAMESPACE="$(echo "${VCS_BASENAME}" | sed -e 's:_::g' | tr '[:lower:]' '[:upper:]')"
 	cat > "${TARGETFILE}" << EOF
@@ -977,6 +980,7 @@ multiCompare() {
 	echo "${larger}"
 }
 
+# shellcheck disable=SC2155
 # Test for repositories
 repoTest() {
 	REPONUM="0"
