@@ -1126,7 +1126,7 @@ if [ ! -z "${AFILETYPE}" ]; then
 	elif [ "${AFILETYPE}" = "sql" ]; then
 		sqlOutput
 	elif [ "${AFILETYPE}" = "hpp" ]; then
-				hppOutput
+		hppOutput
 	elif [ "${AFILETYPE}" = "matlab" ]; then
 		matlabOutput
 	elif [ "${AFILETYPE}" = "octave" ]; then
