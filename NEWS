@@ -2,6 +2,7 @@
 
 Repository head:
   Use --xml for svn when we care about the output.
+  New site: https://autorevision.github.io/
 
 1.11 @ 2015-02-20
   Added scheme, clojure, rpm, and sql outputs.
