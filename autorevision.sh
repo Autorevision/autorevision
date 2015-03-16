@@ -143,8 +143,7 @@ gitRepo() {
 	fi
 
 	# This may be a git-svn remote.  If so, report the Subversion revision.
-	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]
-	then
+	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]; then
 		# The full revision hash
 		VCS_FULL_HASH="$(git rev-parse HEAD)"
 
