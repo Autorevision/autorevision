@@ -1008,7 +1008,13 @@ repoTest() {
 		local stringz="<wcroot-abspath>"
 		local stringx="</wcroot-abspath>"
 		local svnPath="$(svn info --xml | sed -n -e "s:${stringz}::" -e "s:${stringx}::p")"
-		local svnDepth="$(pathSegment "${svnPath}")"
+		# An old enough svn will not be able give us a path; default
+		# to 1 for that case.
+		if [ -z  "${svnPath}" ]; then
+			local svnDepth="1"
+		else
+			local svnDepth="$(pathSegment "${svnPath}")"
+		fi
 		REPONUM="$((REPONUM+1))"
 	else
 		local svnDepth="0"
