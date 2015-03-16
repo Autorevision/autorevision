@@ -229,8 +229,8 @@ unintended behavior.
 Development of autorevision is carried out at
 https://github.com/Autorevision/autorevision
 
-Tarballs and HTML rendered docs are also hosted at
-http://www.catb.org/esr/autorevision/
+Tarballs and HTML rendered docs can be found at
+https://autorevision.github.io/
 
 == AUTHORS ==
 
