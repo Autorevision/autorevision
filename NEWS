@@ -1,8 +1,9 @@
 			autorevision history
 
-Repository head:
+1.12 @ 2015-03-16
   Use --xml for svn when we care about the output.
   New site: https://autorevision.github.io/
+  Handle older svn detection more gracefully.
 
 1.11 @ 2015-02-20
   Added scheme, clojure, rpm, and sql outputs.
