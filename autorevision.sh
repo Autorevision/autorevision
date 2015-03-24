@@ -57,6 +57,7 @@ The following are valid symbols:
 	VCS_FULL_HASH
 	VCS_SHORT_HASH
 	VCS_WC_MODIFIED
+	VCS_ACTION_STAMP
 EOF
 	exit 1
 }
@@ -175,6 +176,9 @@ gitRepo() {
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
 
+	# Action Stamp
+	VCS_ACTION_STAMP="${VCS_DATE}!$(git log -1 --pretty=format:%cE)"
+
 	cd "${oldPath}"
 }
 
@@ -225,6 +229,9 @@ hgRepo() {
 	# Date of the current commit
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::')"
 
+	# Action Stamp
+	VCS_ACTION_STAMP="$(TZ=UTC hg log -r "${VCS_NUM}" -l 1 --template '{date|localdate|rfc3339date}\n' 2>/dev/null | sed -e 's|+00:00|Z|')!$(hg log -r "${VCS_NUM}" -l 1 --template '{author|email}\n' 2>/dev/null)"
+
 	cd "${oldPath}"
 }
 
@@ -270,6 +277,10 @@ bzrRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' -e 's: ::')"
+
+	# Action Stamp
+	# Currently unimplemented because more investigation is needed.
+	VCS_ACTION_STAMP=""
 
 	cd "${oldPath}"
 }
@@ -364,6 +375,9 @@ svnRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::' -e 's:Z:-0000:p')"
+
+	# Action Stamp
+	VCS_ACTION_STAMP="${VCS_DATE}!$(svn log --xml -l 1 -r "${VCS_SHORT_HASH}" | sed -n -e 's:<author>::' -e 's:</author>::')"
 
 	cd "${oldPath}"
 }
@@ -1081,6 +1095,8 @@ if [ ! -z "${VAROUT}" ]; then
 		echo "${VCS_SHORT_HASH}"
 	elif [ "${VAROUT}" = "VCS_WC_MODIFIED" ]; then
 		echo "${VCS_WC_MODIFIED}"
+	elif [ "${VAROUT}" = "VCS_ACTION_STAMP" ]; then
+		echo "${VCS_ACTION_STAMP}"
 	else
 		echo "error: Not a valid output symbol." 1>&2
 		exit 1
