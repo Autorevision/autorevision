@@ -10,6 +10,8 @@
 
 # Get the version number
 VERS := $(shell ./autorevision.sh -s VCS_TAG -o ./autorevision.cache | sed -e 's:v/::')
+# Date for documentation
+DOCDATE := $(shell ./autorevision.sh -s VCS_DATE -o ./autorevision.cache -f | sed -e 's:T.*::')
 
 # Find a md5 program
 MD5 := $(shell if type "md5" &> /dev/null; then echo "md5 -q"; elif type "md5sum" &> /dev/null; then echo "md5sum"; fi)
@@ -57,7 +59,7 @@ autorevision: autorevision.sh
 man: autorevision.1
 
 autorevision.1: autorevision.asciidoc
-	a2x -f manpage autorevision.asciidoc
+	a2x --attribute="revdate=$(DOCDATE)" --attribute="revnumber=$(VERS)" -f manpage autorevision.asciidoc
 
 # HTML representation of the man page
 autorevision.html: autorevision.asciidoc
