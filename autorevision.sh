@@ -302,7 +302,7 @@ svnRepo() {
 					VCS_WC_MODIFIED="1"
 				fi
 			else
-			    VCS_WC_MODIFIED="0"
+				VCS_WC_MODIFIED="0"
 			fi
 		;;
 	esac
