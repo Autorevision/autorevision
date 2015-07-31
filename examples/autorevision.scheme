@@ -2,15 +2,15 @@
 (define VCS_TYPE        "git")
 (define VCS_BASENAME    "autorevision")
 (define VCS_UUID        "da2830f81fec4c6ebce8ebf23f35b0e6b066c149")
-(define VCS_NUM         229)
-(define VCS_DATE        "2014-02-27T16:58:39-0500")
+(define VCS_NUM         289)
+(define VCS_DATE        "2015-07-30T20:19:11-0400")
 (define VCS_BRANCH      "master")
-(define VCS_TAG         "v/1.2")
-(define VCS_TICK        88)
+(define VCS_TAG         "v/1.12")
+(define VCS_TICK        6)
 (define VCS_EXTRA       "")
 
-(define VCS_FULL_HASH   "239cc7f4d5abac9017b756996ab1f638acef22b4")
-(define VCS_SHORT_HASH  "239cc7f")
+(define VCS_FULL_HASH   "18ff79342483d3b3f839b6c5968194a23f5263b1")
+(define VCS_SHORT_HASH  "18ff793")
 
-(define VCS_WC_MODIFIED 1)
+(define VCS_WC_MODIFIED #f)
 ;; end
