@@ -199,20 +199,20 @@ be used in the same invocation.
 Sets the name of the cache file.
 
 *-f*::
-Forces the use cache data even when in a repo; useful if you want to
-preprocess the data before final output.
+Forces the use of cache data even when in a repo; useful for speeding
+up subsequent runs if more than one output format is needed.
 
 *-U*::
 Causes untracked files to be checked when determining if the
 working copy is modified 'for Subversion only'.  While this is the
-default behavior for all other repository types it is off by default
+default behavior for all other repository types, it is off by default
 for Subversion because of speed concerns.
 
 *-V*::
 Emits the autorevision version and exits.
 
 == BUGS ==
-The bzr extractor is not very well tested as yet.
+The bzr extractor is not very well tested.
 
 When a git repo is actually a git-svn remote, this tool tries to do
 the right thing and return a Subversion revision.  The bug is that the
@@ -229,7 +229,7 @@ unintended behavior.
 Development of autorevision is carried out at
 https://github.com/Autorevision/autorevision
 
-Tarballs and HTML rendered docs can be found at
+HTML rendered docs and usage examples can be found at
 https://autorevision.github.io/
 
 == AUTHORS ==
