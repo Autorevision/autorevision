@@ -4,6 +4,7 @@ Repository head:
   Make the man page more reproducible.
   Make sure VCS_WS_MODIFIED is not empty for svn.
   Remove sql output until such time as it can be completed.
+  Add some missing example files.
 
 1.12 @ 2015-03-16
   Use --xml for svn when we care about the output.
