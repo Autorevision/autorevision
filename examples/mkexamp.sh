@@ -2,24 +2,27 @@
 
 # List of formats (short names).
 read -d '' formats << EOF
+clojure
 h
-xcode
-swift
-sh
-py
-pl
-lua
-php
+hpp
 ini
-js
-json
 java
 javaprop
-tex
+js
+json
+lua
 m4
-scheme
-clojure
+matlab
+octave
+php
+pl
+py
 rpm
+scheme
+sh
+swift
+tex
+xcode
 EOF
 
 cd "$(git rev-parse --show-toplevel)"
