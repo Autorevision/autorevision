@@ -99,9 +99,6 @@ A scheme source file setting scheme variables.
 A text file suitable for including from a bash script.  Will work with
 Ruby.
 
-*sql*::
-A sql table definition and insert line to populate it with version information.
-
 *swift*::
 A Swift source file setting Swift global constants. +
 Unless set *VCS_EXTRA* and any symbols that are are missing because of
