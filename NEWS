@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.13 @ 2015-07-31:
   Make the man page more reproducible.
   Make sure VCS_WS_MODIFIED is not empty for svn.
   Remove sql output until such time as it can be completed.
