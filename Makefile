@@ -63,7 +63,7 @@ autorevision.1: autorevision.asciidoc
 
 # HTML representation of the man page
 autorevision.html: autorevision.asciidoc
-	asciidoc --doctype=manpage --backend=xhtml11 autorevision.asciidoc
+	asciidoc --attribute="revdate=$(DOCDATE)" --attribute="footer-style=revdate" --attribute="revnumber=$(VERS)" --doctype=manpage --backend=xhtml11 autorevision.asciidoc
 
 # Authors
 auth: AUTHORS.txt
