@@ -4,18 +4,22 @@
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* {*-t* <output-type> | *-s* <symbol>} [*-o* <cache-file> [*-f*]] [*-U*] [*-V*]
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+
+*autorevision* *-V*
 
 == DESCRIPTION ==
 Extracts metadata about the head revision from your repository.
 
 This program is meant to be used by project build systems to extract
-properties that can be used in software version strings. It can emit
-source files containing variable and macro definitions suitable for
-use with C, C++, Java, sh, Python, Perl, Mac info.plist and other
-types of files (see below for the full list).
+properties that can be used in version strings. It can emit source
+files containing variable and macro definitions suitable for use with
+C, C++, Java, Mac info.plist, sh, Python, Perl and many other types of
+files (see below for the full list).
 
-The generated source is written to standard output.
+The generated source is written to the standard output.
 
 This program can normally be called from anywhere within a repository
 copy.  Under bzr the copy must be of a branch, not a full multibranch
@@ -25,8 +29,8 @@ checkout, not the repository itself.
 If you specify a cache file, then when *autorevision* is run where no
 repository can be recognized, the values from the cache file will be
 used instead.  If a repository can be recognized, the cache is
-rewritten. This feature makes it possible for your build to run
-from an unpacked tarball that includes the cache file.
+rewritten. This feature makes it possible for your build to run from
+an unpacked tarball that includes the cache file.
 
 === Valid Repository Types ===
 
@@ -120,8 +124,8 @@ The repository type - "git", "hg", "bzr", or "svn".
 *VCS_BASENAME*::
 The basename of the directory root.  For most VCSes this will simply
 be the basename of the repository root directory.  For Subversion,
-*autorevision* will navigate up though trunk, branches, and tags
-directories to find the actual root.
+*autorevision* will attempt to navigate up though trunk, branches, and
+tags directories to find the actual root.
 
 *VCS_NUM*::
 A count of revisions between the current one and the initial
