@@ -1,5 +1,9 @@
 			autorevision history
 
+Repository head:
+  Fix PHP output.
+  Use constants array in PHP output.
+
 1.13 @ 2015-07-31:
   Make the man page more reproducible.
   Make sure VCS_WS_MODIFIED is not empty for svn.
