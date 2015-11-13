@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 APPNAME = 'projectname'
-VERSION = '1.0' # This will be overwritten later.
+VERSION = waflib.Utils.readf('version.txt')
 
 
 def options(opt):
@@ -10,11 +10,6 @@ def options(opt):
 
 
 def configure(conf):
-# This will be used by the "waf dist" and will not raise errors before "configure".
-def dist(ctx):
-	# Here we reset the version using info supplied by autorevision.
-	global VERSION
-	VERSION = ctx.cmd_and_log("autorevision -s VCS_TAG -o autorevision.cache", quiet=0).strip()
     conf.load('compiler_cxx')
     # This makes sure that autorevision exists before we call it.
     ctx.find_program('autorevision', var='AUTOREVISION')
@@ -25,14 +20,32 @@ def build(bld):
     # Here we let waf know about the autorevision.cache file.
     autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
+    # Here we make the cache file
+    bld(
+        name='autorevision',
+        rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}',
+        target=autorevision_cache_node,
+        always=True,
+        update_outputs = True)
+
+    # This is where the version.txt file is created.
+    bld(
+        name='version',
+        after='autorevision',
+        rule='autorevision -f -s VCS_TAG -o ${SRC[0].abspath()} > ${TGT}',
+        source=autorevision_cache_node,
+        target='version.txt')
+
     # Here we make autorevision.json.
     bld(
+        after='autorevision',
         rule='${AUTOREVISION} -f -t json -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.json')
 
     # Here we make autorevision.h.
     bld(
+        after='autorevision',
         rule='${AUTOREVISION} -f -t h -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.h')
