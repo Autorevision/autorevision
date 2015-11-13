@@ -6,34 +6,33 @@ VERSION = '1.0' # This will be overwritten later.
 
 
 def options(opt):
-	opt.load('compiler_cxx')
+    opt.load('compiler_cxx')
 
 
 def configure(conf):
-	conf.load('compiler_cxx')
-	# This makes sure that autorevision exists before we call it.
-	ctx.find_program('autorevision', var='AUTOREVISION')
-
 # This will be used by the "waf dist" and will not raise errors before "configure".
 def dist(ctx):
 	# Here we reset the version using info supplied by autorevision.
 	global VERSION
 	VERSION = ctx.cmd_and_log("autorevision -s VCS_TAG -o autorevision.cache", quiet=0).strip()
+    conf.load('compiler_cxx')
+    # This makes sure that autorevision exists before we call it.
+    ctx.find_program('autorevision', var='AUTOREVISION')
 
 
 def build(bld):
-	# Here we let waf know about the autorevision.cache file.
-	autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
-	# Here we make autorevision.json.
-	bld(
-		rule='${AUTOREVISION} -f -t json -o ${SRC} > ${TGT}',
-		source=autorevision_cache_node,
-		target='autorevision.json')
+    # Here we let waf know about the autorevision.cache file.
+    autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
-	# Here we make autorevision.h.
-	bld(
-		rule='${AUTOREVISION} -f -t h -o ${SRC} > ${TGT}',
-		source=autorevision_cache_node,
-		target='autorevision.h')
+    # Here we make autorevision.json.
+    bld(
+        rule='${AUTOREVISION} -f -t json -o ${SRC[0].abspath()} > ${TGT}',
+        source=autorevision_cache_node,
+        target='autorevision.json')
 
+    # Here we make autorevision.h.
+    bld(
+        rule='${AUTOREVISION} -f -t h -o ${SRC[0].abspath()} > ${TGT}',
+        source=autorevision_cache_node,
+        target='autorevision.h')
