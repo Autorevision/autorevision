@@ -6,8 +6,8 @@ import waflib
 APPNAME = 'projectname'
 try:
     # Works after the first run
-    VERSION = waflib.Utils.readf('version.txt')
-except:
+    VERSION = waflib.Utils.readf('version.txt')[:-1]
+except IOError:
     pass
 
 
@@ -25,11 +25,12 @@ def build(bld):
 
     # Here we let waf know about the autorevision.cache file.
     autorevision_cache_node = bld.path.make_node('autorevision.cache')
+    version_txt_node = bld.path.make_node('version.txt')
 
     # This is where the cache file is made.
     bld(
         name='autorevision',
-        rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}',
+        rule='${AUTOREVISION} -s VCS_TAG -o ${TGT[0].abspath()}',
         target=autorevision_cache_node,
         always=True,
         update_outputs = True)
@@ -38,10 +39,10 @@ def build(bld):
     bld(
         name='version',
         after='autorevision',
-        rule='autorevision -f -s VCS_TAG -o ${SRC[0].abspath()} | sed -e \'s:v/::\' > ${TGT}',
+        rule='${AUTOREVISION} -f -s VCS_TAG -o ${SRC[0].abspath()} | sed -e \'s:v/::\' > ${TGT}',
         # sed is used to chop the leading v/ off.
         source=autorevision_cache_node,
-        target='version.txt')
+        target=version_txt_node)
 
     # This is where the autorevision.json file is made.
     bld(
