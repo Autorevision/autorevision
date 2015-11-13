@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-APPNAME = 'something'
+APPNAME = 'projectname'
 VERSION = '1.0' # This will be overwritten later.
 
 
@@ -31,7 +31,3 @@ def build(bld):
 		source=autorevision_cache_node,
 		target='autorevision.h')
 
-	bld.program(
-		source='example.cpp',
-		target='app',
-		cxxflags='-std=c++11')
