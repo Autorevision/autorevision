@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import waflib
+
 APPNAME = 'projectname'
-VERSION = waflib.Utils.readf('version.txt')
+try:
+    # Works after the first run
+    VERSION = waflib.Utils.readf('version.txt')
+except:
+    pass
 
 
 def options(opt):
-    opt.load('compiler_cxx')
+    pass
 
 
-def configure(conf):
-    conf.load('compiler_cxx')
+def configure(ctx):
+    ctx.load('Utils')
     # This makes sure that autorevision exists before we call it.
     ctx.find_program('autorevision', var='AUTOREVISION')
 
@@ -18,7 +24,7 @@ def configure(conf):
 def build(bld):
 
     # Here we let waf know about the autorevision.cache file.
-    autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
+    autorevision_cache_node = bld.path.make_node('autorevision.cache')
 
     # This is where the cache file is made.
     bld(
@@ -32,7 +38,8 @@ def build(bld):
     bld(
         name='version',
         after='autorevision',
-        rule='autorevision -f -s VCS_TAG -o ${SRC[0].abspath()} > ${TGT}',
+        rule='autorevision -f -s VCS_TAG -o ${SRC[0].abspath()} | sed -e \'s:v/::\' > ${TGT}',
+        # sed is used to chop the leading v/ off.
         source=autorevision_cache_node,
         target='version.txt')
 
