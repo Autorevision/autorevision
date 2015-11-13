@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 APPNAME = 'something'
-VERSION = ''
+VERSION = '1.0' # This will be overwritten later.
 
 
 def options(opt):
@@ -13,25 +13,20 @@ def configure(conf):
 	conf.load('compiler_cxx')
 	ctx.find_program('autorevision', var='AUTOREVISION')
 
+def dist(ctx):
+	global VERSION
+	VERSION = ctx.cmd_and_log("autorevision -s VCS_TAG -o autorevision.cache", quiet=0).strip()
+
 
 def build(bld):
-	autorevision_cache_node = bld.path.make_node('autorevision.cache')
+	autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
 	bld(
-		name='autorevision',
-		rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}',
-		target=autorevision_cache_node,
-		always=True,
-		update_outputs = True)
-
-	bld(
-		after='autorevision',
 		rule='${AUTOREVISION} -f -t json -o ${SRC} > ${TGT}',
 		source=autorevision_cache_node,
 		target='autorevision.json')
 
 	bld(
-		after='autorevision',
 		rule='${AUTOREVISION} -f -t h -o ${SRC} > ${TGT}',
 		source=autorevision_cache_node,
 		target='autorevision.h')
