@@ -20,7 +20,7 @@ def build(bld):
     # Here we let waf know about the autorevision.cache file.
     autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
-    # Here we make the cache file
+    # This is where the cache file is made.
     bld(
         name='autorevision',
         rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}',
@@ -36,14 +36,14 @@ def build(bld):
         source=autorevision_cache_node,
         target='version.txt')
 
-    # Here we make autorevision.json.
+    # This is where the autorevision.json file is made.
     bld(
         after='autorevision',
         rule='${AUTOREVISION} -f -t json -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.json')
 
-    # Here we make autorevision.h.
+    # This is where the autorevision.h file is made.
     bld(
         after='autorevision',
         rule='${AUTOREVISION} -f -t h -o ${SRC[0].abspath()} > ${TGT}',
