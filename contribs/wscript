@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+APPNAME = 'something'
+VERSION = ''
+
+
+def options(opt):
+	opt.load('compiler_cxx')
+
+
+def configure(conf):
+	conf.load('compiler_cxx')
+
+
+def build(bld):
+	bld(rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}', target=bld.path.make_node('autorevision.cache', always=True)
+
+	bld(rule='autorevision -f -t json -o ${SRC} > ${TGT}', source='autorevision.cache', target='autorevision.json')
+
+	bld(rule='autorevision -f -t h -o ${SRC} > ${TGT}', source='autorevision.cache', target='autorevision.h')
+
+	bld.program(source='example.cpp', target='app', cxxflags='-std=c++11')
+
