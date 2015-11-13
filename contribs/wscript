@@ -14,11 +14,29 @@ def configure(conf):
 
 
 def build(bld):
-	bld(rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}', target=bld.path.make_node('autorevision.cache', always=True)
+	autorevision_cache_node = bld.path.make_node('autorevision.cache')
 
-	bld(rule='autorevision -f -t json -o ${SRC} > ${TGT}', source='autorevision.cache', target='autorevision.json')
+	bld(
+		name='autorevision',
+		rule='autorevision -s VCS_TAG -o ${TGT[0].abspath()}',
+		target=autorevision_cache_node,
+		always=True,
+		update_outputs = True)
 
-	bld(rule='autorevision -f -t h -o ${SRC} > ${TGT}', source='autorevision.cache', target='autorevision.h')
+	bld(
+		after='autorevision',
+		rule='autorevision -f -t json -o ${SRC} > ${TGT}',
+		source=autorevision_cache_node,
+		target='autorevision.json')
 
-	bld.program(source='example.cpp', target='app', cxxflags='-std=c++11')
+	bld(
+		after='autorevision',
+		rule='autorevision -f -t h -o ${SRC} > ${TGT}',
+		source=autorevision_cache_node,
+		target='autorevision.h')
+
+	bld.program(
+		source='example.cpp',
+		target='app',
+		cxxflags='-std=c++11')
 
