@@ -1,17 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import waflib
-
 APPNAME = 'projectname'
 VERSION = '1.0' # This will be overwritten later.
 
 
 def configure(bld):
-    bld.load('Utils')
     # This makes sure that autorevision exists before we call it.
     bld.find_program('autorevision', var='AUTOREVISION')
-    print(bld.path.abspath())
 
 
 def options(bld):
@@ -21,13 +17,12 @@ def options(bld):
 def dist(bld):
     # This is where the cache file is made and VERSION is rewritten.
     global VERSION
-    VERSION = bld.cmd_and_log("autorevision -s VCS_TAG -o autorevision.cache", quiet=0, cwd=bld.path.abspath()).strip()
+    VERSION = bld.cmd_and_log("autorevision -s VCS_TAG -o %s/autorevision.cache" % (bld.path.abspath()), quiet=0, cwd=bld.path.abspath()).strip()
 
 
 def build(bld):
-
+    dist(bld) # Make sure that the cache file is built.
     # Here we let waf know about the autorevision.cache file.
-    dist(bld) # just to update
     autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
     # This is where the autorevision.json file is made.
