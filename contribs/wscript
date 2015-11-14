@@ -15,9 +15,14 @@ def options(bld):
 
 
 def dist(bld):
+    from waflib import ConfigSet
+    try:
+        env = ConfigSet.ConfigSet('build/c4che/_cache.py')
+    except (OSError, IOError):
+        bld.fatal('Project is not configured')
     # This is where the cache file is made and VERSION is rewritten.
     global VERSION
-    VERSION = bld.cmd_and_log("autorevision -s VCS_TAG -o %s/autorevision.cache" % (bld.path.abspath()), quiet=0, cwd=bld.path.abspath()).strip()
+    VERSION = bld.cmd_and_log("%s -s VCS_TAG -o %s/autorevision.cache" % (env.get_flat('AUTOREVISION'), bld.path.abspath()), quiet=0, cwd=bld.path.abspath()).strip()
 
 
 def build(bld):
