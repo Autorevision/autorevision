@@ -119,6 +119,8 @@ fi
 # For git repos
 # shellcheck disable=SC2155
 gitRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(git rev-parse --show-toplevel)"
 
 	VCS_TYPE="git"
@@ -172,10 +174,14 @@ gitRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For hg repos
 hgRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(hg root)"
 
 	VCS_TYPE="hg"
@@ -217,10 +223,14 @@ hgRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For bzr repos
 bzrRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(bzr root)"
 
 	VCS_TYPE="bzr"
@@ -258,11 +268,15 @@ bzrRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For svn repos
 # shellcheck disable=SC2155
 svnRepo() {
+	local oldPath="${PWD}"
+
 	VCS_TYPE="svn"
 
 	case "${PWD}" in
@@ -348,6 +362,8 @@ svnRepo() {
 
 	# Date of the current commit
 	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::' -e 's:Z:-0000:p')"
+
+	cd "${oldPath}"
 }
 
 
