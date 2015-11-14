@@ -4,6 +4,7 @@ Repository head:
   Fix PHP output.
   Use constants array in PHP output.
   Make sure that the cache file gets outputted where expected.
+  Add an example for use with waf.
 
 1.13 @ 2015-07-31:
   Make the man page more reproducible.
