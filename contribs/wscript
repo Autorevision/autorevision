@@ -36,3 +36,15 @@ def build(bld):
         rule='${AUTOREVISION} -f -t h -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.h')
+
+
+def test(bld):
+    # A simple sanity check; requires that you have run build or dist at least once first.
+    from waflib import ConfigSet
+    try:
+        env = ConfigSet.ConfigSet('build/c4che/_cache.py')
+    except (OSError, IOError):
+        bld.fatal('Project is not configured')
+    else:
+        if env.AUTOREVISION:
+            bld.cmd_and_log('%s -f -s VCS_TAG -o %s/autorevision.cache ' %  (env.get_flat('AUTOREVISION'), bld.path.abspath()), cwd=bld.path.abspath())
