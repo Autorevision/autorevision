@@ -4,56 +4,40 @@
 import waflib
 
 APPNAME = 'projectname'
-try:
-    # Works after the first run
-    VERSION = waflib.Utils.readf('version.txt')[:-1]
-except IOError:
-    pass
+VERSION = '1.0' # This will be overwritten later.
 
 
-def options(opt):
-    pass
-
-
-def configure(ctx):
-    ctx.load('Utils')
+def configure(bld):
+    bld.load('Utils')
     # This makes sure that autorevision exists before we call it.
-    ctx.find_program('autorevision', var='AUTOREVISION')
+    bld.find_program('autorevision', var='AUTOREVISION')
+    print(bld.path.abspath())
+
+
+def options(bld):
+    pass
+
+
+def dist(bld):
+    # This is where the cache file is made and VERSION is rewritten.
+    global VERSION
+    VERSION = bld.cmd_and_log("autorevision -s VCS_TAG -o autorevision.cache", quiet=0, cwd=bld.path.abspath()).strip()
 
 
 def build(bld):
 
     # Here we let waf know about the autorevision.cache file.
-    autorevision_cache_node = bld.path.make_node('autorevision.cache')
-    version_txt_node = bld.path.make_node('version.txt')
-
-    # This is where the cache file is made.
-    bld(
-        name='autorevision',
-        rule='${AUTOREVISION} -s VCS_TAG -o ${TGT[0].abspath()}',
-        target=autorevision_cache_node,
-        always=True,
-        update_outputs = True)
-
-    # This is where the version.txt file is created.
-    bld(
-        name='version',
-        after='autorevision',
-        rule='${AUTOREVISION} -f -s VCS_TAG -o ${SRC[0].abspath()} | sed -e \'s:v/::\' > ${TGT}',
-        # sed is used to chop the leading v/ off.
-        source=autorevision_cache_node,
-        target=version_txt_node)
+    dist(bld) # just to update
+    autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
     # This is where the autorevision.json file is made.
     bld(
-        after='autorevision',
         rule='${AUTOREVISION} -f -t json -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.json')
 
     # This is where the autorevision.h file is made.
     bld(
-        after='autorevision',
         rule='${AUTOREVISION} -f -t h -o ${SRC[0].abspath()} > ${TGT}',
         source=autorevision_cache_node,
         target='autorevision.h')
