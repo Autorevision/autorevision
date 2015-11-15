@@ -22,11 +22,12 @@ def dist(bld):
         bld.fatal('Project is not configured')
     # This is where the cache file is made and VERSION is rewritten.
     global VERSION
-    VERSION = bld.cmd_and_log("%s -s VCS_TAG -o %s/autorevision.cache" % (env.get_flat('AUTOREVISION'), bld.path.abspath()), quiet=0, cwd=bld.path.abspath()).strip()
+    VERSION = bld.cmd_and_log("%s -s VCS_TAG -o %s/autorevision.cache " % (env.get_flat('AUTOREVISION'), bld.path.abspath()), cwd=bld.path.abspath()).strip()
 
 
 def build(bld):
-    dist(bld) # Make sure that the cache file is built.
+    # Make sure that the cache file is built.
+    dist(bld)
     # Here we let waf know about the autorevision.cache file.
     autorevision_cache_node = bld.path.find_or_declare('autorevision.cache')
 
@@ -44,12 +45,5 @@ def build(bld):
 
 
 def test(bld):
-    # A simple sanity check; requires that you have run build or dist at least once first.
-    from waflib import ConfigSet
-    try:
-        env = ConfigSet.ConfigSet('build/c4che/_cache.py')
-    except (OSError, IOError):
-        bld.fatal('Project is not configured')
-    else:
-        if env.AUTOREVISION:
-            bld.cmd_and_log('%s -f -s VCS_TAG -o %s/autorevision.cache ' %  (env.get_flat('AUTOREVISION'), bld.path.abspath()), cwd=bld.path.abspath())
+    # A simple sanity check.
+    dist(bld)
