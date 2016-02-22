@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.14 @ 2016-02-22:
   Fix PHP output.
   Use constants array in PHP output.
   Make sure that the cache file gets outputted where expected.
