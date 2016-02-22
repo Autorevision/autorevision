@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2012 - 2014 dak180 and contributors. See
+# Copyright (c) 2012 - 2016 dak180 and contributors. See
 # http://opensource.org/licenses/mit-license.php or the included
 # COPYING.md for licence terms.
 #
