@@ -117,7 +117,7 @@ fi
 
 # Functions to extract data from different repo types.
 # For git repos
-# shellcheck disable=SC2155
+# shellcheck disable=SC2039,SC2164,SC2155
 gitRepo() {
 	local oldPath="${PWD}"
 
@@ -179,6 +179,7 @@ gitRepo() {
 }
 
 # For hg repos
+# shellcheck disable=SC2039,SC2164
 hgRepo() {
 	local oldPath="${PWD}"
 
@@ -228,6 +229,7 @@ hgRepo() {
 }
 
 # For bzr repos
+# shellcheck disable=SC2039,SC2164
 bzrRepo() {
 	local oldPath="${PWD}"
 
@@ -273,7 +275,7 @@ bzrRepo() {
 }
 
 # For svn repos
-# shellcheck disable=SC2155
+# shellcheck disable=SC2039,SC2164,SC2155
 svnRepo() {
 	local oldPath="${PWD}"
 
@@ -860,7 +862,7 @@ $([ "${VCS_WC_MODIFIED}" ] && echo "%define vcs_wc_modified		${VCS_WC_MODIFIED}"
 EOF
 }
 
-# shellcheck disable=SC2155
+# shellcheck disable=SC2155,SC2039
 hppOutput() {
 	local NAMESPACE="$(echo "${VCS_BASENAME}" | sed -e 's:_::g' | tr '[:lower:]' '[:upper:]')"
 	cat > "${TARGETFILE}" << EOF
@@ -946,6 +948,7 @@ EOF
 
 # Helper functions
 # Count path segments
+# shellcheck disable=SC2039
 pathSegment() {
 	local pathz="${1}"
 	local depth="0"
@@ -960,6 +963,7 @@ pathSegment() {
 }
 
 # Largest of four numbers
+# shellcheck disable=SC2039
 multiCompare() {
 	local larger="${1}"
 	local numA="${2}"
@@ -972,8 +976,8 @@ multiCompare() {
 	echo "${larger}"
 }
 
-# shellcheck disable=SC2155
 # Test for repositories
+# shellcheck disable=SC2155,SC2039
 repoTest() {
 	REPONUM="0"
 	if [ ! -z "$(git rev-parse HEAD 2>/dev/null)" ]; then
@@ -1034,6 +1038,7 @@ repoTest() {
 
 
 # Detect which repos we are in and gather data.
+# shellcheck source=/dev/null
 if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# When requested only read from the cache to populate our symbols.
 	. "${CACHEFILE}"
