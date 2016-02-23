@@ -40,8 +40,7 @@ SOURCES = \
 	control
 
 EXTRA_DIST = \
-	contribs/logo.svg \
-	contribs/autorevision.mk \
+	contribs \
 	AUTHORS.txt \
 	autorevision.cache
 
@@ -86,7 +85,7 @@ autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
 autorevision-$(VERS).tgz: $(SOURCES) all auth
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
-	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz autorevision-$(VERS)
+	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz --exclude=".DS_Store" autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 
 install: all
