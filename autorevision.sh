@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Copyright (c) 2012 - 2016 dak180 and contributors. See
-# http://opensource.org/licenses/mit-license.php or the included
+# https://opensource.org/licenses/mit-license.php or the included
 # COPYING.md for licence terms.
 #
 # autorevision - extracts metadata about the head version from your

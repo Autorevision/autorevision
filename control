@@ -13,7 +13,7 @@ Description: Extracts metadata about the current revision from your repository.
 
 XBS-Github-URL: https://github.com/Autorevision/autorevision
 
-XBS-Ohloh-URL: http://www.ohloh.net/p/autorevision
+XBS-Ohloh-URL: https://www.openhub.net/p/autorevision
 
 XBS-Destinations: freecode
 
