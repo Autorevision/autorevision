@@ -174,10 +174,19 @@ gitRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
+	VCS_DATE="$(TZ=UTC git show -s --date=iso-strict-local --pretty=format:%ad | sed -e 's|+00:00|Z|')"
+	if [ -z "${VCS_DATE}" ]; then
+		echo "warning: Action stamps require git version 2.7+." 1>&2
+		VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
+		local ASdis="1"
+	fi
 
 	# Action Stamp
-	VCS_ACTION_STAMP="${VCS_DATE}!$(git log -1 --pretty=format:%cE)"
+	if [ -z "${ASdis}" ]; then
+		VCS_ACTION_STAMP="${VCS_DATE}!$(git show -s --pretty=format:%cE)"
+	else
+		VCS_ACTION_STAMP=""
+	fi
 
 	cd "${oldPath}"
 }

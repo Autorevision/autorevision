@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Add support for action stamps.
+
 1.14 @ 2016-02-22:
   Fix PHP output.
   Use constants array in PHP output.
