@@ -8,15 +8,16 @@ namespace autorevision
 	const std::string VCS_TYPE		= "git";
 	const std::string VCS_BASENAME	= "autorevision";
 	const std::string VCS_UUID		= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-	const int VCS_NUM				= 292;
-	const std::string VCS_DATE		= "2015-07-31T21:15:47-0400";
+	const int VCS_NUM				= 336;
+	const std::string VCS_DATE		= "2016-02-25T03:38:41Z";
 	const std::string VCS_BRANCH	= "master";
-	const std::string VCS_TAG		= "v/1.12";
-	const int VCS_TICK				= 9;
+	const std::string VCS_TAG		= "v/1.14";
+	const int VCS_TICK				= 11;
 	const std::string VCS_EXTRA		= "";
 
-	const std::string VCS_FULL_HASH		= "56d31c116f8239ae38f2c251946cd5811c47afe1";
-	const std::string VCS_SHORT_HASH	= "56d31c1";
+	const std::string VCS_ACTION_STAMP	= "2016-02-25T03:38:41Z!dak180@users.sourceforge.net";
+	const std::string VCS_FULL_HASH		= "a37506ae793f6fbde92936b76aa99341ca4c5199";
+	const std::string VCS_SHORT_HASH	= "a37506a";
 
 	const int VCS_WC_MODIFIED			= 0;
 }

@@ -2,15 +2,16 @@
 (def VCS_TYPE        "git")
 (def VCS_BASENAME    "autorevision")
 (def VCS_UUID        "da2830f81fec4c6ebce8ebf23f35b0e6b066c149")
-(def VCS_NUM         289)
-(def VCS_DATE        "2015-07-30T20:19:11-0400")
+(def VCS_NUM         336)
+(def VCS_DATE        "2016-02-25T03:38:41Z")
 (def VCS_BRANCH      "master")
-(def VCS_TAG         "v/1.12")
-(def VCS_TICK        6)
+(def VCS_TAG         "v/1.14")
+(def VCS_TICK        11)
 (def VCS_EXTRA       "")
 
-(def VCS_FULL_HASH   "18ff79342483d3b3f839b6c5968194a23f5263b1")
-(def VCS_SHORT_HASH  "18ff793")
+(def VCS_ACTION_STAMP   "2016-02-25T03:38:41Z!dak180@users.sourceforge.net")
+(def VCS_FULL_HASH      "a37506ae793f6fbde92936b76aa99341ca4c5199")
+(def VCS_SHORT_HASH     "a37506a")
 
 (def VCS_WC_MODIFIED false)
 ;; end
