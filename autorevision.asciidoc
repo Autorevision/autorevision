@@ -170,6 +170,13 @@ Empty under Subversion.
 A symbol set aside specifically to be set by the user through the
 environment or via scripts.
 
+*VCS_ACTION_STAMP*::
+An "action stamp" consists of an RFC3339 timestamp in Zulu time,
+followed by an exclamation point, followed by an RFC822 address
+(technically, an "addr-spec" as defined in 6.1). +
+For svn the second part is simply the author name. +
+Not currently implemented for bzr.
+
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
 
