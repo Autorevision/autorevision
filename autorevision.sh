@@ -177,7 +177,7 @@ gitRepo() {
 	VCS_DATE="$(TZ=UTC git show -s --date=iso-strict-local --pretty=format:%ad | sed -e 's|+00:00|Z|')"
 	if [ -z "${VCS_DATE}" ]; then
 		echo "warning: Action stamps require git version 2.7+." 1>&2
-		VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
+		VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::' -e 's|+00:00|Z|')"
 		local ASdis="1"
 	fi
 
@@ -236,7 +236,7 @@ hgRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::')"
+	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::' -e 's|+00:00|Z|')"
 
 	# Action Stamp
 	VCS_ACTION_STAMP="$(TZ=UTC hg log -r "${VCS_NUM}" -l 1 --template '{date|localdate|rfc3339date}\n' 2>/dev/null | sed -e 's|+00:00|Z|')!$(hg log -r "${VCS_NUM}" -l 1 --template '{author|email}\n' 2>/dev/null)"
@@ -383,10 +383,10 @@ svnRepo() {
 	VCS_TICK=""
 
 	# Date of the current commit
-	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::' -e 's:Z:-0000:p')"
+	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::p')"
 
 	# Action Stamp
-	VCS_ACTION_STAMP="${VCS_DATE}!$(svn log --xml -l 1 -r "${VCS_SHORT_HASH}" | sed -n -e 's:<author>::' -e 's:</author>::')"
+	VCS_ACTION_STAMP="${VCS_DATE}!$(svn log --xml -l 1 -r "${VCS_SHORT_HASH}" | sed -n -e 's:<author>::' -e 's:</author>::p')"
 
 	cd "${oldPath}"
 }
