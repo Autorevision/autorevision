@@ -245,4 +245,5 @@ https://autorevision.github.io/
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
 support, git and hg extraction. +
 Eric S. Raymond <esr@thyrsus.com>: Python/Perl/lua/m4 support, svn and
-bzr extraction, git-svn support, CLI design, man page.
+bzr extraction, git-svn support, CLI design, man page. +
+See AUTHORS.txt for a full list in order of number of contributions.
