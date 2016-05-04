@@ -11,7 +11,7 @@ VERS := $(shell autorevision -s VCS_TAG -o ./autorevision.cache)
 
 
 SOURCES = \
-	autorevision.h \
+	autorevision.c \
 	autorevision.json
 
 EXTRA_DIST = \
@@ -32,8 +32,8 @@ autorevision.json: autorevision.cache
 	autorevision -f -t json -o ./autorevision.cache > autorevision.json
 
 
-# Generate C/C++ header output
-cpp: autorevision.h
+# Generate C/C++ source output
+cpp: autorevision.c
 
-autorevision.h: autorevision.cache
-	autorevision -f -t h -o ./autorevision.cache > autorevision.h
+autorevision.c: autorevision.cache
+	autorevision -f -t c -o ./autorevision.cache > autorevision.c
