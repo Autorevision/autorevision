@@ -3,6 +3,7 @@
 # List of formats (short names).
 read -d '' formats << EOF
 clojure
+c
 h
 hpp
 ini

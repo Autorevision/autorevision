@@ -47,6 +47,9 @@ an unpacked tarball that includes the cache file.
 *clojure*::
 A clojure source file setting clojure variables.
 
+*c*::
+A C/C++ source file.
+
 *h*::
 A header file suitable for C/C++.
 
