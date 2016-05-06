@@ -28,6 +28,7 @@ Make sure that you commit an example of the output into the `example` directory.
 Other Conventions
 -----------------
 
+* Signed commits are preferred and signed tags are required.
 * Tabs are preferred to spaces.
 * Do not forget to update the documentation.
 * You generally should *not* assume that any extras, extensions or otherwise non-default commands are available.
