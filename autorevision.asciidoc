@@ -48,7 +48,9 @@ an unpacked tarball that includes the cache file.
 A clojure source file setting clojure variables.
 
 *c*::
-A C/C++ source file.
+A C/C++ source file. +
+`autorevision_declr.h` in the contribs dir is provided for use with
+this output.
 
 *h*::
 A header file suitable for C/C++.

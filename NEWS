@@ -2,6 +2,7 @@
 
 Repository head:
   Add support for action stamps.
+  Add support for plain c/c++ source output.
 
 1.14 @ 2016-02-22:
   Fix PHP output.
