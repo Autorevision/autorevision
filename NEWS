@@ -3,6 +3,7 @@
 Repository head:
   Add support for action stamps.
   Add support for plain c/c++ source output.
+  Activate mq as needed for hg. 
 
 1.14 @ 2016-02-22:
   Fix PHP output.
