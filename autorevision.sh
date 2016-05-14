@@ -1029,7 +1029,7 @@ pathSegment() {
 	local depth="0"
 
 	if [ ! -z "${pathz}" ]; then
-		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "." ] && [ ! "${pathz}" = "C:" ]; do
+		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "." ] && [ ! "${pathz}" = "$(echo "${pathz}" | sed -e 's:/::')" ]; do
 			pathz="$(dirname "${pathz}")"
 			depth="$((depth+1))"
 		done
