@@ -28,7 +28,7 @@ The following are valid output types:
 	ini			= INI file
 	java			= Java file
 	javaprop		= Java properties file
-    csharp          = CSharp properties file
+	csharp		= CSharp properties file
 	js			= javascript file
 	json			= JSON file
 	lua			= Lua file
