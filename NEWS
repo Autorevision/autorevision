@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.15 @ 2016-08-08:
   Add support for action stamps.
   Add support for plain c/c++ source output.
   Activate mq as needed for hg.
