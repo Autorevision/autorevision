@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # List of formats (short names).
 read -d '' formats << EOF
