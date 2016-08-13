@@ -946,6 +946,8 @@ hppOutput() {
 #ifndef ${NAMESPACE}_AUTOREVISION_H
 #define ${NAMESPACE}_AUTOREVISION_H
 
+#include <string>
+
 namespace $(echo "${NAMESPACE}" | tr '[:upper:]' '[:lower:]')
 {
 	const std::string VCS_TYPE		= "${VCS_TYPE}";
