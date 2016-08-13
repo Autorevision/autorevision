@@ -38,4 +38,4 @@ Other Conventions
 * All error messages should be prefixed with `error: `.
 * All warning messages should be prefixed with `warning: `.
 * Try to avoid stderr output from any subcommand leaking through.
-* Test using [http://www.shellcheck.net/](http://www.shellcheck.net/).
+* Test using [https://www.shellcheck.net/](https://www.shellcheck.net/).
