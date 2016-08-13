@@ -110,7 +110,7 @@ Ruby.
 
 *swift*::
 A Swift source file setting Swift global constants. +
-Unless set *VCS_EXTRA* and any symbols that are are missing because of
+Unless set *VCS_EXTRA* and any symbols that are missing because of
 repository support are set to `nil`.
 
 *tex*::
@@ -150,7 +150,7 @@ format, including seconds.
 The name of the branch of the commit graph that was selected when
 autoversion was run. +
 Under git, this will normally be the shortname of the current branch
-(the asterisked line in the output of of "git branch") except that
+(the asterisked line in the output of "git branch") except that
 when the branch doesn't have a shortname it will be a full
 refspec. +
 Under hg the feature that is called 'branches' is actually a sort of
