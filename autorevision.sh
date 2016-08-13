@@ -739,6 +739,7 @@ jsonOutput() {
 	esac
 	cat > "${TARGETFILE}" << EOF
 {
+	"_comment": "${GENERATED_HEADER}",
 	"VCS_TYPE": "${VCS_TYPE}",
 	"VCS_BASENAME": "${VCS_BASENAME}",
 	"VCS_UUID": "${VCS_UUID}",
@@ -817,6 +818,7 @@ EOF
 # For m4 output
 m4Output() {
 	cat > "${TARGETFILE}" << EOF
+dnl ${GENERATED_HEADER}
 define(\`VCS_TYPE', \`${VCS_TYPE}')dnl
 define(\`VCS_BASENAME', \`${VCS_BASENAME}')dnl
 define(\`VCS_UUID', \`${VCS_UUID}')dnl
