@@ -606,6 +606,7 @@ plOutput() {
 \$VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
 
 # end
+1;
 EOF
 }
 
