@@ -211,6 +211,9 @@ be used in the same invocation.
 *-o* '<cache-file>'::
 Sets the name of the cache file.
 
+*-O* '<output-file>'::
+Sets the name of a file to write output to, instead of using stdout.
+
 *-f*::
 Forces the use of cache data even when in a repo; useful for speeding
 up subsequent runs if more than one output format is needed.
