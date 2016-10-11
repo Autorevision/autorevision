@@ -10,11 +10,14 @@
 # Usage message.
 arUsage() {
 	cat > "/dev/stderr" << EOF
-usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
+usage: autorevision {-t output-type | -s symbol} \\
+			[-o cache-file [-f] ] [-O output-file ] [-V]
+
 	Options include:
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
+	-O output-file		= specify output file, instead of stdout
 	-f			= force the use of cache data
 	-U			= check for untracked files in svn
 	-V			= emit version and exit
@@ -66,13 +69,16 @@ EOF
 # Config
 ARVERSION="&&ARVERSION&&"
 TARGETFILE="/dev/stdout"
-while getopts ":t:o:s:VfU" OPTION; do
+while getopts ":t:o:O:s:VfU" OPTION; do
 	case "${OPTION}" in
 		t)
 			AFILETYPE="${OPTARG}"
 		;;
 		o)
 			CACHEFILE="${OPTARG}"
+		;;
+		O)
+			TARGETFILE="${OPTARG}"
 		;;
 		f)
 			CACHEFORCE="1"
