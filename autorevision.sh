@@ -45,6 +45,7 @@ The following are valid output types:
 	swift			= Swift file
 	tex			= (La)TeX file
 	xcode			= Header useful for populating info.plist files
+	cmake 		= CMake file
 
 
 The following are valid symbols:
@@ -1071,6 +1072,30 @@ VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
 EOF
 }
 
+cmakeOutput() {
+	cat > "${TARGETFILE}" << EOF
+# ${GENERATED_HEADER}
+
+set(VCS_TYPE ${VCS_TYPE})
+set(VCS_BASENAME ${VCS_BASENAME})
+set(VCS_UUID ${VCS_UUID})
+set(VCS_NUM ${VCS_NUM})
+set(VCS_DATE ${VCS_DATE})
+set(VCS_BRANCH ${VCS_BRANCH})
+set(VCS_TAG ${VCS_TAG})
+set(VCS_TICK ${VCS_TICK})
+set(VCS_EXTRA ${VCS_EXTRA})
+
+set(VCS_ACTION_STAMP ${VCS_ACTION_STAMP})
+set(VCS_FULL_HASH ${VCS_FULL_HASH})
+set(VCS_SHORT_HASH ${VCS_SHORT_HASH})
+
+set(VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
+
+# end
+EOF
+}
+
 
 # Helper functions
 # Count path segments
@@ -1268,6 +1293,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		matlabOutput
 	elif [ "${AFILETYPE}" = "octave" ]; then
 		octaveOutput
+	elif [ "${AFILETYPE}" = "cmake" ]; then
+		cmakeOutput
 	else
 		echo "error: Not a valid output type." 1>&2
 		exit 1
