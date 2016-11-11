@@ -846,6 +846,9 @@ texOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
+	if [ "${EXTRA_NAME}" = "VCS_EXTRA" ]; then
+		EXTRA_NAME="vcsExtra"
+	fi
 	tee << EOF
 % ${GENERATED_HEADER}
 \def \vcsType {${VCS_TYPE}}
@@ -856,7 +859,7 @@ texOutput() {
 \def \vcsBranch {${VCS_BRANCH}}
 \def \vcsTag {${VCS_TAG}}
 \def \vcsTick {${VCS_TICK}}
-\def \${EXTRA_NAME} {${VCS_EXTRA}}
+\def \\${EXTRA_NAME} {${VCS_EXTRA}}
 \def \vcsACTIONSTAMP {${VCS_ACTION_STAMP}}
 \def \vcsFullHash {${VCS_FULL_HASH}}
 \def \vcsShortHash {${VCS_SHORT_HASH}}
