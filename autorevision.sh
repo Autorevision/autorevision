@@ -9,7 +9,7 @@
 
 # Usage message.
 arUsage() {
-	cat >&2 << EOF
+	tee >&2 << EOF
 usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	Options include:
 	-t output-type		= specify output type
@@ -396,7 +396,7 @@ svnRepo() {
 # Functions to output data in different formats.
 # For bash output
 shOutput() {
-	cat <<EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 
 VCS_TYPE="${VCS_TYPE}"
@@ -421,7 +421,7 @@ EOF
 
 # For source C output
 cOutput() {
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 
 const char *VCS_TYPE         = "${VCS_TYPE}";
@@ -446,7 +446,7 @@ EOF
 
 # For header output
 hOutput() {
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -475,7 +475,7 @@ EOF
 
 # A header output for use with xcode to populate info.plist strings
 xcodeOutput() {
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 #ifndef AUTOREVISION_H
 #define AUTOREVISION_H
@@ -531,7 +531,7 @@ swiftOutput() {
 	else
 		VCS_ACTION_STAMP="\"${VCS_ACTION_STAMP}\""
 	fi
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 
 let VCS_TYPE			= "${VCS_TYPE}"
@@ -560,7 +560,7 @@ pyOutput() {
 		0) VCS_WC_MODIFIED="False" ;;
 		1) VCS_WC_MODIFIED="True" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 
 VCS_TYPE = "${VCS_TYPE}"
@@ -585,7 +585,7 @@ EOF
 
 # For Perl output
 plOutput() {
-	cat << EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 
 \$VCS_TYPE = '${VCS_TYPE}';
@@ -615,7 +615,7 @@ luaOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 -- ${GENERATED_HEADER}
 
 VCS_TYPE = "${VCS_TYPE}"
@@ -644,7 +644,7 @@ phpOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 <?php
 # ${GENERATED_HEADER}
 
@@ -675,7 +675,7 @@ iniOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 ; ${GENERATED_HEADER}
 [VCS]
 VCS_TYPE = "${VCS_TYPE}"
@@ -701,7 +701,7 @@ jsOutput() {
 		1) VCS_WC_MODIFIED="true" ;;
 		0) VCS_WC_MODIFIED="false" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 /** ${GENERATED_HEADER} */
 
 var autorevision = {
@@ -737,7 +737,7 @@ jsonOutput() {
 		1) VCS_WC_MODIFIED="true" ;;
 		0) VCS_WC_MODIFIED="false" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 {
 	"_comment": "${GENERATED_HEADER}",
 	"VCS_TYPE": "${VCS_TYPE}",
@@ -765,7 +765,7 @@ javaOutput() {
 		1) VCS_WC_MODIFIED="true" ;;
 		0) VCS_WC_MODIFIED="false" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 
 public class autorevision {
@@ -794,7 +794,7 @@ javapropOutput() {
 		1) VCS_WC_MODIFIED="true" ;;
 		0) VCS_WC_MODIFIED="false" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 
 VCS_TYPE=${VCS_TYPE}
@@ -817,7 +817,7 @@ EOF
 
 # For m4 output
 m4Output() {
-	cat <<EOF
+	tee << EOF
 dnl ${GENERATED_HEADER}
 define(\`VCS_TYPE', \`${VCS_TYPE}')dnl
 define(\`VCS_BASENAME', \`${VCS_BASENAME}')dnl
@@ -841,7 +841,7 @@ texOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 % ${GENERATED_HEADER}
 \def \vcsType {${VCS_TYPE}}
 \def \vcsBasename {${VCS_BASENAME}}
@@ -866,7 +866,7 @@ schemeOutput() {
 		0) VCS_WC_MODIFIED="#f" ;;
 		1) VCS_WC_MODIFIED="#t" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 ;; ${GENERATED_HEADER}
 (define VCS_TYPE        "${VCS_TYPE}")
 (define VCS_BASENAME    "${VCS_BASENAME}")
@@ -893,7 +893,7 @@ clojureOutput() {
 		0) VCS_WC_MODIFIED="false" ;;
 		1) VCS_WC_MODIFIED="true" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 ;; ${GENERATED_HEADER}
 (def VCS_TYPE        "${VCS_TYPE}")
 (def VCS_BASENAME    "${VCS_BASENAME}")
@@ -916,7 +916,7 @@ EOF
 
 # For rpm spec file output
 rpmOutput() {
-	cat <<EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 $([ "${VCS_TYPE}" ] && echo "%define vcs_type		${VCS_TYPE}")
 $([ "${VCS_BASENAME}" ] && echo "%define vcs_basename		${VCS_BASENAME}")
@@ -940,7 +940,7 @@ EOF
 # shellcheck disable=SC2155,SC2039
 hppOutput() {
 	local NAMESPACE="$(echo "${VCS_BASENAME}" | sed -e 's:_::g' | tr '[:lower:]' '[:upper:]')"
-	cat <<EOF
+	tee << EOF
 /* ${GENERATED_HEADER} */
 
 #ifndef ${NAMESPACE}_AUTOREVISION_H
@@ -978,7 +978,7 @@ matlabOutput() {
 		0) VCS_WC_MODIFIED="FALSE" ;;
 		1) VCS_WC_MODIFIED="TRUE" ;;
 	esac
-	cat <<EOF
+	tee << EOF
 % ${GENERATED_HEADER}
 
 VCS_TYPE = '${VCS_TYPE}';
@@ -1002,7 +1002,7 @@ EOF
 }
 
 octaveOutput() {
-	cat <<EOF
+	tee << EOF
 % ${GENERATED_HEADER}
 
 VCS_TYPE = '${VCS_TYPE}';
@@ -1226,7 +1226,7 @@ fi
 
 # If requested, make a cache file.
 if [ ! -z "${CACHEFILE}" ] && [ ! "${CACHEFORCE}" = "1" ]; then
-	shOutput >"${CACHEFILE}.tmp"
+	shOutput > "${CACHEFILE}.tmp"
 
 	# Check to see if there have been any actual changes.
 	if [ ! -f "${CACHEFILE}" ]; then
