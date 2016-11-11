@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+	Try to eliminate stray error output.
+
 1.15 @ 2016-08-08:
   Add support for action stamps.
   Add support for plain c/c++ source output.
