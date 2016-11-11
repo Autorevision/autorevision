@@ -4,9 +4,9 @@
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
 
-*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-U*]
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
 
 *autorevision* *-V*
 
@@ -210,6 +210,10 @@ be used in the same invocation.
 
 *-o* '<cache-file>'::
 Sets the name of the cache file.
+
+*-e* '<name>'::
+Sets the output name of *VCS_EXTRA* +
+Defaults to `VCS_EXTRA`.
 
 *-f*::
 Forces the use of cache data even when in a repo; useful for speeding
