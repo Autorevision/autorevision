@@ -1096,12 +1096,15 @@ repoTest() {
 		local svnPath="$(svn info --xml 2>/dev/null | sed -n -e "s:${stringz}::" -e "s:${stringx}::p")"
 		# An old enough svn will not be able give us a path; default
 		# to 1 for that case.
-		if [ -z  "${svnPath}" ]; then
-			local svnDepth="1"
-		else
+		if [ ! -z "${svnPath}" ]; then
 			local svnDepth="$(pathSegment "${svnPath}")"
+			REPONUM="$((REPONUM+1))"
+		elif [ -z "${svnPath}" ] && [ -d ".svn" ]; then
+			local svnDepth="1"
+			REPONUM="$((REPONUM+1))"
+		else
+			local svnDepth="0"
 		fi
-		REPONUM="$((REPONUM+1))"
 	else
 		local svnDepth="0"
 	fi
