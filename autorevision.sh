@@ -1069,28 +1069,28 @@ multiCompare() {
 # shellcheck disable=SC2155,SC2039
 repoTest() {
 	REPONUM="0"
-	if command -v git &>/dev/null; then
+	if command -v git > /dev/null 2>&1; then
 		local gitPath="$(git rev-parse --show-toplevel)"
 		local gitDepth="$(pathSegment "${gitPath}")"
 		REPONUM="$((REPONUM+1))"
 	else
 		local gitDepth="0"
 	fi
-	if command -v hg &>/dev/null; then
+	if command -v hg > /dev/null 2>&1; then
 		local hgPath="$(hg root 2>/dev/null)"
 		local hgDepth="$(pathSegment "${hgPath}")"
 		REPONUM="$((REPONUM+1))"
 	else
 		local hgDepth="0"
 	fi
-	if command -v bzr &>/dev/null; then
+	if command -v bzr > /dev/null 2>&1; then
 		local bzrPath="$(bzr root 2>/dev/null)"
 		local bzrDepth="$(pathSegment "${bzrPath}")"
 		REPONUM="$((REPONUM+1))"
 	else
 		local bzrDepth="0"
 	fi
-	if command -v svn &>/dev/null; then
+	if command -v svn > /dev/null 2>&1; then
 		local stringz="<wcroot-abspath>"
 		local stringx="</wcroot-abspath>"
 		local svnPath="$(svn info --xml 2>/dev/null | sed -n -e "s:${stringz}::" -e "s:${stringx}::p")"
