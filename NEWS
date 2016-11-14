@@ -1,9 +1,9 @@
 			autorevision history
 
 Repository head:
-	Try to eliminate stray error output.
-	Allow the VCS_EXTRA symbol to be renamed.
-	Add an C# output.
+  Try to eliminate stray error output.
+  Allow the VCS_EXTRA symbol to be renamed.
+  Add an C# output.
 
 1.15 @ 2016-08-08:
   Add support for action stamps.
