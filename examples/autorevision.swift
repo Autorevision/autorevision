@@ -3,16 +3,16 @@
 let VCS_TYPE			= "git"
 let VCS_BASENAME		= "autorevision"
 let VCS_UUID:	String?	= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149"
-let VCS_NUM:	Int		= 336
-let VCS_DATE			= "2016-02-25T03:38:41Z"
+let VCS_NUM:	Int		= 376
+let VCS_DATE			= "2016-11-14T20:27:54Z"
 let VCS_BRANCH:	String	= "master"
-let VCS_TAG:	String?	= "v/1.14"
-let VCS_TICK:	Int?	= 11
+let VCS_TAG:	String?	= "v/1.15"
+let VCS_TICK:	Int?	= 25
 let VCS_EXTRA:	String?	= nil
 
-let VCS_ACTION_STAMP:	String?	= "2016-02-25T03:38:41Z!dak180@users.sourceforge.net"
-let VCS_FULL_HASH:		String	= "a37506ae793f6fbde92936b76aa99341ca4c5199"
-let VCS_SHORT_HASH:		String	= "a37506a"
+let VCS_ACTION_STAMP:	String?	= "2016-11-14T20:27:54Z!dak180@users.sourceforge.net"
+let VCS_FULL_HASH:		String	= "d9b6a03e53385f8fd256c1cff629e92f28da0c4d"
+let VCS_SHORT_HASH:		String	= "d9b6a03"
 
 let VCS_WC_MODIFIED:	Bool	= false
 

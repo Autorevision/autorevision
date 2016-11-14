@@ -3,21 +3,23 @@
 #ifndef AUTOREVISION_AUTOREVISION_H
 #define AUTOREVISION_AUTOREVISION_H
 
+#include <string>
+
 namespace autorevision
 {
 	const std::string VCS_TYPE		= "git";
 	const std::string VCS_BASENAME	= "autorevision";
 	const std::string VCS_UUID		= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-	const int VCS_NUM				= 336;
-	const std::string VCS_DATE		= "2016-02-25T03:38:41Z";
+	const int VCS_NUM				= 376;
+	const std::string VCS_DATE		= "2016-11-14T20:27:54Z";
 	const std::string VCS_BRANCH	= "master";
-	const std::string VCS_TAG		= "v/1.14";
-	const int VCS_TICK				= 11;
+	const std::string VCS_TAG		= "v/1.15";
+	const int VCS_TICK				= 25;
 	const std::string VCS_EXTRA		= "";
 
-	const std::string VCS_ACTION_STAMP	= "2016-02-25T03:38:41Z!dak180@users.sourceforge.net";
-	const std::string VCS_FULL_HASH		= "a37506ae793f6fbde92936b76aa99341ca4c5199";
-	const std::string VCS_SHORT_HASH	= "a37506a";
+	const std::string VCS_ACTION_STAMP	= "2016-11-14T20:27:54Z!dak180@users.sourceforge.net";
+	const std::string VCS_FULL_HASH		= "d9b6a03e53385f8fd256c1cff629e92f28da0c4d";
+	const std::string VCS_SHORT_HASH	= "d9b6a03";
 
 	const int VCS_WC_MODIFIED			= 0;
 }

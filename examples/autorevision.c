@@ -3,17 +3,17 @@
 const char *VCS_TYPE         = "git";
 const char *VCS_BASENAME     = "autorevision";
 const char *VCS_UUID         = "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-const int VCS_NUM            = 339;
-const char *VCS_DATE         = "2016-03-16T19:00:26Z";
+const int VCS_NUM            = 376;
+const char *VCS_DATE         = "2016-11-14T20:27:54Z";
 const char *VCS_BRANCH       = "master";
-const char *VCS_TAG          = "v/1.14";
-const int VCS_TICK           = 14;
+const char *VCS_TAG          = "v/1.15";
+const int VCS_TICK           = 25;
 const char *VCS_EXTRA        = "";
 
-const char *VCS_ACTION_STAMP = "2016-03-16T19:00:26Z!dak180@users.sourceforge.net";
-const char *VCS_FULL_HASH    = "7159703f9c5d2bc7bd7236b4560c2474f019b835";
-const char *VCS_SHORT_HASH   = "7159703";
+const char *VCS_ACTION_STAMP = "2016-11-14T20:27:54Z!dak180@users.sourceforge.net";
+const char *VCS_FULL_HASH    = "d9b6a03e53385f8fd256c1cff629e92f28da0c4d";
+const char *VCS_SHORT_HASH   = "d9b6a03";
 
-const int VCS_WC_MODIFIED     = 1;
+const int VCS_WC_MODIFIED     = 0;
 
 /* end */

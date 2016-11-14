@@ -4,16 +4,16 @@ public class autorevision {
     public static final String VCS_TYPE = "git";
     public static final String VCS_BASENAME = "autorevision";
     public static final String VCS_UUID = "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-    public static final long VCS_NUM = 336;
-    public static final String VCS_DATE = "2016-02-25T03:38:41Z";
+    public static final long VCS_NUM = 376;
+    public static final String VCS_DATE = "2016-11-14T20:27:54Z";
     public static final String VCS_BRANCH = "master";
-    public static final String VCS_TAG = "v/1.14";
-    public static final long VCS_TICK = 11;
+    public static final String VCS_TAG = "v/1.15";
+    public static final long VCS_TICK = 25;
     public static final String VCS_EXTRA = "";
 
-    public static final String VCS_ACTION_STAMP = "2016-02-25T03:38:41Z!dak180@users.sourceforge.net";
-    public static final String VCS_FULL_HASH = "a37506ae793f6fbde92936b76aa99341ca4c5199";
-    public static final String VCS_SHORT_HASH = "a37506a";
+    public static final String VCS_ACTION_STAMP = "2016-11-14T20:27:54Z!dak180@users.sourceforge.net";
+    public static final String VCS_FULL_HASH = "d9b6a03e53385f8fd256c1cff629e92f28da0c4d";
+    public static final String VCS_SHORT_HASH = "d9b6a03";
 
     public static final boolean VCS_WC_MODIFIED = false;
 }
