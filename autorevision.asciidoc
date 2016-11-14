@@ -52,6 +52,9 @@ A C/C++ source file. +
 `autorevision_declr.h` in the contribs dir is provided for use with
 this output.
 
+*cmake*::
+A cmake script file.
+
 *csharp*::
 C# file with Autorevision class
 
@@ -123,9 +126,6 @@ TeX. For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
 
 *xcode*::
 A header like output for use with xcode to populate info.plist strings.
-
-*cmake*::
-CMake file setting cmake variables.
 
 === Valid Symbol Names ===
 

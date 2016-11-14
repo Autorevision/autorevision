@@ -4,6 +4,7 @@
 read -d '' formats << EOF
 c
 clojure
+cmake
 csharp
 h
 hpp
@@ -25,7 +26,6 @@ sh
 swift
 tex
 xcode
-cmake
 EOF
 
 cd "$(git rev-parse --show-toplevel)"

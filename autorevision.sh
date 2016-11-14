@@ -24,6 +24,7 @@ usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-e name]
 The following are valid output types:
 	c			= C/C++ file
 	clojure			= clojure file
+	cmake 			= CMake script file
 	csharp			= CSharp properties file
 	h			= Header for use with c/c++
 	hpp			= Alternate C++ header strings with namespace
@@ -45,7 +46,6 @@ The following are valid output types:
 	swift			= Swift file
 	tex			= (La)TeX file
 	xcode			= Header useful for populating info.plist files
-	cmake			= CMake file
 
 
 The following are valid symbols:
@@ -449,6 +449,31 @@ const char *VCS_SHORT_HASH   = "${VCS_SHORT_HASH}";
 const int VCS_WC_MODIFIED     = ${VCS_WC_MODIFIED};
 
 /* end */
+EOF
+}
+
+# For Cmake output
+cmakeOutput() {
+	tee << EOF
+# ${GENERATED_HEADER}
+
+set(VCS_TYPE ${VCS_TYPE})
+set(VCS_BASENAME ${VCS_BASENAME})
+set(VCS_UUID ${VCS_UUID})
+set(VCS_NUM ${VCS_NUM})
+set(VCS_DATE ${VCS_DATE})
+set(VCS_BRANCH ${VCS_BRANCH})
+set(VCS_TAG ${VCS_TAG})
+set(VCS_TICK ${VCS_TICK})
+set(VCS_EXTRA ${VCS_EXTRA})
+
+set(VCS_ACTION_STAMP ${VCS_ACTION_STAMP})
+set(VCS_FULL_HASH ${VCS_FULL_HASH})
+set(VCS_SHORT_HASH ${VCS_SHORT_HASH})
+
+set(VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
+
+# end
 EOF
 }
 
@@ -1069,30 +1094,6 @@ VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
 
 % end
-EOF
-}
-
-cmakeOutput() {
-	tee << EOF
-# ${GENERATED_HEADER}
-
-set(VCS_TYPE ${VCS_TYPE})
-set(VCS_BASENAME ${VCS_BASENAME})
-set(VCS_UUID ${VCS_UUID})
-set(VCS_NUM ${VCS_NUM})
-set(VCS_DATE ${VCS_DATE})
-set(VCS_BRANCH ${VCS_BRANCH})
-set(VCS_TAG ${VCS_TAG})
-set(VCS_TICK ${VCS_TICK})
-set(VCS_EXTRA ${VCS_EXTRA})
-
-set(VCS_ACTION_STAMP ${VCS_ACTION_STAMP})
-set(VCS_FULL_HASH ${VCS_FULL_HASH})
-set(VCS_SHORT_HASH ${VCS_SHORT_HASH})
-
-set(VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
-
-# end
 EOF
 }
 
