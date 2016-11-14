@@ -22,14 +22,14 @@ usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-e name]
 	-?			= help message
 
 The following are valid output types:
-	clojure			= clojure file
 	c			= C/C++ file
+	clojure			= clojure file
+	csharp			= CSharp properties file
 	h			= Header for use with c/c++
 	hpp			= Alternate C++ header strings with namespace
 	ini			= INI file
 	java			= Java file
 	javaprop		= Java properties file
-	csharp		= CSharp properties file
 	js			= javascript file
 	json			= JSON file
 	lua			= Lua file
@@ -401,6 +401,7 @@ svnRepo() {
 
 # Functions to output data in different formats.
 # For bash output
+# First in list because it is used by autorevision
 shOutput() {
 	tee << EOF
 # ${GENERATED_HEADER}
@@ -979,6 +980,7 @@ $([ "${VCS_WC_MODIFIED}" ] && echo "%define vcs_wc_modified		${VCS_WC_MODIFIED}"
 EOF
 }
 
+# For C++ Header output
 # shellcheck disable=SC2155,SC2039
 hppOutput() {
 	local NAMESPACE="$(echo "${VCS_BASENAME}" | sed -e 's:_::g' | tr '[:lower:]' '[:upper:]')"
@@ -1015,6 +1017,7 @@ namespace $(echo "${NAMESPACE}" | tr '[:upper:]' '[:lower:]')
 EOF
 }
 
+# For Matlab output
 matlabOutput() {
 	case "${VCS_WC_MODIFIED}" in
 		0) VCS_WC_MODIFIED="FALSE" ;;
@@ -1043,6 +1046,7 @@ VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
 EOF
 }
 
+# For Octave output
 octaveOutput() {
 	tee << EOF
 % ${GENERATED_HEADER}
