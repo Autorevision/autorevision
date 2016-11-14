@@ -29,6 +29,7 @@ The following are valid output types:
 	ini			= INI file
 	java			= Java file
 	javaprop		= Java properties file
+	csharp		= CSharp properties file
 	js			= javascript file
 	json			= JSON file
 	lua			= Lua file
@@ -793,6 +794,39 @@ public class autorevision {
 EOF
 }
 
+csharpOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		1) VCS_WC_MODIFIED="true" ;;
+		0) VCS_WC_MODIFIED="false" ;;
+	esac
+	if [ "${EXTRA_NAME}" = "VCS_EXTRA" ]; then
+        EXTRA_NAME="VcsExtra"
+    fi
+    tee << EOF
+/* ${GENERATED_HEADER} */
+
+namespace AutoRevision
+{
+    public class VersionInfo
+    {
+        public static string VcsType = "${VCS_TYPE}";
+        public static string VcsBasename = "${VCS_BASENAME}";
+        public static string VcsUuid = "${VCS_UUID}";
+        public static string VcsNum = "${VCS_NUM}";
+        public static string VcsDate = "${VCS_DATE}";
+        public static string VcsBranch = "${VCS_DATE}";
+        public static string VcsTag = "${VCS_TAG}";
+        public static string VcsTick = "${VCS_TICK}";
+        public static string ${EXTRA_NAME} = "${VCS_EXTRA}";
+        public static string VcsActionStamp = "${VCS_ACTION_STAMP}";
+        public static string VcsFullHash = "${VCS_FULL_HASH}";
+        public static string VcsShortHash = "${VCS_SHORT_HASH}";
+        public static string VcsWcModified = "${VCS_WC_MODIFIED}";
+    }
+}
+EOF
+}
+
 # For Java properties output
 javapropOutput() {
 	case "${VCS_WC_MODIFIED}" in
@@ -1212,6 +1246,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		javaOutput
 	elif [ "${AFILETYPE}" = "javaprop" ]; then
 		javapropOutput
+	elif [ "${AFILETYPE}" = "csharp" ]; then
+		csharpOutput
 	elif [ "${AFILETYPE}" = "tex" ]; then
 		texOutput
 	elif [ "${AFILETYPE}" = "m4" ]; then
