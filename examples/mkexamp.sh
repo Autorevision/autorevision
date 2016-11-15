@@ -25,6 +25,7 @@ sh
 swift
 tex
 xcode
+cmake
 EOF
 
 cd "$(git rev-parse --show-toplevel)"

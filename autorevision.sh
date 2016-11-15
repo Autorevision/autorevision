@@ -45,7 +45,7 @@ The following are valid output types:
 	swift			= Swift file
 	tex			= (La)TeX file
 	xcode			= Header useful for populating info.plist files
-	cmake 		= CMake file
+	cmake			= CMake file
 
 
 The following are valid symbols:
@@ -1073,7 +1073,7 @@ EOF
 }
 
 cmakeOutput() {
-	cat > "${TARGETFILE}" << EOF
+	tee << EOF
 # ${GENERATED_HEADER}
 
 set(VCS_TYPE ${VCS_TYPE})
