@@ -52,6 +52,9 @@ A C/C++ source file. +
 `autorevision_declr.h` in the contribs dir is provided for use with
 this output.
 
+*cmake*::
+A cmake script file.
+
 *csharp*::
 C# file with Autorevision class
 

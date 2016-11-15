@@ -4,6 +4,7 @@
 read -d '' formats << EOF
 c
 clojure
+cmake
 csharp
 h
 hpp
