@@ -108,6 +108,7 @@ clean:
 devclean: clean
 	rm -f autorevision.cache
 	rm -f AUTHORS AUTHORS.txt
+	rm -f *.orig ./*/*.orig
 
 # HTML versions of doc files suitable for use on a website
 docs: \
