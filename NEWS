@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.16 @ 2016-11-15:
   Try to eliminate stray error output.
   Allow the VCS_EXTRA symbol to be renamed.
   Add an C# output.
