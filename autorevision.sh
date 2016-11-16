@@ -1134,23 +1134,29 @@ multiCompare() {
 repoTest() {
 	REPONUM="0"
 	if command -v git > /dev/null 2>&1; then
-		local gitPath="$(git rev-parse --show-toplevel)"
+		local gitPath="$(git rev-parse --show-toplevel 2>/dev/null)"
 		local gitDepth="$(pathSegment "${gitPath}")"
-		REPONUM="$((REPONUM+1))"
+		if [ ! -z "${gitPath}" ]; then
+			REPONUM="$((REPONUM+1))"
+		fi
 	else
 		local gitDepth="0"
 	fi
 	if command -v hg > /dev/null 2>&1; then
 		local hgPath="$(hg root 2>/dev/null)"
 		local hgDepth="$(pathSegment "${hgPath}")"
-		REPONUM="$((REPONUM+1))"
+		if [ ! -z "${hgPath}" ]; then
+			REPONUM="$((REPONUM+1))"
+		fi
 	else
 		local hgDepth="0"
 	fi
 	if command -v bzr > /dev/null 2>&1; then
 		local bzrPath="$(bzr root 2>/dev/null)"
 		local bzrDepth="$(pathSegment "${bzrPath}")"
-		REPONUM="$((REPONUM+1))"
+		if [ ! -z "${bzrPath}" ]; then
+			REPONUM="$((REPONUM+1))"
+		fi
 	else
 		local bzrDepth="0"
 	fi
@@ -1175,7 +1181,7 @@ repoTest() {
 
 	# Do not do more work then we have to.
 	if [ "${REPONUM}" = "0" ]; then
-		return
+		return 0
 	fi
 
 	# Figure out which repo is the deepest and use it.
