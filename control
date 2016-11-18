@@ -19,6 +19,8 @@ XBS-Destinations: freecode
 
 Homepage: https://autorevision.github.io/
 
+XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
+
 XBS-HTML-Target: index.html
 
 XBS-Logo: contribs/logo.svg
