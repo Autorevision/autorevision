@@ -70,15 +70,18 @@ auth: AUTHORS.txt
 AUTHORS.txt:
 	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS.txt
 
+# The tarball signed and sealed
+dist: tarball autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
+
 # The tarball
-dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
+tarball: autorevision-$(VERS).tgz
 
 # Make an md5 checksum
-autorevision-$(VERS).tgz.md5: autorevision-$(VERS).tgz
+autorevision-$(VERS).tgz.md5: tarball
 	$(MD5) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
 
 # Make a detached gpg sig
-autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
+autorevision-$(VERS).tgz.sig: tarball
 	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
 
 # The actual tarball
