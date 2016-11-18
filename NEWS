@@ -1,5 +1,10 @@
 			autorevision history
 
+1.17 @ 2016-11-18:
+  Fix out of repo operation.
+  Bring back the irc channel.
+  Add a script to sanity check out of repo operation.
+
 1.16 @ 2016-11-15:
   Try to eliminate stray error output.
   Allow the VCS_EXTRA symbol to be renamed.
