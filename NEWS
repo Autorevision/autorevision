@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Fix some bashisms in the make file.
+
 1.17 @ 2016-11-18:
   Fix out of repo operation.
   Bring back the irc channel.
