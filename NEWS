@@ -2,6 +2,7 @@
 
 Repository head:
   Fix some bashisms in the make file.
+  Get the short hash form git rather than assuming its length.
 
 1.17 @ 2016-11-18:
   Fix out of repo operation.
