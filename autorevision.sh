@@ -136,9 +136,11 @@ gitRepo() {
 
 	VCS_BASENAME="$(basename "${PWD}")"
 
-	VCS_UUID="$(git rev-list --max-parents=0 --date-order --reverse HEAD 2>/dev/null | sed -n 1p)"
+	local currentRev="$(git rev-parse HEAD)"
+
+	VCS_UUID="$(git rev-list --max-parents=0 --date-order --reverse "${currentRev}" 2>/dev/null | sed -n 1p)"
 	if [ -z "${VCS_UUID}" ]; then
-		VCS_UUID="$(git rev-list --topo-order HEAD | tail -n 1)"
+		VCS_UUID="$(git rev-list --topo-order "${currentRev}" | tail -n 1)"
 	fi
 
 	# Is the working copy clean?
@@ -146,7 +148,7 @@ gitRepo() {
 	VCS_WC_MODIFIED="${?}"
 
 	# Enumeration of changesets
-	VCS_NUM="$(git rev-list --count HEAD 2>/dev/null)"
+	VCS_NUM="$(git rev-list --count "${currentRev}" 2>/dev/null)"
 	if [ -z "${VCS_NUM}" ]; then
 		echo "warning: Counting the number of revisions may be slower due to an outdated git version less than 1.7.2.3. If something breaks, please update it." 1>&2
 		VCS_NUM="$(git rev-list HEAD | wc -l)"
@@ -155,21 +157,21 @@ gitRepo() {
 	# This may be a git-svn remote.  If so, report the Subversion revision.
 	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]; then
 		# The full revision hash
-		VCS_FULL_HASH="$(git rev-parse HEAD)"
+		VCS_FULL_HASH="$(git rev-parse "${currentRev}")"
 
 		# The short hash
-		VCS_SHORT_HASH="$(git rev-parse --short "${VCS_FULL_HASH}")"
+		VCS_SHORT_HASH="$(git rev-parse --short "${currentRev}")"
 	else
 		# The git-svn revision number
-		VCS_FULL_HASH="$(git svn find-rev HEAD)"
+		VCS_FULL_HASH="$(git svn find-rev "${currentRev}")"
 		VCS_SHORT_HASH="${VCS_FULL_HASH}"
 	fi
 
 	# Current branch
-	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined HEAD 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
+	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined "${currentRev}" 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
 
 	# Cache the description
-	local DESCRIPTION="$(git describe --long --tags 2>/dev/null)"
+	local DESCRIPTION="$(git describe --long --tags "${currentRev}" 2>/dev/null)"
 
 	# Current or last tag ancestor (empty if no tags)
 	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" -e 's:-[0-9]*$::')"
@@ -182,16 +184,16 @@ gitRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(TZ=UTC git show -s --date=iso-strict-local --pretty=format:%ad 2>/dev/null | sed -e 's|+00:00|Z|')"
+	VCS_DATE="$(TZ=UTC git show -s --date=iso-strict-local --pretty=format:%ad "${currentRev}" 2>/dev/null | sed -e 's|+00:00|Z|')"
 	if [ -z "${VCS_DATE}" ]; then
 		echo "warning: Action stamps require git version 2.7+." 1>&2
-		VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::' -e 's|+00:00|Z|')"
+		VCS_DATE="$(git log -1 --pretty=format:%ci "${currentRev}" | sed -e 's: :T:' -e 's: ::' -e 's|+00:00|Z|')"
 		local ASdis="1"
 	fi
 
 	# Action Stamp
 	if [ -z "${ASdis}" ]; then
-		VCS_ACTION_STAMP="${VCS_DATE}!$(git show -s --pretty=format:%cE)"
+		VCS_ACTION_STAMP="${VCS_DATE}!$(git show -s --pretty=format:%cE "${currentRev}")"
 	else
 		VCS_ACTION_STAMP=""
 	fi
