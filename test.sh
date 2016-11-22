@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This test script makes a number of assumptions about its enviroment
-# and therfore is not meant to be portable or even to be run from
+# This test script makes a number of assumptions about its environment
+# and therefore is not meant to be portable or even to be run from
 # outside Autorevision's repository.
 
 # Prep
