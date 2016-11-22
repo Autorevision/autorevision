@@ -30,4 +30,4 @@ cd "${tdir}"
 make clean
 
 # Compare the results
-cmp -s "autorevision.cache" "${testPath}/autorevision.cache"
+cmp "autorevision.cache" "${testPath}/autorevision.cache"
