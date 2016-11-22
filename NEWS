@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.18 @ 2016-11-22:
   Fix some bashisms in the make file.
   Get the short hash form git rather than assuming its length.
 
