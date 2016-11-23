@@ -2,7 +2,7 @@
 
 1.18 @ 2016-11-22:
   Fix some bashisms in the make file.
-  Get the short hash form git rather than assuming its length.
+  Get the short hash from git rather than assuming its length.
 
 1.17 @ 2016-11-18:
   Fix out of repo operation.
