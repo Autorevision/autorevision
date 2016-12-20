@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.19 @ 2016-12-20:
   Only use the committer date for git.
   Only use the `local` keyword where supported.
 
