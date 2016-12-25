@@ -68,7 +68,7 @@ autorevision.html: autorevision.asciidoc
 auth: AUTHORS.txt
 
 AUTHORS.txt:
-	git log --format='%aN <%aE>' | awk '{arr[$$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d\  -f2- > AUTHORS.txt
+	git log --format='%aN <%aE>' | sort -f | uniq -c | sort -rn | sed 's:^ *[0-9]* *::' > AUTHORS.txt
 
 # The tarball signed and sealed
 dist: tarball autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
