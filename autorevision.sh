@@ -122,7 +122,7 @@ fi
 
 if [ "$(command -v local 2> /dev/null)" = "local" ]; then
 	LOCAL="local"
-elif command -v typeset > /dev/null 2>&1; then
+elif [ "$(command -v typeset 2> /dev/null)" = "typeset" ]; then
 	LOCAL="typeset"
 else
 	LOCAL=""
