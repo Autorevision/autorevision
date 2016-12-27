@@ -136,7 +136,9 @@ The repository type - "git", "hg", "bzr", or "svn".
 The basename of the directory root.  For most VCSes this will simply
 be the basename of the repository root directory.  For Subversion,
 *autorevision* will attempt to navigate up though trunk, branches, and
-tags directories to find the actual root.
+tags directories to find the actual root. For git when in a linked working
+tree created by *git-worktree(1)*, *autorevision* will attempt to use the main
+working tree's basename.
 
 *VCS_NUM*::
 A count of revisions between the current one and the initial
