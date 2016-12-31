@@ -605,8 +605,8 @@ EOF
 # For Python output
 pyOutput() {
 	case "${VCS_WC_MODIFIED}" in
-		0) PY_VCS_WC_MODIFIED="False" ;;
-		1) PY_VCS_WC_MODIFIED="True" ;;
+		0) VCS_WC_MODIFIED="False" ;;
+		1) VCS_WC_MODIFIED="True" ;;
 	esac
 	tee << EOF
 # ${GENERATED_HEADER}
@@ -1236,6 +1236,25 @@ else
 fi
 
 
+# If requested, make a cache file.
+if [ ! -z "${CACHEFILE}" ] && [ ! "${CACHEFORCE}" = "1" ]; then
+	EXTRA_OUTPUT="${EXTRA_NAME}"
+	EXTRA_NAME="VCS_EXTRA"
+	shOutput > "${CACHEFILE}.tmp"
+
+	# Check to see if there have been any actual changes.
+	if [ ! -f "${CACHEFILE}" ]; then
+		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
+	elif cmp -s "${CACHEFILE}.tmp" "${CACHEFILE}"; then
+		rm -f "${CACHEFILE}.tmp"
+	else
+		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
+	fi
+	EXTRA_NAME="${EXTRA_OUTPUT}"
+fi
+
+
+
 # -s output is handled here.
 if [ ! -z "${VAROUT}" ]; then
 	if [ "${VAROUT}" = "VCS_TYPE" ]; then
@@ -1320,21 +1339,5 @@ if [ ! -z "${AFILETYPE}" ]; then
 	else
 		echo "error: Not a valid output type." 1>&2
 		exit 1
-	fi
-fi
-
-
-# If requested, make a cache file.
-if [ ! -z "${CACHEFILE}" ] && [ ! "${CACHEFORCE}" = "1" ]; then
-	EXTRA_NAME="VCS_EXTRA"
-	shOutput > "${CACHEFILE}.tmp"
-
-	# Check to see if there have been any actual changes.
-	if [ ! -f "${CACHEFILE}" ]; then
-		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
-	elif cmp -s "${CACHEFILE}.tmp" "${CACHEFILE}"; then
-		rm -f "${CACHEFILE}.tmp"
-	else
-		mv -f "${CACHEFILE}.tmp" "${CACHEFILE}"
 	fi
 fi

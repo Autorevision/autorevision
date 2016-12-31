@@ -6,6 +6,7 @@
 
 # Prep
 set -e
+export VCS_EXTRA="test"
 make tarball
 
 # Configure
@@ -29,5 +30,13 @@ cd "${tdir}"
 # Poke it to see it does anything
 make clean
 
-# Compare the results
+# Test out of repo results.
 cmp "autorevision.cache" "${testPath}/autorevision.cache"
+
+
+# Test cache pollution.
+cd "${testPath}"
+
+./autorevision.sh -o "./autorevision.cache" -t "swift" -e "TEST"
+
+cmp "autorevision.cache" "${tmpdir}/${tdir}/autorevision.cache"
