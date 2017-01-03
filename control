@@ -13,15 +13,15 @@ Description: Extracts metadata about the current revision from your repository.
 
 XBS-Github-URL: https://github.com/Autorevision/autorevision
 
-XBS-Ohloh-URL: https://www.openhub.net/p/autorevision
+Vcs-Browser: https://github.com/Autorevision/autorevision
 
-XBS-Destinations: freecode
+Vcs-Git: git://github.com/Autorevision/autorevision
+
+XBS-Ohloh-URL: https://www.openhub.net/p/autorevision
 
 Homepage: https://autorevision.github.io/
 
 XBS-IRC-Channel: irc://chat.freenode.net/#autorevision
-
-XBS-HTML-Target: index.html
 
 XBS-Logo: contribs/logo.svg
 
