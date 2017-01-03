@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.20 @ 2017-01-03:
   Better determinism in the order of the author file.
   Better tests for `local` support.
   Make sure the cache file is not polluted from other output types.
