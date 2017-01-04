@@ -88,7 +88,7 @@ autorevision-$(VERS).tgz.sig: tarball
 autorevision-$(VERS).tgz: $(SOURCES) all auth
 	mkdir autorevision-$(VERS)
 	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
-	@COPYFILE_DISABLE=1 tar -czf autorevision-$(VERS).tgz --exclude=".DS_Store" autorevision-$(VERS)
+	@COPYFILE_DISABLE=1 GZIP=-n9 tar -czf autorevision-$(VERS).tgz --exclude=".DS_Store" autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 
 install: all
