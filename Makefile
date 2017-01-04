@@ -55,7 +55,10 @@ autorevision: autorevision.sh
 	chmod +x autorevision
 
 # The Man Page
-man: autorevision.1
+man: autorevision.1.gz
+
+autorevision.1.gz: autorevision.1
+	gzip --no-name < autorevision.1 > autorevision.1.gz
 
 autorevision.1: autorevision.asciidoc
 	a2x --attribute="revdate=$(DOCDATE)" --attribute="revnumber=$(VERS)" -f manpage autorevision.asciidoc
@@ -95,13 +98,13 @@ install: all
 	install -d "$(target)/bin"
 	install -m 755 autorevision "$(target)/bin/autorevision"
 	install -d "$(target)$(mandir)/man1"
-	gzip --no-name < autorevision.1 > "$(target)$(mandir)/man1/autorevision.1.gz"
+	install -m 644 autorevision.1.gz "$(target)$(mandir)/man1/autorevision.1.gz"
 
 uninstall:
 	rm -f "$(target)/bin/autorevision" "$(target)$(mandir)/man1/autorevision.1.gz"
 
 clean:
-	rm -f autorevision autorevision.html autorevision.1
+	rm -f autorevision autorevision.html autorevision.1 autorevision.1.gz
 	rm -f *.tgz *.md5 *.sig
 	rm -f docbook-xsl.css
 	rm -f CONTRIBUTING.html COPYING.html README.html
