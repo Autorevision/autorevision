@@ -70,7 +70,7 @@ autorevision.html: autorevision.asciidoc
 # Authors
 auth: AUTHORS.txt
 
-AUTHORS.txt: .mailmap .git
+AUTHORS.txt: .mailmap autorevision.cache
 	git log --format='%aN <%aE>' | sort -f | uniq -c | sort -rn | sed 's:^ *[0-9]* *::' > AUTHORS.txt
 
 # The tarball signed and sealed
