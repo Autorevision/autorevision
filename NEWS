@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Try to make tarballs more reproducible.
+
 1.20 @ 2017-01-03:
   Better determinism in the order of the author file.
   Better tests for `local` support.
