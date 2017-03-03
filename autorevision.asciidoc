@@ -4,9 +4,9 @@
 autorevision - extract current-revision metadata from version-control repositories
 
 == SYNOPSIS ==
-*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
+*autorevision* *-t* <output-type> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
 
-*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*]
+*autorevision* *-s* <symbol> [*-o* <cache-file> [*-f*]&#8201;] [*-e* <name>] [*-U*] [*-q*]
 
 *autorevision* *-V*
 
@@ -230,6 +230,9 @@ Causes untracked files to be checked when determining if the
 working copy is modified 'for Subversion only'.  While this is the
 default behavior for all other repository types, it is off by default
 for Subversion because of speed concerns.
+
+*-q*::
+Silence warnings.
 
 *-V*::
 Emits the autorevision version and exits.
