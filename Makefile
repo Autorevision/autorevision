@@ -40,11 +40,12 @@ SOURCES = \
 	control
 
 EXTRA_DIST = \
+	logo.svg.in \
 	contribs \
 	AUTHORS.txt \
 	autorevision.cache
 
-all : cmd man
+all : cmd man logo.svg
 
 # The script
 cmd: autorevision
@@ -72,6 +73,12 @@ auth: AUTHORS.txt
 
 AUTHORS.txt: .mailmap autorevision.cache
 	git log --format='%aN <%aE>' | sort -f | uniq -c | sort -rn | sed 's:^ *[0-9]* *::' > AUTHORS.txt
+
+autorevision.sed: autorevision.cache
+	./autorevision.sh -f -t sed -o $< > $@
+
+logo.svg: logo.svg.in autorevision.sed
+	sed -f autorevision.sed $< > $@
 
 # The tarball signed and sealed
 dist: tarball autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
@@ -105,6 +112,7 @@ uninstall:
 
 clean:
 	rm -f autorevision autorevision.html autorevision.1 autorevision.1.gz
+	rm -f autorevision.sed logo.svg
 	rm -f *.tgz *.md5 *.sig
 	rm -f docbook-xsl.css
 	rm -f CONTRIBUTING.html COPYING.html README.html

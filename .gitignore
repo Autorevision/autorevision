@@ -6,6 +6,8 @@
 /*.tgz
 /*.md5
 /*.sig
+/logo.svg
+/autorevision.sed
 /autorevision
 /AUTHORS
 /AUTHORS.txt
