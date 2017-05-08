@@ -45,6 +45,7 @@ The following are valid output types:
 	py			= Python file
 	rpm			= rpm file
 	scheme			= scheme file
+	sed			= sed script
 	sh			= Bash sytax
 	swift			= Swift file
 	tex			= (La)TeX file
@@ -1121,6 +1122,29 @@ VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
 EOF
 }
 
+sedOutput() {
+	tee << EOF
+# ${GENERATED_HEADER}
+
+s|@VCS_TYPE@|${VCS_TYPE}|g
+s|@VCS_BASENAME@|${VCS_BASENAME}|g
+s|@VCS_UUID@|${VCS_UUID}|g
+s|@VCS_NUM@|${VCS_NUM}|g
+s|@VCS_DATE@|${VCS_DATE}|g
+s|@VCS_BRANCH@|${VCS_BRANCH}|g
+s|@VCS_TAG@|${VCS_TAG}|g
+s|@VCS_TICK@|${VCS_TICK}|g
+s|@${EXTRA_NAME}@|${VCS_EXTRA}|g
+
+s|@VCS_ACTION_STAMP@|${VCS_ACTION_STAMP}|g
+s|@VCS_FULL_HASH@|${VCS_FULL_HASH}|g
+s|@VCS_SHORT_HASH@|${VCS_SHORT_HASH}|g
+
+s|@VCS_WC_MODIFIED@|${VCS_WC_MODIFIED}|g
+
+# end
+EOF
+}
 
 # Helper functions
 # Count path segments
@@ -1305,6 +1329,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		xcodeOutput
 	elif [ "${AFILETYPE}" = "swift" ]; then
 		swiftOutput
+	elif [ "${AFILETYPE}" = "sed" ]; then
+		sedOutput
 	elif [ "${AFILETYPE}" = "sh" ]; then
 		shOutput
 	elif [ "${AFILETYPE}" = "py" ] || [ "${AFILETYPE}" = "python" ]; then

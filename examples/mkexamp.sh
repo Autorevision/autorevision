@@ -22,6 +22,7 @@ pl
 py
 rpm
 scheme
+sed
 sh
 swift
 tex

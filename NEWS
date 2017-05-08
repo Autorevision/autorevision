@@ -3,6 +3,7 @@
 Repository head:
   Try to make tarballs more reproducible.
   Add an option to silence warnings.
+  Add a sed script output.
 
 1.20 @ 2017-01-03:
   Better determinism in the order of the author file.
