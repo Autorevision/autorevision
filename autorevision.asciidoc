@@ -113,7 +113,7 @@ A scheme source file setting scheme variables.
 *sed*::
 A sed script that replaces symbol names enclosed in @ symbols.
 It uses the | character as a separator in the sed commands.
-You can run it using `sed -i -f script.sed file-to-edit`.
+You can run it using `sed -f script.sed file-to-edit`.
 
 *sh*::
 A text file suitable for including from a bash script.  Will work with
