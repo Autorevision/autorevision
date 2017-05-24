@@ -153,7 +153,23 @@ gitRepo() {
 
 	VCS_TYPE="git"
 
-	VCS_BASENAME="$(basename "${PWD}")"
+	# Portably canonicalize the path to the git dir.
+	${LOCAL} gitDir="$(cd "$(git rev-parse --git-path objects/.. 2>/dev/null)"; echo "${PWD}")"
+
+	# Use the basename from the main working tree.
+	case "$(cd "${gitDir}" && git rev-parse --is-bare-repository 2>/dev/null)" in
+		true)
+			# Strip .git suffix if present.
+			VCS_BASENAME="$(basename "${gitDir}" .git)"
+			;;
+		false)
+			VCS_BASENAME="$(basename "$(dirname "${gitDir}")")"
+			;;
+		*)
+			echo "error: Cannot determine if repository is bare." 1>&2
+			exit 1
+			;;
+	esac
 
 	${LOCAL} currentRev="$(git rev-parse HEAD)"
 
