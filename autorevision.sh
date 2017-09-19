@@ -934,6 +934,7 @@ EOF
 }
 
 # For (La)TeX output
+# shellcheck disable=SC1117
 texOutput() {
 	case "${VCS_WC_MODIFIED}" in
 		0) VCS_WC_MODIFIED="false" ;;
