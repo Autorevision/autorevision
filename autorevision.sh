@@ -197,6 +197,13 @@ gitRepo() {
 	# Current or last tag ancestor (empty if no tags)
 	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" -e 's:-[0-9]*$::')"
 
+	if [ ! "${WARNHIDE}" = "1" ]; then
+		${LOCAL} tagType="$(git for-each-ref --format='%(objecttype)' "$(git rev-parse --symbolic-full-name --verify "${VCS_TAG}")")"
+		if [ ! "${tagType}" = "tag" ]; then
+			echo "note: The most recent tag is not annotated; if it is intended to be a release you may want to fix this." 1>&2
+		fi
+	fi
+
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	if [ ! -z "${DESCRIPTION}" ]; then
 		VCS_TICK="$(echo "${DESCRIPTION}" | sed -e "s:${VCS_TAG}-::" -e "s:-g${VCS_SHORT_HASH}::")"
