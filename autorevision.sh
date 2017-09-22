@@ -60,9 +60,11 @@ The following are valid symbols:
 	VCS_DATE
 	VCS_BRANCH
 	VCS_TAG
+	VCS_TAG_OPENPGP
 	VCS_TICK
 	VCS_EXTRA
 	VCS_FULL_HASH
+	VCS_COMMIT_OPENPGP
 	VCS_SHORT_HASH
 	VCS_WC_MODIFIED
 	VCS_ACTION_STAMP
@@ -188,6 +190,9 @@ gitRepo() {
 		VCS_SHORT_HASH="${VCS_FULL_HASH}"
 	fi
 
+	# Get the current revision's signing key.
+	VCS_COMMIT_OPENPGP="$(git verify-tag --raw "${currentRev}" 2>&1 | grep "VALIDSIG" | cut -d ' ' -f 12)"
+
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined "${currentRev}" 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
 
@@ -197,11 +202,16 @@ gitRepo() {
 	# Current or last tag ancestor (empty if no tags)
 	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" -e 's:-[0-9]*$::')"
 
-	if [ ! "${WARNHIDE}" = "1" ]; then
-		${LOCAL} tagType="$(git for-each-ref --format='%(objecttype)' "$(git rev-parse --symbolic-full-name --verify "${VCS_TAG}")")"
-		if [ ! "${tagType}" = "tag" ]; then
-			echo "note: The most recent tag is not annotated; if it is intended to be a release you may want to fix this." 1>&2
+	# Determine if the tag is annotated.
+	${LOCAL} tagType="$(git for-each-ref --format='%(objecttype)' "$(git rev-parse --symbolic-full-name --verify "${VCS_TAG}")")"
+	if [ ! "${tagType}" = "tag" ]; then
+		# Let the user know if the current tag is not annotated.
+		if [ ! "${WARNHIDE}" = "1" ]; then
+		echo "note: The most recent tag is not annotated; if it is intended to be a release you may want to fix this." 1>&2
 		fi
+
+		# You cannot have a signed tag that is not annotated.
+		VCS_TAG_OPENPGP="$(git verify-tag --raw "${VCS_TAG}" 2>&1 | grep "VALIDSIG" | cut -d ' ' -f 12)"
 	fi
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
