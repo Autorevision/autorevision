@@ -184,7 +184,8 @@ Empty under Subversion.
 
 *VCS_EXTRA*::
 A symbol set aside specifically to be set by the user through the
-environment or via scripts.
+environment or via scripts. +
+Additionally, the name of this symbol may be customized as well.  ('See *-e* for more info.')
 
 *VCS_ACTION_STAMP*::
 An "action stamp" consists of an RFC3339 timestamp in Zulu time,
