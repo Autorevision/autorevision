@@ -456,11 +456,13 @@ VCS_NUM="${VCS_NUM}"
 VCS_DATE="${VCS_DATE}"
 VCS_BRANCH="${VCS_BRANCH}"
 VCS_TAG="${VCS_TAG}"
+VCS_TAG_OPENPGP="${VCS_TAG_OPENPGP}"
 VCS_TICK="${VCS_TICK}"
 ${EXTRA_NAME}="${VCS_EXTRA}"
 
 VCS_ACTION_STAMP="${VCS_ACTION_STAMP}"
 VCS_FULL_HASH="${VCS_FULL_HASH}"
+VCS_COMMIT_OPENPGP="${VCS_COMMIT_OPENPGP}"
 VCS_SHORT_HASH="${VCS_SHORT_HASH}"
 
 VCS_WC_MODIFIED="${VCS_WC_MODIFIED}"
@@ -474,21 +476,23 @@ cOutput() {
 	tee << EOF
 /* ${GENERATED_HEADER} */
 
-const char *VCS_TYPE         = "${VCS_TYPE}";
-const char *VCS_BASENAME     = "${VCS_BASENAME}";
-const char *VCS_UUID         = "${VCS_UUID}";
-const int VCS_NUM            = ${VCS_NUM};
-const char *VCS_DATE         = "${VCS_DATE}";
-const char *VCS_BRANCH       = "${VCS_BRANCH}";
-const char *VCS_TAG          = "${VCS_TAG}";
-const int VCS_TICK           = ${VCS_TICK};
-const char *${EXTRA_NAME}        = "${VCS_EXTRA}";
+const char *VCS_TYPE      	 	 = "${VCS_TYPE}";
+const char *VCS_BASENAME    	 = "${VCS_BASENAME}";
+const char *VCS_UUID			 = "${VCS_UUID}";
+const int VCS_NUM				 = ${VCS_NUM};
+const char *VCS_DATE        	 = "${VCS_DATE}";
+const char *VCS_BRANCH      	 = "${VCS_BRANCH}";
+const char *VCS_TAG         	 = "${VCS_TAG}";
+const char *VCS_TAG_OPENPGP		 = "${VCS_TAG_OPENPGP}";
+const int VCS_TICK				 = ${VCS_TICK};
+const char *${EXTRA_NAME}		 = "${VCS_EXTRA}";
 
-const char *VCS_ACTION_STAMP = "${VCS_ACTION_STAMP}";
-const char *VCS_FULL_HASH    = "${VCS_FULL_HASH}";
-const char *VCS_SHORT_HASH   = "${VCS_SHORT_HASH}";
+const char *VCS_ACTION_STAMP	 = "${VCS_ACTION_STAMP}";
+const char *VCS_FULL_HASH   	 = "${VCS_FULL_HASH}";
+const char *VCS_COMMIT_OPENPGP	 = "${VCS_COMMIT_OPENPGP}";
+const char *VCS_SHORT_HASH		 = "${VCS_SHORT_HASH}";
 
-const int VCS_WC_MODIFIED     = ${VCS_WC_MODIFIED};
+const int VCS_WC_MODIFIED		 = ${VCS_WC_MODIFIED};
 
 /* end */
 EOF
@@ -506,11 +510,13 @@ set(VCS_NUM ${VCS_NUM})
 set(VCS_DATE ${VCS_DATE})
 set(VCS_BRANCH ${VCS_BRANCH})
 set(VCS_TAG ${VCS_TAG})
+set(VCS_TAG_OPENPGP ${VCS_TAG_OPENPGP})
 set(VCS_TICK ${VCS_TICK})
 set(${EXTRA_NAME} ${VCS_EXTRA})
 
 set(VCS_ACTION_STAMP ${VCS_ACTION_STAMP})
 set(VCS_FULL_HASH ${VCS_FULL_HASH})
+set(VCS_COMMIT_OPENPGP ${VCS_COMMIT_OPENPGP})
 set(VCS_SHORT_HASH ${VCS_SHORT_HASH})
 
 set(VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
@@ -533,11 +539,13 @@ hOutput() {
 #define VCS_DATE		"${VCS_DATE}"
 #define VCS_BRANCH		"${VCS_BRANCH}"
 #define VCS_TAG			"${VCS_TAG}"
+#define VCS_TAG_OPENPGP	"${VCS_TAG_OPENPGP}"
 #define VCS_TICK		${VCS_TICK}
 #define ${EXTRA_NAME}		"${VCS_EXTRA}"
 
 #define VCS_ACTION_STAMP	"${VCS_ACTION_STAMP}"
 #define VCS_FULL_HASH		"${VCS_FULL_HASH}"
+#define VCS_COMMIT_OPENPGP	"${VCS_COMMIT_OPENPGP}"
 #define VCS_SHORT_HASH		"${VCS_SHORT_HASH}"
 
 #define VCS_WC_MODIFIED		${VCS_WC_MODIFIED}
@@ -562,11 +570,13 @@ xcodeOutput() {
 #define VCS_DATE		${VCS_DATE}
 #define VCS_BRANCH		${VCS_BRANCH}
 #define VCS_TAG			${VCS_TAG}
+#define VCS_TAG_OPENPGP	${VCS_TAG_OPENPGP}
 #define VCS_TICK		${VCS_TICK}
 #define ${EXTRA_NAME}		${VCS_EXTRA}
 
 #define VCS_ACTION_STAMP	${VCS_ACTION_STAMP}
 #define VCS_FULL_HASH		${VCS_FULL_HASH}
+#define VCS_COMMIT_OPENPGP	${VCS_COMMIT_OPENPGP}
 #define VCS_SHORT_HASH		${VCS_SHORT_HASH}
 
 #define VCS_WC_MODIFIED		${VCS_WC_MODIFIED}
@@ -595,6 +605,11 @@ swiftOutput() {
 	else
 		VCS_TAG="\"${VCS_TAG}\""
 	fi
+	if [ -z "${VCS_TAG_OPENPGP}" ]; then
+		VCS_TAG_OPENPGP="nil"
+	else
+		VCS_TAG_OPENPGP="\"${VCS_TAG_OPENPGP}\""
+	fi
 	: "${VCS_TICK:="nil"}"
 	if [ -z "${VCS_EXTRA}" ]; then
 		VCS_EXTRA="nil"
@@ -606,21 +621,28 @@ swiftOutput() {
 	else
 		VCS_ACTION_STAMP="\"${VCS_ACTION_STAMP}\""
 	fi
+	if [ -z "${VCS_COMMIT_OPENPGP}" ]; then
+		VCS_COMMIT_OPENPGP="nil"
+	else
+		VCS_COMMIT_OPENPGP="\"${VCS_COMMIT_OPENPGP}\""
+	fi
 	tee << EOF
 /* ${GENERATED_HEADER} */
 
 let VCS_TYPE			= "${VCS_TYPE}"
 let VCS_BASENAME		= "${VCS_BASENAME}"
-let VCS_UUID:	String?	= ${VCS_UUID}
-let VCS_NUM:	Int		= ${VCS_NUM}
+let VCS_UUID:			String?	= ${VCS_UUID}
+let VCS_NUM:			Int		= ${VCS_NUM}
 let VCS_DATE			= "${VCS_DATE}"
-let VCS_BRANCH:	String	= "${VCS_BRANCH}"
-let VCS_TAG:	String?	= ${VCS_TAG}
-let VCS_TICK:	Int?	= ${VCS_TICK}
-let ${EXTRA_NAME}:	String?	= ${VCS_EXTRA}
+let VCS_BRANCH:			String	= "${VCS_BRANCH}"
+let VCS_TAG:			String?	= ${VCS_TAG}
+let VCS_TAG_OPENPGP:	String?	= ${VCS_TAG_OPENPGP}
+let VCS_TICK:			Int?	= ${VCS_TICK}
+let ${EXTRA_NAME}:		String?	= ${VCS_EXTRA}
 
 let VCS_ACTION_STAMP:	String?	= ${VCS_ACTION_STAMP}
 let VCS_FULL_HASH:		String	= "${VCS_FULL_HASH}"
+let VCS_COMMIT_OPENPGP:	String	= "${VCS_COMMIT_OPENPGP}"
 let VCS_SHORT_HASH:		String	= "${VCS_SHORT_HASH}"
 
 let VCS_WC_MODIFIED:	Bool	= ${VCS_WC_MODIFIED}
@@ -645,11 +667,13 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TAG_OPENPGP = "${VCS_TAG_OPENPGP}"
 VCS_TICK = ${VCS_TICK}
 ${EXTRA_NAME} = "${VCS_EXTRA}"
 
 VCS_ACTION_STAMP = "${VCS_ACTION_STAMP}"
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
+VCS_COMMIT_OPENPGP = "${VCS_COMMIT_OPENPGP}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 
 VCS_WC_MODIFIED = ${PY_VCS_WC_MODIFIED}
@@ -670,11 +694,13 @@ plOutput() {
 \$VCS_DATE = '${VCS_DATE}';
 \$VCS_BRANCH = '${VCS_BRANCH}';
 \$VCS_TAG = '${VCS_TAG}';
+\$VCS_TAG_OPENPGP = '${VCS_TAG_OPENPGP}';
 \$VCS_TICK = ${VCS_TICK};
 \$${EXTRA_NAME} = '${VCS_EXTRA}';
 
 \$VCS_ACTION_STAMP = '${VCS_ACTION_STAMP}';
 \$VCS_FULL_HASH = '${VCS_FULL_HASH}';
+\$VCS_COMMIT_OPENPGP = '${VCS_COMMIT_OPENPGP}';
 \$VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
 
 \$VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
@@ -700,11 +726,13 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TAG_OPENPGP = "${VCS_TAG_OPENPGP}"
 VCS_TICK = ${VCS_TICK}
 ${EXTRA_NAME} = "${VCS_EXTRA}"
 
 VCS_ACTION_STAMP = "${VCS_ACTION_STAMP}"
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
+VCS_COMMIT_OPENPGP = "${VCS_COMMIT_OPENPGP}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED}
@@ -731,10 +759,12 @@ return array(
 	"VCS_DATE" => "${VCS_DATE}",
 	"VCS_BRANCH" => "${VCS_BRANCH}",
 	"VCS_TAG" => "${VCS_TAG}",
+	"VCS_TAG_OPENPGP" => "${VCS_TAG_OPENPGP}",
 	"VCS_TICK" => ${VCS_TICK},
 	"${EXTRA_NAME}" => "${VCS_EXTRA}",
 	"VCS_ACTION_STAMP" => "${VCS_ACTION_STAMP}",
 	"VCS_FULL_HASH" => "${VCS_FULL_HASH}",
+	"VCS_COMMIT_OPENPGP" => "${VCS_COMMIT_OPENPGP}",
 	"VCS_SHORT_HASH" => "${VCS_SHORT_HASH}",
 	"VCS_WC_MODIFIED" => ${VCS_WC_MODIFIED}
 );
@@ -760,10 +790,12 @@ VCS_NUM = ${VCS_NUM}
 VCS_DATE = "${VCS_DATE}"
 VCS_BRANCH = "${VCS_BRANCH}"
 VCS_TAG = "${VCS_TAG}"
+VCS_TAG_OPENPGP = "${VCS_TAG_OPENPGP}"
 VCS_TICK = ${VCS_TICK}
 ${EXTRA_NAME} = "${VCS_EXTRA}"
 VCS_ACTION_STAMP = "${VCS_ACTION_STAMP}"
 VCS_FULL_HASH = "${VCS_FULL_HASH}"
+VCS_COMMIT_OPENPGP = "${VCS_COMMIT_OPENPGP}"
 VCS_SHORT_HASH = "${VCS_SHORT_HASH}"
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED}
 ; end
@@ -787,11 +819,13 @@ var autorevision = {
 	VCS_DATE: "${VCS_DATE}",
 	VCS_BRANCH: "${VCS_BRANCH}",
 	VCS_TAG: "${VCS_TAG}",
+	VCS_TAG_OPENPGP: "${VCS_TAG_OPENPGP}",
 	VCS_TICK: ${VCS_TICK},
 	${EXTRA_NAME}: "${VCS_EXTRA}",
 
 	VCS_ACTION_STAMP: "${VCS_ACTION_STAMP}",
 	VCS_FULL_HASH: "${VCS_FULL_HASH}",
+	VCS_COMMIT_OPENPGP: "${VCS_COMMIT_OPENPGP}",
 	VCS_SHORT_HASH: "${VCS_SHORT_HASH}",
 
 	VCS_WC_MODIFIED: ${VCS_WC_MODIFIED}
@@ -822,11 +856,13 @@ jsonOutput() {
 	"VCS_DATE": "${VCS_DATE}",
 	"VCS_BRANCH":"${VCS_BRANCH}",
 	"VCS_TAG": "${VCS_TAG}",
+	"VCS_TAG_OPENPGP": "${VCS_TAG_OPENPGP}",
 	"VCS_TICK": ${VCS_TICK},
 	"${EXTRA_NAME}": "${VCS_EXTRA}",
 
 	"VCS_ACTION_STAMP": "${VCS_ACTION_STAMP}",
 	"VCS_FULL_HASH": "${VCS_FULL_HASH}",
+	"VCS_COMMIT_OPENPGP": "${VCS_COMMIT_OPENPGP}",
 	"VCS_SHORT_HASH": "${VCS_SHORT_HASH}",
 
 	"VCS_WC_MODIFIED": ${VCS_WC_MODIFIED}
@@ -851,11 +887,13 @@ public class autorevision {
     public static final String VCS_DATE = "${VCS_DATE}";
     public static final String VCS_BRANCH = "${VCS_BRANCH}";
     public static final String VCS_TAG = "${VCS_TAG}";
+    public static final String VCS_TAG_OPENPGP = "${VCS_TAG_OPENPGP}";
     public static final long VCS_TICK = ${VCS_TICK};
     public static final String ${EXTRA_NAME} = "${VCS_EXTRA}";
 
     public static final String VCS_ACTION_STAMP = "${VCS_ACTION_STAMP}";
     public static final String VCS_FULL_HASH = "${VCS_FULL_HASH}";
+    public static final String VCS_COMMIT_OPENPGP = "${VCS_COMMIT_OPENPGP}";
     public static final String VCS_SHORT_HASH = "${VCS_SHORT_HASH}";
 
     public static final boolean VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
@@ -885,10 +923,12 @@ namespace AutoRevision
         public static string VcsDate = "${VCS_DATE}";
         public static string VcsBranch = "${VCS_DATE}";
         public static string VcsTag = "${VCS_TAG}";
+        public static string VcsTagOpenpgp = "${VCS_TAG_OPENPGP}";
         public static string VcsTick = "${VCS_TICK}";
         public static string ${EXTRA_NAME} = "${VCS_EXTRA}";
         public static string VcsActionStamp = "${VCS_ACTION_STAMP}";
         public static string VcsFullHash = "${VCS_FULL_HASH}";
+        public static string VcsCommitOpenpgp = "${VCS_COMMIT_OPENPGP}";
         public static string VcsShortHash = "${VCS_SHORT_HASH}";
         public static string VcsWcModified = "${VCS_WC_MODIFIED}";
     }
@@ -912,11 +952,13 @@ VCS_NUM=${VCS_NUM}
 VCS_DATE=${VCS_DATE}
 VCS_BRANCH=${VCS_BRANCH}
 VCS_TAG=${VCS_TAG}
+VCS_TAG_OPENPGP=${VCS_TAG_OPENPGP}
 VCS_TICK=${VCS_TICK}
 ${EXTRA_NAME}=${VCS_EXTRA}
 
 VCS_ACTION_STAMP=${VCS_ACTION_STAMP}
 VCS_FULL_HASH=${VCS_FULL_HASH}
+VCS_COMMIT_OPENPGP=${VCS_COMMIT_OPENPGP}
 VCS_SHORT_HASH=${VCS_SHORT_HASH}
 
 VCS_WC_MODIFIED=${VCS_WC_MODIFIED}
@@ -934,10 +976,12 @@ define(\`VCS_NUM', \`${VCS_NUM}')dnl
 define(\`VCS_DATE', \`${VCS_DATE}')dnl
 define(\`VCS_BRANCH', \`${VCS_BRANCH}')dnl
 define(\`VCS_TAG', \`${VCS_TAG}')dnl
+define(\`VCS_TAG_OPENPGP', \`${VCS_TAG_OPENPGP}')dnl
 define(\`VCS_TICK', \`${VCS_TICK}')dnl
 define(\`${EXTRA_NAME}', \`${VCS_EXTRA}')dnl
 define(\`VCS_ACTIONSTAMP', \`${VCS_ACTION_STAMP}')dnl
 define(\`VCS_FULLHASH', \`${VCS_FULL_HASH}')dnl
+define(\`VCS_COMMIT_OPENPGP', \`${VCS_COMMIT_OPENPGP}')dnl
 define(\`VCS_SHORTHASH', \`${VCS_SHORT_HASH}')dnl
 define(\`VCS_WC_MODIFIED', \`${VCS_WC_MODIFIED}')dnl
 EOF
@@ -962,10 +1006,12 @@ texOutput() {
 \def \vcsDate {${VCS_DATE}}
 \def \vcsBranch {${VCS_BRANCH}}
 \def \vcsTag {${VCS_TAG}}
+\def \vcsTagOpenpgp {${VCS_TAG_OPENPGP}}
 \def \vcsTick {${VCS_TICK}}
 \def \\${EXTRA_NAME} {${VCS_EXTRA}}
 \def \vcsACTIONSTAMP {${VCS_ACTION_STAMP}}
 \def \vcsFullHash {${VCS_FULL_HASH}}
+\def \vcsCommitOpenpgp {${VCS_COMMIT_OPENPGP}}
 \def \vcsShortHash {${VCS_SHORT_HASH}}
 \def \vcsWCModified {${VCS_WC_MODIFIED}}
 \endinput
@@ -987,12 +1033,14 @@ schemeOutput() {
 (define VCS_DATE        "${VCS_DATE}")
 (define VCS_BRANCH      "${VCS_BRANCH}")
 (define VCS_TAG         "${VCS_TAG}")
+(define VCS_TAG_OPENPGP "${VCS_TAG_OPENPGP}")
 (define VCS_TICK        ${VCS_TICK})
-(define ${EXTRA_NAME}       "${VCS_EXTRA}")
+(define ${EXTRA_NAME}   "${VCS_EXTRA}")
 
 (define VCS_ACTION_STAMP   "${VCS_ACTION_STAMP}")
-(define VCS_FULL_HASH   "${VCS_FULL_HASH}")
-(define VCS_SHORT_HASH  "${VCS_SHORT_HASH}")
+(define VCS_FULL_HASH      "${VCS_FULL_HASH}")
+(define VCS_COMMIT_OPENPGP "${VCS_COMMIT_OPENPGP}")
+(define VCS_SHORT_HASH     "${VCS_SHORT_HASH}")
 
 (define VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
 ;; end
@@ -1014,11 +1062,13 @@ clojureOutput() {
 (def VCS_DATE        "${VCS_DATE}")
 (def VCS_BRANCH      "${VCS_BRANCH}")
 (def VCS_TAG         "${VCS_TAG}")
+(def VCS_TAG_OPENPGP "${VCS_TAG_OPENPGP}")
 (def VCS_TICK        ${VCS_TICK})
 (def ${EXTRA_NAME}       "${VCS_EXTRA}")
 
 (def VCS_ACTION_STAMP   "${VCS_ACTION_STAMP}")
 (def VCS_FULL_HASH      "${VCS_FULL_HASH}")
+(def VCS_COMMIT_OPENPGP "${VCS_COMMIT_OPENPGP}")
 (def VCS_SHORT_HASH     "${VCS_SHORT_HASH}")
 
 (def VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
@@ -1036,12 +1086,14 @@ $([ "${VCS_UUID}" ] && echo "%define vcs_uuid		${VCS_UUID}")
 $([ "${VCS_NUM}" ] && echo "%define vcs_num			${VCS_NUM}")
 $([ "${VCS_DATE}" ] && echo "%define vcs_date		${VCS_DATE}")
 $([ "${VCS_BRANCH}" ] && echo "%define vcs_branch		${VCS_BRANCH}")
+$([ "${VCS_TAG_OPENPGP}" ] && echo "%define vcs_tag_openpgp			${VCS_TAG_OPENPGP}")
 $([ "${VCS_TAG}" ] && echo "%define vcs_tag			${VCS_TAG}")
 $([ "${VCS_TICK}" ] && echo "%define vcs_tick		${VCS_TICK}")
 $([ "${VCS_EXTRA}" ] && echo "%define ${EXTRA_NAME}		${VCS_EXTRA}")
 
 $([ "${VCS_ACTION_STAMP}" ] && echo "%define vcs_action_stamp		${VCS_ACTION_STAMP}")
 $([ "${VCS_FULL_HASH}" ] && echo "%define vcs_full_hash		${VCS_FULL_HASH}")
+$([ "${VCS_COMMIT_OPENPGP}" ] && echo "%define vcs_commit_openpgp		${VCS_COMMIT_OPENPGP}")
 $([ "${VCS_SHORT_HASH}" ] && echo "%define vcs_short_hash		${VCS_SHORT_HASH}")
 
 $([ "${VCS_WC_MODIFIED}" ] && echo "%define vcs_wc_modified		${VCS_WC_MODIFIED}")
@@ -1063,19 +1115,21 @@ hppOutput() {
 
 namespace $(echo "${NAMESPACE}" | tr '[:upper:]' '[:lower:]')
 {
-	const std::string VCS_TYPE		= "${VCS_TYPE}";
-	const std::string VCS_BASENAME	= "${VCS_BASENAME}";
-	const std::string VCS_UUID		= "${VCS_UUID}";
-	const int VCS_NUM				= ${VCS_NUM};
-	const std::string VCS_DATE		= "${VCS_DATE}";
-	const std::string VCS_BRANCH	= "${VCS_BRANCH}";
-	const std::string VCS_TAG		= "${VCS_TAG}";
-	const int VCS_TICK				= ${VCS_TICK};
+	const std::string VCS_TYPE			= "${VCS_TYPE}";
+	const std::string VCS_BASENAME		= "${VCS_BASENAME}";
+	const std::string VCS_UUID			= "${VCS_UUID}";
+	const int VCS_NUM					= ${VCS_NUM};
+	const std::string VCS_DATE			= "${VCS_DATE}";
+	const std::string VCS_BRANCH		= "${VCS_BRANCH}";
+	const std::string VCS_TAG			= "${VCS_TAG}";
+	const std::string VCS_TAG_OPENPGP	= "${VCS_TAG_OPENPGP}";
+	const int VCS_TICK					= ${VCS_TICK};
 	const std::string ${EXTRA_NAME}		= "${VCS_EXTRA}";
 
-	const std::string VCS_ACTION_STAMP	= "${VCS_ACTION_STAMP}";
-	const std::string VCS_FULL_HASH		= "${VCS_FULL_HASH}";
-	const std::string VCS_SHORT_HASH	= "${VCS_SHORT_HASH}";
+	const std::string VCS_ACTION_STAMP		= "${VCS_ACTION_STAMP}";
+	const std::string VCS_FULL_HASH			= "${VCS_FULL_HASH}";
+	const std::string VCS_COMMIT_OPENPGP	= "${VCS_COMMIT_OPENPGP}";
+	const std::string VCS_SHORT_HASH		= "${VCS_SHORT_HASH}";
 
 	const int VCS_WC_MODIFIED			= ${VCS_WC_MODIFIED};
 }
@@ -1102,11 +1156,13 @@ VCS_NUM = ${VCS_NUM};
 VCS_DATE = '${VCS_DATE}';
 VCS_BRANCH = '${VCS_BRANCH}';
 VCS_TAG = '${VCS_TAG}';
+VCS_TAG_OPENPGP = '${VCS_TAG_OPENPGP}';
 VCS_TICK = ${VCS_TICK};
 ${EXTRA_NAME} = '${VCS_EXTRA}';
 
 VCS_ACTION_STAMP = '${VCS_ACTION_STAMP}';
 VCS_FULL_HASH = '${VCS_FULL_HASH}';
+VCS_COMMIT_OPENPGP = '${VCS_COMMIT_OPENPGP}';
 VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
 
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
@@ -1127,11 +1183,13 @@ VCS_NUM = ${VCS_NUM};
 VCS_DATE = '${VCS_DATE}';
 VCS_BRANCH = '${VCS_BRANCH}';
 VCS_TAG = '${VCS_TAG}';
+VCS_TAG_OPENPGP = '${VCS_TAG_OPENPGP}';
 VCS_TICK = ${VCS_TICK};
 ${EXTRA_NAME} = '${VCS_EXTRA}';
 
 VCS_ACTION_STAMP = '${VCS_ACTION_STAMP}';
 VCS_FULL_HASH = '${VCS_FULL_HASH}';
+VCS_COMMIT_OPENPGP = '${VCS_COMMIT_OPENPGP}';
 VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
 
 VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
@@ -1151,11 +1209,13 @@ s|@VCS_NUM@|${VCS_NUM}|g
 s|@VCS_DATE@|${VCS_DATE}|g
 s|@VCS_BRANCH@|${VCS_BRANCH}|g
 s|@VCS_TAG@|${VCS_TAG}|g
+s|@VCS_TAG_OPENPGP@|${VCS_TAG_OPENPGP}|g
 s|@VCS_TICK@|${VCS_TICK}|g
 s|@${EXTRA_NAME}@|${VCS_EXTRA}|g
 
 s|@VCS_ACTION_STAMP@|${VCS_ACTION_STAMP}|g
 s|@VCS_FULL_HASH@|${VCS_FULL_HASH}|g
+s|@VCS_COMMIT_OPENPGP@|${VCS_COMMIT_OPENPGP}|g
 s|@VCS_SHORT_HASH@|${VCS_SHORT_HASH}|g
 
 s|@VCS_WC_MODIFIED@|${VCS_WC_MODIFIED}|g
