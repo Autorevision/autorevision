@@ -2,17 +2,19 @@
 
 let VCS_TYPE			= "git"
 let VCS_BASENAME		= "autorevision"
-let VCS_UUID:	String?	= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149"
-let VCS_NUM:	Int		= 376
-let VCS_DATE			= "2016-11-14T20:27:54Z"
-let VCS_BRANCH:	String	= "master"
-let VCS_TAG:	String?	= "v/1.15"
-let VCS_TICK:	Int?	= 25
-let VCS_EXTRA:	String?	= nil
+let VCS_UUID:			String?	= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149"
+let VCS_NUM:			Int		= 424
+let VCS_DATE			= "2017-09-26T03:57:45Z"
+let VCS_BRANCH:			String	= "topic/gpg"
+let VCS_TAG:			String?	= "v/1.20"
+let VCS_TAG_OPENPGP:	String?	= "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317"
+let VCS_TICK:			Int?	= 16
+let VCS_EXTRA:		String?	= nil
 
-let VCS_ACTION_STAMP:	String?	= "2016-11-14T20:27:54Z!dak180@users.sourceforge.net"
-let VCS_FULL_HASH:		String	= "d9b6a03e53385f8fd256c1cff629e92f28da0c4d"
-let VCS_SHORT_HASH:		String	= "d9b6a03"
+let VCS_ACTION_STAMP:	String?	= "2017-09-26T03:57:45Z!dak180@users.sourceforge.net"
+let VCS_FULL_HASH:		String	= "c009f3afa47dc7cc2bcf789f37cdea8c91a32f5e"
+let VCS_COMMIT_OPENPGP:	String?	= "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317"
+let VCS_SHORT_HASH:		String	= "c009f3a"
 
 let VCS_WC_MODIFIED:	Bool	= false
 
