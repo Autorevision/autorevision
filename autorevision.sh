@@ -191,7 +191,7 @@ gitRepo() {
 	fi
 
 	# Get the current revision's signing key.
-	VCS_COMMIT_OPENPGP="$(git verify-tag --raw "${currentRev}" 2>&1 | grep "VALIDSIG" | cut -d ' ' -f 12)"
+	VCS_COMMIT_OPENPGP="$(git verify-commit --raw "${currentRev}" 2>&1 | grep "VALIDSIG" | cut -d ' ' -f 12)"
 
 	# Current branch
 	VCS_BRANCH="$(git rev-parse --symbolic-full-name --verify "$(git name-rev --name-only --no-undefined "${currentRev}" 2>/dev/null)" 2>/dev/null | sed -e 's:refs/heads/::' | sed -e 's:refs/::')"
@@ -209,7 +209,7 @@ gitRepo() {
 		if [ ! "${WARNHIDE}" = "1" ]; then
 		echo "note: The most recent tag is not annotated; if it is intended to be a release you may want to fix this." 1>&2
 		fi
-
+	else
 		# You cannot have a signed tag that is not annotated.
 		VCS_TAG_OPENPGP="$(git verify-tag --raw "${VCS_TAG}" 2>&1 | grep "VALIDSIG" | cut -d ' ' -f 12)"
 	fi
