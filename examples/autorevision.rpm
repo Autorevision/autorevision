@@ -2,16 +2,18 @@
 %define vcs_type		git
 %define vcs_basename		autorevision
 %define vcs_uuid		da2830f81fec4c6ebce8ebf23f35b0e6b066c149
-%define vcs_num			376
-%define vcs_date		2016-11-14T20:27:54Z
-%define vcs_branch		master
-%define vcs_tag			v/1.15
-%define vcs_tick		25
+%define vcs_num			424
+%define vcs_date		2017-09-26T03:57:45Z
+%define vcs_branch		topic/gpg
+%define vcs_tag_openpgp			A16E4FE1BFE882DE9D6E28AD0044B6E72C414317
+%define vcs_tag			v/1.20
+%define vcs_tick		16
 
 
-%define vcs_action_stamp		2016-11-14T20:27:54Z!dak180@users.sourceforge.net
-%define vcs_full_hash		d9b6a03e53385f8fd256c1cff629e92f28da0c4d
-%define vcs_short_hash		d9b6a03
+%define vcs_action_stamp		2017-09-26T03:57:45Z!dak180@users.sourceforge.net
+%define vcs_full_hash		c009f3afa47dc7cc2bcf789f37cdea8c91a32f5e
+%define vcs_commit_openpgp		A16E4FE1BFE882DE9D6E28AD0044B6E72C414317
+%define vcs_short_hash		c009f3a
 
 %define vcs_wc_modified		0
 # end

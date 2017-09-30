@@ -7,19 +7,21 @@
 
 namespace autorevision
 {
-	const std::string VCS_TYPE		= "git";
-	const std::string VCS_BASENAME	= "autorevision";
-	const std::string VCS_UUID		= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-	const int VCS_NUM				= 376;
-	const std::string VCS_DATE		= "2016-11-14T20:27:54Z";
-	const std::string VCS_BRANCH	= "master";
-	const std::string VCS_TAG		= "v/1.15";
-	const int VCS_TICK				= 25;
+	const std::string VCS_TYPE			= "git";
+	const std::string VCS_BASENAME		= "autorevision";
+	const std::string VCS_UUID			= "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
+	const int VCS_NUM					= 424;
+	const std::string VCS_DATE			= "2017-09-26T03:57:45Z";
+	const std::string VCS_BRANCH		= "topic/gpg";
+	const std::string VCS_TAG			= "v/1.20";
+	const std::string VCS_TAG_OPENPGP	= "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317";
+	const int VCS_TICK					= 16;
 	const std::string VCS_EXTRA		= "";
 
-	const std::string VCS_ACTION_STAMP	= "2016-11-14T20:27:54Z!dak180@users.sourceforge.net";
-	const std::string VCS_FULL_HASH		= "d9b6a03e53385f8fd256c1cff629e92f28da0c4d";
-	const std::string VCS_SHORT_HASH	= "d9b6a03";
+	const std::string VCS_ACTION_STAMP		= "2017-09-26T03:57:45Z!dak180@users.sourceforge.net";
+	const std::string VCS_FULL_HASH			= "c009f3afa47dc7cc2bcf789f37cdea8c91a32f5e";
+	const std::string VCS_COMMIT_OPENPGP	= "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317";
+	const std::string VCS_SHORT_HASH		= "c009f3a";
 
 	const int VCS_WC_MODIFIED			= 0;
 }

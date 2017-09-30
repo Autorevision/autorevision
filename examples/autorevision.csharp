@@ -7,15 +7,17 @@ namespace AutoRevision
         public static string VcsType = "git";
         public static string VcsBasename = "autorevision";
         public static string VcsUuid = "da2830f81fec4c6ebce8ebf23f35b0e6b066c149";
-        public static string VcsNum = "376";
-        public static string VcsDate = "2016-11-14T20:27:54Z";
-        public static string VcsBranch = "2016-11-14T20:27:54Z";
-        public static string VcsTag = "v/1.15";
-        public static string VcsTick = "25";
+        public static string VcsNum = "424";
+        public static string VcsDate = "2017-09-26T03:57:45Z";
+        public static string VcsBranch = "2017-09-26T03:57:45Z";
+        public static string VcsTag = "v/1.20";
+        public static string VcsTagOpenpgp = "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317";
+        public static string VcsTick = "16";
         public static string VcsExtra = "";
-        public static string VcsActionStamp = "2016-11-14T20:27:54Z!dak180@users.sourceforge.net";
-        public static string VcsFullHash = "d9b6a03e53385f8fd256c1cff629e92f28da0c4d";
-        public static string VcsShortHash = "d9b6a03";
+        public static string VcsActionStamp = "2017-09-26T03:57:45Z!dak180@users.sourceforge.net";
+        public static string VcsFullHash = "c009f3afa47dc7cc2bcf789f37cdea8c91a32f5e";
+        public static string VcsCommitOpenpgp = "A16E4FE1BFE882DE9D6E28AD0044B6E72C414317";
+        public static string VcsShortHash = "c009f3a";
         public static string VcsWcModified = "false";
     }
 }

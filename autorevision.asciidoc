@@ -177,6 +177,11 @@ Under bzr, this is the nick of the branch you are on.
 The name of the most recent tag ancestral to the current commit. +
 Empty under Subversion.
 
+*VCS_TAG_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current tag. +
+Blank if the current tag is not signed or if no tags exist. +
+Currently only implemented for git.
+
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current
 commit or an alias of *VCS_NUM* if there are no prior tags. +
@@ -196,6 +201,11 @@ Not currently implemented for bzr.
 
 *VCS_FULL_HASH*::
 A full unique identifier for the current revision.
+
+*VCS_COMMIT_OPENPGP*::
+The fingerprint OpenPGP of the key that that signed the current revision. +
+Blank if the current revision is not signed. +
+Currently only implemented for git.
 
 *VCS_SHORT_HASH*::
 A shortened version of *VCS_FULL_HASH*, but *VCS_FULL_HASH* if it
