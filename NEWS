@@ -1,6 +1,6 @@
 			autorevision history
 
-Repository head:
+1.21 @ 2017-09-30:
   Try to make tarballs more reproducible.
   Add an option to silence warnings.
   Add a sed script output.
