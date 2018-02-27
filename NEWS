@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Make sure we do not get a tag where we need a branch.
+
 1.21 @ 2017-09-30:
   Try to make tarballs more reproducible.
   Add an option to silence warnings.
