@@ -14,7 +14,7 @@ testPath="$(cd "$(dirname "$0")"; pwd -P)"
 vers="$(./autorevision -fo ./autorevision.cache -s VCS_TAG | sed -e 's:v/::')"
 tdir="autorevision-${vers}"
 tarball="${tdir}.tgz"
-tmpdir="$(mktemp -dqt autorevision)"
+tmpdir="$(mktemp -dqt autorevisionXXX)"
 
 
 # Copy the tarball to a temp directory
