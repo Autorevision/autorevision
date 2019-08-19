@@ -12,7 +12,7 @@
 # Usage message.
 arUsage() {
 	tee >&2 << EOF
-usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-e name] [-U] [-q] [-V]
+usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-e name] [-U] [-C path] [-q] [-V]
 	Options include:
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
@@ -20,6 +20,7 @@ usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-e name]
 	-f			= force the use of cache data
 	-e name			= set a different output name for VCS_EXTRA
 	-U			= check for untracked files in svn
+	-C path			= change to path before working on repository
 	-q			= Silence warnings
 	-V			= emit version and exit
 	-?			= help message
@@ -74,7 +75,7 @@ EOF
 
 # Config
 ARVERSION="&&ARVERSION&&"
-while getopts ":t:o:s:e:VfqU" OPTION; do
+while getopts ":t:o:s:e:C:VfqU" OPTION; do
 	case "${OPTION}" in
 		t)
 			AFILETYPE="${OPTARG}"
@@ -90,6 +91,9 @@ while getopts ":t:o:s:e:VfqU" OPTION; do
 		;;
 		e)
 			EXTRA_NAME="${OPTARG}"
+		;;
+		C)
+			CHANGE_TO_DIR="${OPTARG}"
 		;;
 		U)
 			UNTRACKEDFILES="1"
@@ -1335,7 +1339,19 @@ if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 else
 	# If a value is not set through the environment set VCS_EXTRA to nothing.
 	: "${VCS_EXTRA:=""}"
+
+	if [ ! -z "${CHANGE_TO_DIR}" ]; then
+		originalPath="${PWD}"
+		# shellcheck disable=SC2164
+		cd "${CHANGE_TO_DIR}"
+	fi
+
 	repoTest
+
+	if [ ! -z "${originalPath}" ]; then
+		# shellcheck disable=SC2164
+		cd "${originalPath}"
+	fi
 
 	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
 		# We are not in a repo; try to use a previously generated cache to populate our symbols.
