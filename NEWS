@@ -3,6 +3,7 @@
 Repository head:
   Make sure we do not get a tag where we need a branch.
   Do not emit warnings about nonexistent tags.
+  Add option -C for changing working directory.
 
 1.21 @ 2017-09-30:
   Try to make tarballs more reproducible.
