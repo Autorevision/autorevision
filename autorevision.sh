@@ -1236,10 +1236,12 @@ EOF
 pathSegment() {
 	${LOCAL} pathz="${1}"
 	${LOCAL} depth="0"
+	${LOCAL} last_pathz=""
 
 	if [ ! -z "${pathz}" ]; then
 		# Continue until we are at / or there are no path separators left.
-		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "$(echo "${pathz}" | sed -e 's:/::')" ]; do
+		while [ ! "${pathz}" = "/" ] && [ ! "${pathz}" = "${last_pathz}" ]; do
+			last_pathz="${pathz}"
 			pathz="$(dirname "${pathz}")"
 			depth="$((depth+1))"
 		done
