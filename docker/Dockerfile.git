@@ -1,0 +1,14 @@
+FROM alpine:3.10 AS builder
+RUN apk update  && apk add git bash make asciidoc gzip sed
+COPY . /build
+RUN mkdir -p /build
+WORKDIR /build
+RUN ls
+RUN make install
+
+
+
+FROM alpine:3.10
+RUN apk update  && apk add git bash
+COPY --from=builder /usr/local/bin/autorevision /usr/local/bin
+ENTRYPOINT ["/usr/local/bin/autorevision"]
