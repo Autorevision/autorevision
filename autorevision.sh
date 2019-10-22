@@ -139,6 +139,27 @@ else
 	LOCAL=""
 fi
 
+#check if needed software is installed
+commands=(
+sed
+cut
+grep
+wc
+tail
+basename
+dirname
+tee
+getopts
+tr
+cmp
+)
+for command in "${commands[@]}"; do
+	if ! command -v "${command}" &> /dev/null; then
+		echo "${command} is missing, please install"
+		exit 100
+	fi
+done
+
 # Make sure that the path we are given is one we can source
 # (dash, we are looking at you).
 if [ ! -z "${CACHEFILE}" ] && ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
