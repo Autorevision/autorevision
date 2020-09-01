@@ -1387,90 +1387,90 @@ fi
 
 
 # -s output is handled here.
-if [ ! -z "${VAROUT}" ]; then
-	if [ "${VAROUT}" = "VCS_TYPE" ]; then
-		echo "${VCS_TYPE}"
-	elif [ "${VAROUT}" = "VCS_BASENAME" ]; then
-		echo "${VCS_BASENAME}"
-	elif [ "${VAROUT}" = "VCS_NUM" ]; then
-		echo "${VCS_NUM}"
-	elif [ "${VAROUT}" = "VCS_DATE" ]; then
-		echo "${VCS_DATE}"
-	elif [ "${VAROUT}" = "VCS_BRANCH" ]; then
-		echo "${VCS_BRANCH}"
-	elif [ "${VAROUT}" = "VCS_TAG" ]; then
-		echo "${VCS_TAG}"
-	elif [ "${VAROUT}" = "VCS_TICK" ]; then
-		echo "${VCS_TICK}"
-	elif [ "${VAROUT}" = "VCS_FULL_HASH" ]; then
-		echo "${VCS_FULL_HASH}"
-	elif [ "${VAROUT}" = "VCS_SHORT_HASH" ]; then
-		echo "${VCS_SHORT_HASH}"
-	elif [ "${VAROUT}" = "VCS_WC_MODIFIED" ]; then
-		echo "${VCS_WC_MODIFIED}"
-	elif [ "${VAROUT}" = "VCS_ACTION_STAMP" ]; then
-		echo "${VCS_ACTION_STAMP}"
-	else
-		echo "error: Not a valid output symbol." 1>&2
-		exit 1
-	fi
+if [ -n "${VAROUT}" ]; then
+	case "${VAROUT}" in
+		"VCS_TYPE")
+			echo "${VCS_TYPE}";;
+		"VCS_BASENAME")
+			echo "${VCS_BASENAME}";;
+		"VCS_NUM")
+			echo "${VCS_NUM}";;
+		"VCS_DATE")
+			echo "${VCS_DATE}";;
+		"VCS_BRANCH")
+			echo "${VCS_BRANCH}";;
+		"VCS_TAG")
+			echo "${VCS_TAG}";;
+		"VCS_TICK")
+			echo "${VCS_TICK}";;
+		"VCS_FULL_HASH")
+			echo "${VCS_FULL_HASH}";;
+		"VCS_SHORT_HASH")
+			echo "${VCS_SHORT_HASH}";;
+		"VCS_WC_MODIFIED")
+			echo "${VCS_WC_MODIFIED}";;
+		"VCS_ACTION_STAMP")
+			echo "${VCS_ACTION_STAMP}";;
+		*)
+			echo "error: ${VAROUT} is not a valid output symbol." 1>&2
+			exit 1;;
+	esac
 fi
 
 
 # Detect requested output type and use it.
-if [ ! -z "${AFILETYPE}" ]; then
-	if [ "${AFILETYPE}" = "c" ]; then
-		cOutput
-	elif [ "${AFILETYPE}" = "h" ]; then
-		hOutput
-	elif [ "${AFILETYPE}" = "xcode" ]; then
-		xcodeOutput
-	elif [ "${AFILETYPE}" = "swift" ]; then
-		swiftOutput
-	elif [ "${AFILETYPE}" = "sed" ]; then
-		sedOutput
-	elif [ "${AFILETYPE}" = "sh" ]; then
-		shOutput
-	elif [ "${AFILETYPE}" = "py" ] || [ "${AFILETYPE}" = "python" ]; then
-		pyOutput
-	elif [ "${AFILETYPE}" = "pl" ] || [ "${AFILETYPE}" = "perl" ]; then
-		plOutput
-	elif [ "${AFILETYPE}" = "lua" ]; then
-		luaOutput
-	elif [ "${AFILETYPE}" = "php" ]; then
-		phpOutput
-	elif [ "${AFILETYPE}" = "ini" ]; then
-		iniOutput
-	elif [ "${AFILETYPE}" = "js" ]; then
-		jsOutput
-	elif [ "${AFILETYPE}" = "json" ]; then
-		jsonOutput
-	elif [ "${AFILETYPE}" = "java" ]; then
-		javaOutput
-	elif [ "${AFILETYPE}" = "javaprop" ]; then
-		javapropOutput
-	elif [ "${AFILETYPE}" = "csharp" ]; then
-		csharpOutput
-	elif [ "${AFILETYPE}" = "tex" ]; then
-		texOutput
-	elif [ "${AFILETYPE}" = "m4" ]; then
-		m4Output
-	elif [ "${AFILETYPE}" = "scheme" ]; then
-		schemeOutput
-	elif [ "${AFILETYPE}" = "clojure" ]; then
-		clojureOutput
-	elif [ "${AFILETYPE}" = "rpm" ]; then
-		rpmOutput
-	elif [ "${AFILETYPE}" = "hpp" ]; then
-		hppOutput
-	elif [ "${AFILETYPE}" = "matlab" ]; then
-		matlabOutput
-	elif [ "${AFILETYPE}" = "octave" ]; then
-		octaveOutput
-	elif [ "${AFILETYPE}" = "cmake" ]; then
-		cmakeOutput
-	else
-		echo "error: Not a valid output type." 1>&2
-		exit 1
-	fi
+if [ -n "${AFILETYPE}" ]; then
+	case "${AFILETYPE}" in
+		"c")
+			cOutput;;
+		"h")
+			hOutput;;
+		"xcode")
+			xcodeOutput;;
+		"swift")
+			swiftOutput;;
+		"sh")
+			shOutput;;
+		"py"|"python")
+			pyOutput;;
+		"pl"|"perl")
+			plOutput;;
+		"lua")
+			luaOutput;;
+		"php")
+			phpOutput;;
+		"ini")
+			iniOutput;;
+		"js")
+			jsOutput;;
+		"json")
+			jsonOutput;;
+		"java")
+			javaOutput;;
+		"javaprop")
+			javapropOutput;;
+		"csharp")
+			csharpOutput;;
+		"tex")
+			texOutput;;
+		"m4")
+			m4Output;;
+		"scheme")
+			schemeOutput;;
+		"clojure")
+			clojureOutput;;
+		"rpm")
+			rpmOutput;;
+		"hpp")
+			hppOutput;;
+		"matlab")
+			matlabOutput;;
+		"octave")
+			octaveOutput;;
+		"cmake")
+			cmakeOutput;;
+		*)
+			echo "error: ${AFILETYPE} is not a valid output type." 1>&2
+			exit 1;;
+	esac
 fi
