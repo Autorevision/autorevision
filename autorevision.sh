@@ -1387,90 +1387,127 @@ fi
 
 
 # -s output is handled here.
-if [ -n "${VAROUT}" ]; then
+if [ ! -z "${VAROUT}" ]; then
 	case "${VAROUT}" in
-		"VCS_TYPE")
-			echo "${VCS_TYPE}";;
-		"VCS_BASENAME")
-			echo "${VCS_BASENAME}";;
-		"VCS_NUM")
-			echo "${VCS_NUM}";;
-		"VCS_DATE")
-			echo "${VCS_DATE}";;
-		"VCS_BRANCH")
-			echo "${VCS_BRANCH}";;
-		"VCS_TAG")
-			echo "${VCS_TAG}";;
-		"VCS_TICK")
-			echo "${VCS_TICK}";;
-		"VCS_FULL_HASH")
-			echo "${VCS_FULL_HASH}";;
-		"VCS_SHORT_HASH")
-			echo "${VCS_SHORT_HASH}";;
-		"VCS_WC_MODIFIED")
-			echo "${VCS_WC_MODIFIED}";;
-		"VCS_ACTION_STAMP")
-			echo "${VCS_ACTION_STAMP}";;
+		VCS_TYPE)
+			echo "${VCS_TYPE}"
+		;;
+		VCS_BASENAME)
+			echo "${VCS_BASENAME}"
+		;;
+		VCS_NUM)
+			echo "${VCS_NUM}"
+		;;
+		VCS_DATE)
+			echo "${VCS_DATE}"
+		;;
+		VCS_BRANCH)
+			echo "${VCS_BRANCH}"
+		;;
+		VCS_TAG)
+			echo "${VCS_TAG}"
+		;;
+		VCS_TICK)
+			echo "${VCS_TICK}"
+		;;
+		VCS_FULL_HASH)
+			echo "${VCS_FULL_HASH}"
+		;;
+		VCS_SHORT_HASH)
+			echo "${VCS_SHORT_HASH}"
+		;;
+		VCS_WC_MODIFIED)
+			echo "${VCS_WC_MODIFIED}"
+		;;
+		VCS_ACTION_STAMP)
+			echo "${VCS_ACTION_STAMP}"
+		;;
 		*)
 			echo "error: ${VAROUT} is not a valid output symbol." 1>&2
-			exit 1;;
+			exit 1
+		;;
 	esac
 fi
 
 
 # Detect requested output type and use it.
-if [ -n "${AFILETYPE}" ]; then
+if [ ! -z "${AFILETYPE}" ]; then
 	case "${AFILETYPE}" in
-		"c")
-			cOutput;;
-		"h")
-			hOutput;;
-		"xcode")
-			xcodeOutput;;
-		"swift")
-			swiftOutput;;
-		"sh")
-			shOutput;;
-		"py"|"python")
-			pyOutput;;
-		"pl"|"perl")
-			plOutput;;
-		"lua")
-			luaOutput;;
-		"php")
-			phpOutput;;
-		"ini")
-			iniOutput;;
-		"js")
-			jsOutput;;
-		"json")
-			jsonOutput;;
-		"java")
-			javaOutput;;
-		"javaprop")
-			javapropOutput;;
-		"csharp")
-			csharpOutput;;
-		"tex")
-			texOutput;;
-		"m4")
-			m4Output;;
-		"scheme")
-			schemeOutput;;
-		"clojure")
-			clojureOutput;;
-		"rpm")
-			rpmOutput;;
-		"hpp")
-			hppOutput;;
-		"matlab")
-			matlabOutput;;
-		"octave")
-			octaveOutput;;
-		"cmake")
-			cmakeOutput;;
+		c)
+			cOutput
+		;;
+		h)
+			hOutput
+		;;
+		xcode)
+			xcodeOutput
+		;;
+		swift)
+			swiftOutput
+		;;
+		sh)
+			shOutput
+		;;
+		py|python)
+			pyOutput
+		;;
+		pl|perl)
+			plOutput
+		;;
+		lua)
+			luaOutput
+		;;
+		php)
+			phpOutput
+		;;
+		ini)
+			iniOutput
+		;;
+		js)
+			jsOutput
+		;;
+		json)
+			jsonOutput
+		;;
+		java)
+			javaOutput
+		;;
+		javaprop)
+			javapropOutput
+		;;
+		csharp)
+			csharpOutput
+		;;
+		tex)
+			texOutput
+		;;
+		m4)
+			m4Output
+		;;
+		scheme)
+			schemeOutput
+		;;
+		clojure)
+			clojureOutput
+		;;
+		rpm)
+			rpmOutput
+		;;
+		hpp)
+			hppOutput
+		;;
+		matlab)
+			matlabOutput
+		;;
+		octave)
+			octaveOutput
+		;;
+		cmake)
+			cmakeOutput
+		;;
 		*)
 			echo "error: ${AFILETYPE} is not a valid output type." 1>&2
-			exit 1;;
+			exit 1
+		;;
 	esac
 fi
