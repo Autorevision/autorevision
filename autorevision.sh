@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2012 - 2019 dak180 and contributors. See
+# Copyright (c) 2012 - 2020 dak180 and contributors. See
 # https://opensource.org/licenses/mit-license.php or the included
 # COPYING.md for licence terms.
 #
