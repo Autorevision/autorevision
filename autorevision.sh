@@ -1445,6 +1445,9 @@ if [ ! -z "${AFILETYPE}" ]; then
 		swift)
 			swiftOutput
 		;;
+		sed)
+			sedOutput
+		;;
 		sh)
 			shOutput
 		;;
