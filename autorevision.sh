@@ -7,7 +7,7 @@
 # autorevision - extracts metadata about the head version from your
 # repository.
 
-# shellcheck disable=SC2154
+# shellcheck disable=SC2154,SC2236,SC2030,SC2031
 
 # Usage message.
 arUsage() {
@@ -140,8 +140,7 @@ else
 fi
 
 #check if needed software is installed
-commands=(
-sed
+commands="sed
 cut
 grep
 wc
@@ -151,10 +150,10 @@ dirname
 tee
 getopts
 tr
-cmp
-)
-for command in "${commands[@]}"; do
-	if ! command -v "${command}" &> /dev/null; then
+cmp"
+
+for command in ${commands}; do
+	if ! command -v "${command}" > /dev/null 2>&1; then
 		echo "${command} is missing, please install"
 		exit 100
 	fi
