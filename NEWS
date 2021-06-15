@@ -1,5 +1,8 @@
 			autorevision history
 
+Repository head:
+  Update the irc channel address.
+
 1.22 @ 2021-01-25:
   Make sure we do not get a tag where we need a branch.
   Do not emit warnings about nonexistent tags.
