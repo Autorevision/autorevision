@@ -45,6 +45,9 @@ EXTRA_DIST = \
 	AUTHORS.txt \
 	autorevision.cache
 
+TEXT_PRODUCTS = \
+	autorevision.1
+
 all : cmd man logo.svg
 
 # The script
@@ -97,7 +100,7 @@ autorevision-$(VERS).tgz.sig: tarball
 # The actual tarball
 autorevision-$(VERS).tgz: $(SOURCES) all auth
 	mkdir autorevision-$(VERS)
-	cp -pR $(SOURCES) $(EXTRA_DIST) autorevision-$(VERS)/
+	cp -pR $(SOURCES) $(EXTRA_DIST) $(TEXT_PRODUCTS) autorevision-$(VERS)/
 	@COPYFILE_DISABLE=1 GZIP=-n9 tar -czf autorevision-$(VERS).tgz --exclude=".DS_Store" autorevision-$(VERS)
 	rm -fr autorevision-$(VERS)
 
