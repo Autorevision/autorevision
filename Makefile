@@ -16,6 +16,9 @@ DOCDATE := $(shell ./autorevision.sh -s VCS_DATE -o ./autorevision.cache -f | se
 # Find a md5 program
 MD5 := $(shell if command -v "md5" > /dev/null 2>&1; then echo "md5 -q"; elif command -v "md5sum" > /dev/null 2>&1; then echo "md5sum"; fi)
 
+# Find a sha256 program
+SHA256 := $(shell if command -v "shasum" > /dev/null 2>&1; then echo "shasum -a 256"; elif command -v "openssl" > /dev/null 2>&1; then echo "openssl sha256"; fi)
+
 .SUFFIXES: .md .html
 
 .md.html:
@@ -93,6 +96,9 @@ tarball: autorevision-$(VERS).tgz
 autorevision-$(VERS).tgz.md5: tarball
 	$(MD5) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
 
+# Make an sha256 checksum
+: autorevision-$(VERS).tgz
+	$(SHA256) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.sha256
 # Make a detached gpg sig
 autorevision-$(VERS).tgz.sig: tarball
 	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
