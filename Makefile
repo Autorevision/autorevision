@@ -87,20 +87,21 @@ logo.svg: logo.svg.in autorevision.sed
 	sed -f autorevision.sed $< > $@
 
 # The tarball signed and sealed
-dist: tarball autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sig
+dist: autorevision-$(VERS).tgz autorevision-$(VERS).tgz.md5 autorevision-$(VERS).tgz.sha256 autorevision-$(VERS).tgz.sig
 
 # The tarball
 tarball: autorevision-$(VERS).tgz
 
 # Make an md5 checksum
-autorevision-$(VERS).tgz.md5: tarball
+autorevision-$(VERS).tgz.md5: autorevision-$(VERS).tgz
 	$(MD5) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.md5
 
 # Make an sha256 checksum
 : autorevision-$(VERS).tgz
 	$(SHA256) autorevision-$(VERS).tgz > autorevision-$(VERS).tgz.sha256
+
 # Make a detached gpg sig
-autorevision-$(VERS).tgz.sig: tarball
+autorevision-$(VERS).tgz.sig: autorevision-$(VERS).tgz
 	gpg --armour --detach-sign --output "autorevision-$(VERS).tgz.sig" "autorevision-$(VERS).tgz"
 
 # The actual tarball
