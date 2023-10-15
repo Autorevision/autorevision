@@ -1,0 +1,4 @@
+FROM vladistan/autorevision:latest
+RUN apk update  && apk add subversion bzr mercurial
+WORKDIR /app
+ENTRYPOINT ["/usr/local/bin/autorevision"]
